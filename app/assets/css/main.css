@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Dark is the default (:root); light is derived (.light, set on <html> by @nuxtjs/color-mode).
+ * Components use token utilities (bg-bg, text-muted, border-border...) and never carry dark: variants.
+ * Contrast is enforced by tests/unit/contrast.test.ts — see docs/design/tokens.md.
+ */
+:root {
+  --bg: #0b0d10;
+  --surface: #12151a;
+  --surface-2: #1a1e24;
+  --border: #232830;
+  --border-strong: #343a44;
+  --text: #e6e8eb;
+  --text-2: #b4bac4;
+  --muted: #8b93a1;
+  /* design used #5C6470 (3.25:1, fails AA) — lifted to pass 4.5:1 on bg/surface/surface-2 */
+  --faint: #7f8896;
+  --accent: #5eead4;
+  --accent-fg: #0b0d10;
+  --cat-rag: #5eead4;
+  --cat-ai-workflow: #fdba74;
+  --cat-full-stack: #a5b4fc;
+  --cat-extra: #a3e635;
+  --grid-line: #1a1e24;
+  color-scheme: dark;
+}
+
+.light {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface-2: #eef0f3;
+  --border: #dde1e7;
+  --border-strong: #b9c0ca;
+  --text: #14171c;
+  --text-2: #3d4450;
+  --muted: #5b6472;
+  --faint: #636d7b;
+  /* teal #5EEAD4 is unusable on light — dark teal keeps 5:1 */
+  --accent: #0f766e;
+  --accent-fg: #ffffff;
+  --cat-rag: #0f766e;
+  --cat-ai-workflow: #9a3412;
+  --cat-full-stack: #4f46e5;
+  --cat-extra: #3f6212;
+  --grid-line: #eef0f3;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-cat-rag: var(--cat-rag);
+  --color-cat-ai-workflow: var(--cat-ai-workflow);
+  --color-cat-full-stack: var(--cat-full-stack);
+  --color-cat-extra: var(--cat-extra);
+
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --breakpoint-3xl: 1600px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-fg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* background grid from the design boards */
+  .gridbg {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  @media (min-width: 1024px) {
+    .gridbg {
+      background-size: 48px 48px;
+    }
+  }
+
+  .container-page {
+    width: 100%;
+    max-width: 90rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 3rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-page {
+      padding-inline: 6rem;
+    }
+  }
+
+  /* yaml-style list in the hero terminal: brackets are decorative, so they stay out of the HTML text */
+  .yaml-list::before {
+    content: '[';
+  }
+
+  .yaml-list::after {
+    content: ']';
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 9px;
+    height: 1.1em;
+    vertical-align: text-bottom;
+    background: var(--accent);
+    animation: blink 1.1s steps(1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor {
+      animation: none;
+    }
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
