@@ -34,7 +34,7 @@ tests/          unit (Vitest) + e2e (Playwright)
 docs/           design tokens + boards, deploy guide, content checklist
 ```
 
-How it is built and why: [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md).
+How it is built and why: [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md). Rules for changing it (KISS, YAGNI, DRY, SOLID, separation of concerns, Law of Demeter, composition): [`docs/CODE_QUALITY.md`](./docs/CODE_QUALITY.md).
 
 Content is edited in `app/data/*` (structure) and `i18n/locales/*.json` (copy) — see [`docs/content-checklist.md`](./docs/content-checklist.md). Tokens and the contrast audit: [`docs/design/tokens.md`](./docs/design/tokens.md).
 
