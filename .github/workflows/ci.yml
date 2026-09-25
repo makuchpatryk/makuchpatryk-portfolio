@@ -1,0 +1,94 @@
+name: ci
+
+on:
+  pull_request:
+  workflow_call:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm check:locales
+      - run: pnpm check:video-size
+      - run: pnpm generate
+        env:
+          NUXT_PUBLIC_SITE_URL: https://example.com
+      # launch gate: warns while content is placeholder; fails on a `release*` tag
+      - run: node scripts/check-placeholders.mjs ${{ startsWith(github.ref, 'refs/tags/release') && '--strict' || '' }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: .output/public
+          retention-days: 3
+
+  e2e:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: .output/public
+      - name: e2e (root base)
+        run: pnpm test:e2e
+      - name: e2e (non-root base, GitHub project-page shape)
+        run: |
+          NITRO_PRESET=github_pages NUXT_APP_BASE_URL=/makuchpatryk/ NUXT_PUBLIC_SITE_URL=https://user.github.io pnpm generate
+          PORT=4174 E2E_BASE=/makuchpatryk/ pnpm test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+  lighthouse:
+    needs: verify
+    runs-on: ubuntu-latest
+    # Desktop scores 100 locally; mobile perf was pessimistic on a slow dev box (Lighthouse benchmarkIndex 570).
+    # Non-blocking until mobile numbers are confirmed on CI runners — then remove continue-on-error.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: .output/public
+      - run: pnpm lhci
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse
+          path: .lighthouseci
+          retention-days: 7
