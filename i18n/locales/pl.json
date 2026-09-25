@@ -1,0 +1,418 @@
+{
+  "meta": {
+    "home": {
+      "title": "[Imię Nazwisko] — AI Engineer / Software Engineer",
+      "description": "[Portfolio inżyniera AI / oprogramowania: integracje LLM, RAG i AI workflows. Wybrane projekty, case studies i CV.]"
+    },
+    "projects": {
+      "title": "Projekty — [Imię Nazwisko]",
+      "description": "Wszystkie projekty: RAG, AI workflows i aplikacje full-stack. Filtruj według technologii."
+    },
+    "notFound": {
+      "title": "Nie znaleziono strony — [Imię Nazwisko]",
+      "description": "Ta strona nie istnieje."
+    },
+    "ogHomeSubtitle": "AI Engineer / Software Engineer",
+    "ogProjectsSubtitle": "Projekty"
+  },
+  "a11y": {
+    "skip": "Przejdź do treści",
+    "primaryNav": "Główna",
+    "home": "Strona główna",
+    "menuOpen": "Otwórz menu",
+    "menuClose": "Zamknij menu",
+    "externalNote": "(otwiera się w nowej karcie)",
+    "footerNav": "Stopka",
+    "languageSwitch": "Język"
+  },
+  "nav": {
+    "projects": "projekty",
+    "experience": "doświadczenie",
+    "stack": "stack",
+    "about": "o_mnie",
+    "contact": "kontakt",
+    "cv": "cv.pdf ↓",
+    "allProjects": "← wszystkie projekty"
+  },
+  "theme": {
+    "toLight": "Przełącz na jasny motyw",
+    "toDark": "Przełącz na ciemny motyw",
+    "light": "jasny",
+    "dark": "ciemny"
+  },
+  "lang": {
+    "en": "English",
+    "pl": "Polski"
+  },
+  "hero": {
+    "status": "open to work · {city} / zdalnie",
+    "statusShort": "open to work · zdalnie",
+    "role1": "AI Engineer",
+    "role2": "Software Engineer",
+    "tagline": "[Dwa zdania: integracje LLM, RAG i AI workflows, jaki problem biznesowy rozwiązujesz i jakiej roli szukasz.]",
+    "viewProjects": "zobacz projekty →",
+    "github": "github ↗",
+    "linkedin": "linkedin ↗",
+    "photoAlt": "Portret: {name}",
+    "terminal": {
+      "title": "zsh — ~/{handle}",
+      "whoami": "whoami",
+      "whoamiOut": "AI / Software Engineer",
+      "catStack": "cat stack.yaml"
+    }
+  },
+  "sections": {
+    "projects": {
+      "eyebrow": "[01] projekty",
+      "title": "Wybrane projekty"
+    },
+    "experience": {
+      "eyebrow": "[02] doświadczenie",
+      "title": "Doświadczenie",
+      "current": "● aktualnie",
+      "previous": "○ wcześniej",
+      "now": "teraz"
+    },
+    "stack": {
+      "eyebrow": "[03] stack",
+      "title": "Technologie"
+    },
+    "about": {
+      "eyebrow": "[04] o mnie",
+      "title": "Kim jestem"
+    },
+    "contact": {
+      "eyebrow": "[05] kontakt"
+    }
+  },
+  "projectCard": {
+    "featured": "★ wyróżniony",
+    "role": "rola",
+    "effect": "efekt",
+    "demo": "demo ↗",
+    "code": "kod ↗",
+    "caseStudy": "case study →",
+    "details": "szczegóły →",
+    "viewAll": "wszystkie projekty →",
+    "visualPlaceholder": "[screenshot / schemat]",
+    "pipelineTitle": "architektura / {label}",
+    "pipelinePlaceholder": "[podmień na schemat swojego projektu]"
+  },
+  "categories": {
+    "rag": "rag",
+    "ai-workflow": "ai workflow",
+    "full-stack": "full-stack"
+  },
+  "pipeline": {
+    "ingest": "ingest",
+    "query": "query",
+    "label": {
+      "rag": "pipeline RAG",
+      "ai-workflow": "AI workflow",
+      "full-stack": "system"
+    },
+    "steps": {
+      "documents": "dokumenty",
+      "chunking": "chunking",
+      "embeddings": "embeddingi",
+      "pgvector": "pgvector",
+      "question": "pytanie",
+      "retrieval": "retrieval top-k",
+      "llm": "LLM",
+      "fastapi": "FastAPI",
+      "ui": "UI",
+      "trigger": "wyzwalacz",
+      "extraction": "ekstrakcja",
+      "validation": "walidacja",
+      "action": "akcja",
+      "audit": "log audytu"
+    }
+  },
+  "projectsPage": {
+    "eyebrow": "~/projekty",
+    "title": "Projekty",
+    "lead": "RAG, AI workflows i systemy full-stack. Filtruj według technologii.",
+    "filterLabel": "Filtruj według tagu",
+    "all": "wszystkie",
+    "count": "Projekty: {count}",
+    "empty": "Brak projektów z tym tagiem."
+  },
+  "project": {
+    "breadcrumb": "~/projekty",
+    "backToAll": "← wszystkie projekty",
+    "role": "rola",
+    "duration": "czas",
+    "type": "typ",
+    "stack": "stack",
+    "types": {
+      "commercial": "komercyjny",
+      "personal": "własny"
+    },
+    "liveDemo": "live demo ↗",
+    "codeOnGithub": "kod na github ↗",
+    "videoFile": "demo.mp4",
+    "videoPlaceholder": "[wideo demo: nagranie ekranu 1–3 min]",
+    "videoLabel": "Wideo demo: {title}",
+    "videoFallback": "Twoja przeglądarka nie odtwarza tego wideo.",
+    "toc": "spis treści",
+    "tocLabel": "Spis treści",
+    "sections": {
+      "problem": "problem",
+      "solution": "rozwiązanie",
+      "architecture": "architektura",
+      "results": "wyniki",
+      "lessons": "wnioski"
+    },
+    "architectureHeading": "Jak to działa",
+    "resultsHeading": "Efekt",
+    "lessonsHeading": "Czego się nauczyłem",
+    "screenshotPlaceholder": "[screenshot {n}]",
+    "gallery": "galeria",
+    "galleryPlaceholder": "[zdjęcie]",
+    "galleryCaption": "[podpis]",
+    "back": "← wróć",
+    "allProjects": "Wszystkie projekty",
+    "next": "następny projekt →",
+    "previous": "← poprzedni projekt",
+    "nav": "Nawigacja po projektach"
+  },
+  "experience": {
+    "current": {
+      "role": "[Stanowisko]",
+      "company": "[Firma]",
+      "location": "[Miasto / zdalnie]",
+      "bullets": [
+        "[Konkretne osiągnięcie, najlepiej z efektem]",
+        "[Drugie osiągnięcie]"
+      ]
+    },
+    "previous": {
+      "role": "[Stanowisko]",
+      "company": "[Firma]",
+      "location": "[Miasto / zdalnie]",
+      "bullets": [
+        "[Konkretne osiągnięcie, najlepiej z efektem]",
+        "[Drugie osiągnięcie]"
+      ]
+    }
+  },
+  "stack": {
+    "groups": {
+      "ai": "ai / llm · główny focus",
+      "backend": "backend",
+      "cloud": "cloud / devops",
+      "frontend": "frontend"
+    },
+    "items": {
+      "rag": "RAG",
+      "agents": "AI workflows i agenci",
+      "embeddings": "Embeddingi, bazy wektorowe",
+      "llmApi": "Integracje LLM API",
+      "llmEval": "Ewaluacja LLM",
+      "python": "Python",
+      "fastapi": "FastAPI",
+      "postgres": "PostgreSQL / pgvector",
+      "rest": "REST API",
+      "aws": "AWS",
+      "docker": "Docker",
+      "cicd": "CI/CD",
+      "git": "Git",
+      "typescript": "TypeScript",
+      "vue": "Vue"
+    }
+  },
+  "about": {
+    "lead": "[Główne zdanie o Tobie, np. czym się zajmujesz na co dzień i co Cię napędza w pracy z AI.]",
+    "body": "[2–3 zdania: jak trafiłeś do AI, z czego jesteś najbardziej dumny, jak łączysz inżynierię oprogramowania z AI (np. od prototypu RAG po wdrożenie na AWS).]",
+    "photoPlaceholder": "[twoje zdjęcie]",
+    "now": "obecnie",
+    "nowValue": "[nad czym pracujesz]",
+    "looking": "szukam",
+    "lookingValue": "[rola: AI / Software Engineer]",
+    "outside": "poza kodem",
+    "outsideValue": "[hobby / zainteresowania]"
+  },
+  "contact": {
+    "headingA": "Zbudujmy coś",
+    "headingB": "z",
+    "headingEnd": ".",
+    "mail": "mail",
+    "github": "github ↗",
+    "linkedin": "linkedin ↗",
+    "cv": "cv.pdf ↓"
+  },
+  "footer": {
+    "copyright": "© {year} {name}",
+    "mail": "mail ↗"
+  },
+  "error": {
+    "title": "404",
+    "heading": "Nie znaleziono strony",
+    "text": "Strona, której szukasz, nie istnieje albo została przeniesiona.",
+    "back": "← wróć na stronę główną"
+  },
+  "projects": {
+    "rag-assistant": {
+      "title": "[Nazwa projektu 1]",
+      "summary": "[Projekt 1: problem → rozwiązanie → efekt, 1–2 zdania.]",
+      "role": "[pipeline, API, wdrożenie]",
+      "effect": "[trafność, czas, koszt, użytkownicy]",
+      "duration": "[np. 3 miesiące, 2025]",
+      "problem": {
+        "heading": "[Jaki problem był do rozwiązania?]",
+        "body": "[Kontekst: kto miał problem, jak to wyglądało wcześniej, dlaczego zwykłe rozwiązanie nie wystarczało.]"
+      },
+      "solution": {
+        "heading": "[Co zbudowałeś?]",
+        "body": "[Opis rozwiązania i kluczowe decyzje techniczne: dlaczego ten model, ta strategia chunkingu, ta baza wektorowa.]"
+      },
+      "architecture": {
+        "body": "[Krótko opisz przepływ i gdzie to jest hostowane, np. AWS: Lambda / ECS, S3, RDS.]"
+      },
+      "lessons": [
+        "[Największe wyzwanie i jak je rozwiązałeś]",
+        "[Co zrobiłbyś inaczej / następne kroki]"
+      ],
+      "metrics": {
+        "accuracy": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        },
+        "latency": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        },
+        "cost": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        }
+      }
+    },
+    "ai-workflow-automation": {
+      "title": "[Nazwa projektu 2]",
+      "summary": "[Projekt 2: problem → rozwiązanie → efekt, 1–2 zdania.]",
+      "role": "[pipeline, API, wdrożenie]",
+      "effect": "[trafność, czas, koszt, użytkownicy]",
+      "duration": "[np. 3 miesiące, 2025]",
+      "problem": {
+        "heading": "[Jaki problem był do rozwiązania?]",
+        "body": "[Kontekst: kto miał problem, jak to wyglądało wcześniej, dlaczego zwykłe rozwiązanie nie wystarczało.]"
+      },
+      "solution": {
+        "heading": "[Co zbudowałeś?]",
+        "body": "[Opis rozwiązania i kluczowe decyzje techniczne: dlaczego ten model, ta strategia chunkingu, ta baza wektorowa.]"
+      },
+      "architecture": {
+        "body": "[Krótko opisz przepływ i gdzie to jest hostowane, np. AWS: Lambda / ECS, S3, RDS.]"
+      },
+      "lessons": [
+        "[Największe wyzwanie i jak je rozwiązałeś]",
+        "[Co zrobiłbyś inaczej / następne kroki]"
+      ],
+      "metrics": {
+        "time": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        },
+        "volume": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        },
+        "errors": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        }
+      }
+    },
+    "fullstack-platform": {
+      "title": "[Nazwa projektu 3]",
+      "summary": "[Projekt 3: problem → rozwiązanie → efekt, 1–2 zdania.]",
+      "role": "[pipeline, API, wdrożenie]",
+      "effect": "[trafność, czas, koszt, użytkownicy]",
+      "duration": "[np. 3 miesiące, 2025]",
+      "problem": {
+        "heading": "[Jaki problem był do rozwiązania?]",
+        "body": "[Kontekst: kto miał problem, jak to wyglądało wcześniej, dlaczego zwykłe rozwiązanie nie wystarczało.]"
+      },
+      "solution": {
+        "heading": "[Co zbudowałeś?]",
+        "body": "[Opis rozwiązania i kluczowe decyzje techniczne: dlaczego ten model, ta strategia chunkingu, ta baza wektorowa.]"
+      },
+      "architecture": {
+        "body": "[Krótko opisz przepływ i gdzie to jest hostowane, np. AWS: Lambda / ECS, S3, RDS.]"
+      },
+      "lessons": [
+        "[Największe wyzwanie i jak je rozwiązałeś]",
+        "[Co zrobiłbyś inaczej / następne kroki]"
+      ],
+      "metrics": {
+        "users": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        },
+        "uptime": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        },
+        "deploys": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        }
+      }
+    },
+    "llm-eval-harness": {
+      "title": "[Nazwa projektu 4]",
+      "summary": "[Projekt 4: problem → rozwiązanie → efekt, 1–2 zdania.]",
+      "role": "[pipeline, API, wdrożenie]",
+      "effect": "[trafność, czas, koszt, użytkownicy]",
+      "duration": "[np. 3 miesiące, 2025]",
+      "problem": {
+        "heading": "[Jaki problem był do rozwiązania?]",
+        "body": "[Kontekst: kto miał problem, jak to wyglądało wcześniej, dlaczego zwykłe rozwiązanie nie wystarczało.]"
+      },
+      "solution": {
+        "heading": "[Co zbudowałeś?]",
+        "body": "[Opis rozwiązania i kluczowe decyzje techniczne: dlaczego ten model, ta strategia chunkingu, ta baza wektorowa.]"
+      },
+      "architecture": {
+        "body": "[Krótko opisz przepływ i gdzie to jest hostowane, np. AWS: Lambda / ECS, S3, RDS.]"
+      },
+      "lessons": [
+        "[Największe wyzwanie i jak je rozwiązałeś]",
+        "[Co zrobiłbyś inaczej / następne kroki]"
+      ],
+      "metrics": {
+        "cases": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        },
+        "runtime": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        },
+        "regressions": {
+          "value": "[wartość]",
+          "label": "[np. trafność odpowiedzi]"
+        }
+      }
+    },
+    "document-search": {
+      "title": "[Nazwa projektu 5]",
+      "summary": "[Projekt 5: problem → rozwiązanie → efekt, 1–2 zdania.]",
+      "role": "[pipeline, API, wdrożenie]",
+      "effect": "[trafność, czas, koszt, użytkownicy]"
+    },
+    "internal-dashboard": {
+      "title": "[Nazwa projektu 6]",
+      "summary": "[Projekt 6: problem → rozwiązanie → efekt, 1–2 zdania.]",
+      "role": "[pipeline, API, wdrożenie]",
+      "effect": "[trafność, czas, koszt, użytkownicy]"
+    },
+    "api-gateway": {
+      "title": "[Nazwa projektu 7]",
+      "summary": "[Projekt 7: problem → rozwiązanie → efekt, 1–2 zdania.]",
+      "role": "[pipeline, API, wdrożenie]",
+      "effect": "[trafność, czas, koszt, użytkownicy]"
+    }
+  }
+}
