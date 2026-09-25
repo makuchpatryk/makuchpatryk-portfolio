@@ -1,6 +1,6 @@
 # makuchpatryk — portfolio
 
-Static, bilingual (EN default / PL) portfolio for an AI / Software Engineer. Nuxt 4 (`nuxt generate`), Tailwind CSS v4, dark-default terminal aesthetic with a light theme, typed TS content + i18n JSON. Product spec: [`PRD.md`](./PRD.md). Design source: [`docs/design/`](./docs/design).
+Static, bilingual (EN default / PL) portfolio for an AI / Software Engineer. Nuxt 4 (`nuxt generate`), Tailwind CSS v4, dark-default terminal aesthetic with a light theme, typed TS content + i18n JSON. Product spec: [`docs/PRD.md`](./docs/PRD.md). Design source: [`docs/design/`](./docs/design).
 
 ## Quick start
 
