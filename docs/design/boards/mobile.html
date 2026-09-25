@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl"><head>
+<meta charset="utf-8">
+<title>CV – mobile</title>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style></style>
+<style>
+body{margin:0;font-family:Geist,system-ui,sans-serif;background:#0B0D10;color:#E6E8EB}
+a{color:#E6E8EB}a:hover{color:#5EEAD4}
+.gridbg{background-image:linear-gradient(#1A1E24 1px,transparent 1px),linear-gradient(90deg,#1A1E24 1px,transparent 1px);background-size:32px 32px}
+</style>
+</helmet>
+<div style="width: 390px; height: 2220px; box-sizing: border-box; display: flex; flex-direction: column; background: #0B0D10; color: #E6E8EB; font-family: Geist, system-ui, sans-serif">
+
+<nav style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #232830; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px">
+<a href="#top" style="text-decoration: none; font-weight: 600"><span style="color: {{accent}}">~/</span>[imię]</a>
+<button aria-label="Otwórz menu" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #343A44; border-radius: 6px; background: transparent; color: #E6E8EB">
+<svg width="20" height="20" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg>
+</button>
+</nav>
+
+<section class="gridbg" style="display: flex; flex-direction: column; gap: 22px; padding: 44px 20px 48px; border-bottom: 1px solid #232830">
+<div style="display: flex; align-items: center; gap: 14px">
+<div style="flex-shrink: 0; padding: 3px; border: 1px solid {{accent}}; border-radius: 12px">
+<div style="width: 76px; height: 76px; border-radius: 9px; border: 1px dashed #5C6470; background: #12151A; display: flex; align-items: center; justify-content: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; color: #8B93A1">[zdjęcie]</div>
+</div>
+<div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid #232830; border-radius: 999px; background: #12151A; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #8B93A1">
+<span style="width: 7px; height: 7px; border-radius: 999px; background: {{accent}}"></span>
+<span>open to work · remote</span>
+</div>
+</div>
+<h1 style="margin: 0; font-weight: 600; font-size: 40px; line-height: 1.05; letter-spacing: -0.035em">[Imię Nazwisko]<br><span style="color: {{accent}}">AI Engineer</span> / Software Engineer</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #8B93A1">[Dwa zdania: RAG, AI workflows i jakiej roli szukasz.]</p>
+<div style="display: flex; flex-direction: column; border: 1px solid #232830; border-radius: 10px; background: #12151A; padding: 16px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; line-height: 1.75">
+<span><span style="color: {{accent}}">$</span> cat stack.yaml</span>
+<span><span style="color: #8B93A1">ai:</span> [rag, ai-workflows]</span>
+<span><span style="color: #8B93A1">backend:</span> [python, fastapi]</span>
+<span><span style="color: #8B93A1">cloud:</span> [aws, docker]</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px">
+<a href="#projekty" style="display: flex; align-items: center; justify-content: center; min-height: 50px; background: {{accent}}; color: #0B0D10; border-radius: 6px; text-decoration: none; font-weight: 600">zobacz projekty →</a>
+<a href="#cv" style="display: flex; align-items: center; justify-content: center; min-height: 50px; border: 1px solid #343A44; border-radius: 6px; text-decoration: none">cv.pdf ↓</a>
+</div>
+</section>
+
+<section id="projekty" style="display: flex; flex-direction: column; gap: 18px; padding: 40px 20px 44px; border-bottom: 1px solid #232830">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: {{accent}}">[01] projekty</span>
+<article style="display: flex; flex-direction: column; gap: 14px; padding: 18px; border: 1px solid #232830; border-radius: 12px; background: #12151A">
+<div class="gridbg" style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 16px; border: 1px solid #232830; border-radius: 8px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px">
+<span style="padding: 7px 9px; border: 1px solid #343A44; border-radius: 5px; background: #0B0D10">docs</span><span style="color: #5C6470">→</span>
+<span style="padding: 7px 9px; border: 1px solid #343A44; border-radius: 5px; background: #0B0D10">embed</span><span style="color: #5C6470">→</span>
+<span style="padding: 7px 9px; border: 1px solid {{accent}}; color: {{accent}}; border-radius: 5px; background: #0B0D10">pgvector</span><span style="color: #5C6470">→</span>
+<span style="padding: 7px 9px; border: 1px solid {{accent}}; color: {{accent}}; border-radius: 5px; background: #0B0D10">LLM</span>
+</div>
+<h3 style="margin: 0; font-weight: 600; font-size: 22px; letter-spacing: -0.02em">[Nazwa projektu]</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #B4BAC4">[Jaki problem rozwiązuje AI — 1 zdanie.]</p>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px">
+<span style="padding: 4px 8px; background: #1A1E24; border-radius: 4px">python</span>
+<span style="padding: 4px 8px; background: #1A1E24; border-radius: 4px">fastapi</span>
+<span style="padding: 4px 8px; background: #1A1E24; border-radius: 4px">rag</span>
+<span style="padding: 4px 8px; background: #1A1E24; border-radius: 4px">aws</span>
+</div>
+<div style="display: flex; gap: 18px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px"><a href="#demo">demo ↗</a><a href="#repo">kod ↗</a><a href="#case" style="color: {{accent}}">case study →</a></div>
+</article>
+<article style="display: flex; flex-direction: column; gap: 12px; padding: 18px; border: 1px solid #232830; border-radius: 12px; background: #12151A">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #8B93A1">02 · ai workflow</span>
+<h3 style="margin: 0; font-weight: 600; font-size: 22px; letter-spacing: -0.02em">[Nazwa projektu]</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #B4BAC4">[Problem → rozwiązanie → efekt.]</p>
+<div style="display: flex; gap: 18px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px"><a href="#demo2">demo ↗</a><a href="#repo2">kod ↗</a></div>
+</article>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 14px; padding: 40px 20px 44px; border-bottom: 1px solid #232830">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: {{accent}}">[02] doświadczenie</span>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 16px; border: 1px solid #232830; border-radius: 10px; background: #12151A">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: {{accent}}">● [2024] — teraz</span>
+<span style="font-size: 18px; font-weight: 600">[Stanowisko]</span>
+<span style="font-size: 14px; color: #8B93A1">[Firma]</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 16px; border: 1px solid #232830; border-radius: 10px; background: #12151A">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #8B93A1">○ [2022] — [2024]</span>
+<span style="font-size: 18px; font-weight: 600">[Stanowisko]</span>
+<span style="font-size: 14px; color: #8B93A1">[Firma]</span>
+</div>
+</section>
+
+<footer class="gridbg" style="flex-grow: 1; display: flex; flex-direction: column; gap: 20px; padding: 48px 20px 32px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: {{accent}}">[04] kontakt</span>
+<h2 style="margin: 0; font-weight: 600; font-size: 44px; line-height: 1; letter-spacing: -0.04em">Zbudujmy coś z <span style="color: {{accent}}">AI</span>.</h2>
+<a href="#mail" style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 16px; text-underline-offset: 6px"><span style="color: {{accent}}">$</span> mail [twoj@email.pl]</a>
+<div style="display: flex; gap: 20px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px">
+<a href="#github">github ↗</a>
+<a href="#linkedin">linkedin ↗</a>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#5EEAD4&quot;,&quot;options&quot;:[&quot;#5EEAD4&quot;,&quot;#A3E635&quot;,&quot;#FDBA74&quot;,&quot;#A5B4FC&quot;]},&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:2220}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#5EEAD4' };
+  }
+}
+</script>
+
+
+</body></html>
