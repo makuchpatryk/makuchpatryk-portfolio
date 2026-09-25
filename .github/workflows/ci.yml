@@ -2,6 +2,10 @@ name: ci
 
 on:
   pull_request:
+  push:
+    # main is covered by deploy.yml, which calls this workflow
+    branches-ignore: [main]
+  workflow_dispatch:
   workflow_call:
 
 concurrency:
