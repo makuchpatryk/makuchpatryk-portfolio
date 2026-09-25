@@ -1,9 +1,7 @@
 name: deploy
 
+# manual only: Actions -> deploy -> Run workflow, pick a branch or a tag in "Use workflow from"
 on:
-  push:
-    branches: [main]
-    tags: ['release*']
   workflow_dispatch:
 
 permissions:

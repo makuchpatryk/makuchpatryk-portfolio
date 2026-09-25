@@ -26,7 +26,7 @@ Static, bilingual (EN default / PL) developer portfolio for an AI / Software Eng
 | Hero terminal | static text + blinking cursor; disabled under `prefers-reduced-motion` |
 | Content status | Build with placeholders; content fill = separate checklist + launch gate |
 | Host | **GitHub Pages** (Actions-based deploy). Nitro preset `github_pages`. Build stays host-agnostic: base URL + site URL come from env, no host logic in app code. *Updated:* `SITE_URL` is the site **origin only** (`https://user.github.io`); the modules append the base path |
-| Deploy | `.github/workflows/deploy.yml`: on push to `main` → reuse CI → `pnpm generate` → upload `.output/public` → `actions/deploy-pages`. Domain: none yet (`user.github.io/<repo>/`); custom domain later = `public/CNAME` + base `/` |
+| Deploy | `.github/workflows/deploy.yml`: manual dispatch (branch or tag picker) → reuse CI → `pnpm generate` → upload `.output/public` → `actions/deploy-pages`. Domain: none yet (`user.github.io/<repo>/`); custom domain later = `public/CNAME` + base `/` |
 | Name | package `makuchpatryk` (folder stays `makuchpatryk-new`) |
 
 ## 3. Success criteria

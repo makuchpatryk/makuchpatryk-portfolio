@@ -180,10 +180,10 @@ pull_request ─> ci.yml: lint, typecheck, unit, locale parity, video budget, ge
                         ├─> e2e (root + non-root base)
                         └─> lighthouse (non-blocking for now; mobile perf ≥0.75, rest ≥0.95)
 
-push main / release* tag ─> deploy.yml: ci.yml ─> build (NITRO_PRESET=github_pages) ─> upload-pages-artifact ─> deploy-pages
+manual (pick branch or tag) ─> deploy.yml: ci.yml ─> build (NITRO_PRESET=github_pages) ─> upload-pages-artifact ─> deploy-pages
 ```
 
-The placeholder gate warns on `main` and fails the build on a `release*` tag. Locally, Husky + lint-staged run ESLint on staged files and the project typecheck; CI stays the source of truth.
+The placeholder gate warns on a branch and fails the build on a `release*` tag. Locally, Husky + lint-staged run ESLint on staged files and the project typecheck; CI stays the source of truth.
 
 ## 14. Design decisions and gotchas
 

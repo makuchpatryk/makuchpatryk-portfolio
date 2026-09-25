@@ -16,7 +16,7 @@ One-time setup:
 
 1. Repo → **Settings → Pages → Source = GitHub Actions**.
 2. Repo → **Settings → Secrets and variables → Actions → Variables**: add `SITE_URL` (e.g. `https://<user>.github.io`). Add `BASE_URL=/` only when using a custom domain or a `<user>.github.io` user-site repo.
-3. Push to `main`. `deploy.yml` runs CI (`ci.yml`), builds with `NITRO_PRESET=github_pages`, uploads `.output/public` and deploys.
+3. Run the deploy manually: **Actions → deploy → Run workflow**, choose a branch or a tag in **Use workflow from**. `deploy.yml` runs CI (`ci.yml`), builds that ref with `NITRO_PRESET=github_pages`, uploads `.output/public` and deploys. Nothing deploys on push.
 
 Without `BASE_URL` the workflow uses `/<repo-name>/` (project page: `https://<user>.github.io/<repo>/`).
 
@@ -24,7 +24,7 @@ Post-deploy smoke check (manual): live URL, `/pl/`, a deep link such as `/projec
 
 ### Launch gate
 
-`scripts/check-placeholders.mjs` scans the built HTML for `[placeholder]` strings. It only warns on `main`; pushing a tag matching `release*` runs it with `--strict` and fails the build. Note: the `github-pages` environment only accepts deployments from `main` by default — add the tag pattern under **Settings → Environments → github-pages → Deployment branches and tags** if you want tag-triggered deploys.
+`scripts/check-placeholders.mjs` scans the built HTML for `[placeholder]` strings. It only warns on a branch; deploying a tag matching `release*` runs it with `--strict` and fails the build. Note: the `github-pages` environment only accepts deployments from `main` by default — add the tag pattern under **Settings → Environments → github-pages → Deployment branches and tags** to deploy tags.
 
 ### Known limitation on a project-page subpath
 
