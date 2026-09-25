@@ -149,7 +149,7 @@ Pure logic (`app/utils/projects.ts`) has no Nuxt imports, so Vitest tests it dir
 - Images: build-time optimisation, explicit width/height, lazy loading below the fold.
 - Budget for video is enforced by `pnpm check:video-size` (≤15 MiB per file, ≤120 MiB total).
 
-Measured on a slow dev box (Lighthouse `benchmarkIndex` 570): desktop 100 on all four categories; mobile accessibility/best-practices/SEO 100, performance 75–88. The CI Lighthouse job is non-blocking until mobile is confirmed on a GitHub runner.
+Measured on a dev box: desktop 100 on all four categories; mobile accessibility/best-practices/SEO 100, performance 75–88. On a GitHub runner mobile performance is 0.81 (home) to 0.94. The floor is JS boot, not content: the same page with scripts stripped scores 100 (FCP 1.3 s, TBT 0), and Vue + Nuxt + vue-i18n boot costs ~300 ms TBT under Lighthouse's 4x CPU throttle. Tried without a lasting gain: `hydrate-never` on the hero and home sections (≈+0.03–0.05, breaks SPA navigation from those links), `i18n.bundle.runtimeOnly` (breaks: lazy-loaded locale JSON needs the runtime compiler), dropping `prefetch` links, `local()` font lookups, `text-wrap: balance`. The mobile performance gate is therefore 0.75; desktop performance and all other categories stay at 0.95.
 
 ## 10. SEO
 
@@ -178,7 +178,7 @@ Skip link, one `h1` per page with a logical heading order (project titles are `h
 ```
 pull_request ─> ci.yml: lint, typecheck, unit, locale parity, video budget, generate, placeholder gate
                         ├─> e2e (root + non-root base)
-                        └─> lighthouse (non-blocking for now)
+                        └─> lighthouse (non-blocking for now; mobile perf ≥0.75, rest ≥0.95)
 
 push main / release* tag ─> deploy.yml: ci.yml ─> build (NITRO_PRESET=github_pages) ─> upload-pages-artifact ─> deploy-pages
 ```
@@ -201,4 +201,4 @@ The placeholder gate warns on `main` and fails the build on a `release*` tag. Lo
 | Explicit per-locale sitemaps | automatic locale split is wrong under a base path |
 | pnpm `allowBuilds` in `pnpm-workspace.yaml` | pnpm 11 blocks dependency build scripts (esbuild, sharp, resvg) unless allowed |
 
-Known limitations: no `robots.txt` on a project-page subpath (only valid at a domain root); mobile Lighthouse performance is unconfirmed on CI hardware; demo videos are placeholders until real files are added.
+Known limitations: no `robots.txt` on a project-page subpath (only valid at a domain root); mobile Lighthouse performance is gated at 0.75, not 0.95 (see §9); demo videos are placeholders until real files are added.

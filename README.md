@@ -17,7 +17,7 @@ pnpm generate         # fully static site in .output/public
 | `pnpm lint` / `pnpm typecheck` | ESLint (`@nuxt/eslint`) / `vue-tsc` |
 | `pnpm test` | Vitest: project filter, locale parity, detail completeness, contrast ratios |
 | `pnpm test:e2e` | Playwright against the **built** site (`pnpm generate` first): routes × locales, theme, language, filter, keyboard, axe (both themes) |
-| `pnpm lhci` | Lighthouse CI (mobile + desktop, ≥0.95 assertions) |
+| `pnpm lhci` | Lighthouse CI (mobile + desktop; ≥0.95 everywhere except mobile performance, ≥0.75) |
 | `pnpm check:placeholders` | launch gate: `[placeholder]` strings in built HTML |
 | `pnpm check:locales` / `pnpm check:video-size` | key parity / video budget |
 

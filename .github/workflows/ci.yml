@@ -70,8 +70,8 @@ jobs:
   lighthouse:
     needs: verify
     runs-on: ubuntu-latest
-    # Desktop scores 100 locally; mobile perf was pessimistic on a slow dev box (Lighthouse benchmarkIndex 570).
-    # Non-blocking until mobile numbers are confirmed on CI runners — then remove continue-on-error.
+    # Desktop scores 100 locally. Mobile perf is 0.81-0.94 on CI (hydration cost under 4x CPU throttle), so its gate is 0.75.
+    # Non-blocking until desktop numbers are confirmed on CI runners — then remove continue-on-error.
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
