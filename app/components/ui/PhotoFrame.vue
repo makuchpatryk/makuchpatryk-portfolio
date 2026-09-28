@@ -18,6 +18,7 @@ withDefaults(defineProps<{
       :width="size === 'compact' ? 76 : 440"
       :height="size === 'compact' ? 76 : undefined"
       :loading="size === 'compact' ? 'eager' : 'lazy'"
+      format="webp"
       class="rounded-[10px]"
       :class="size === 'compact' ? 'size-[76px] object-cover' : 'h-auto w-full'"
     />
