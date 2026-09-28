@@ -193,7 +193,7 @@
       "location": "Warszawa",
       "bullets": [
         "Zaprojektowałem scentralizowaną platformę API gateway — JWT auth, wersjonowanie, rate limiting i polityki bezpieczeństwa — z odpornymi integracjami opartymi na retry.",
-        "Zaprojektowałem moduł zarządzania zamówieniami ze 100+ konfigurowalnymi parametrami, skracając onboarding nowych deweloperów z 2 tygodni do 3 dni; mentorowałem 3 inżynierów i prowadziłem cotygodniowe code review.",
+        "Zaprojektowałem moduł zarządzania zamówieniami ze 100+ konfigurowalnymi parametrami.",
         "Poprowadziłem migrację Vue 2 → Vue 3 i współtworzyłem design system (PrimeVue + Tailwind) wdrożony w 3 aplikacjach wewnętrznych."
       ]
     },

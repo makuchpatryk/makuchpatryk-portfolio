@@ -193,7 +193,7 @@
       "location": "Warszawa",
       "bullets": [
         "Architected a centralized API gateway platform — JWT auth, versioning, rate limiting and security policies — with resilient retry-based integrations to external systems.",
-        "Designed a 100+-parameter order management module that cut new-developer onboarding from 2 weeks to 3 days; mentored 3 engineers and ran weekly code reviews.",
+        "Designed a 100+-parameter order management module.",
         "Led the Vue 2 → Vue 3 migration and co-created a PrimeVue + Tailwind design system adopted by 3 internal apps."
       ]
     },
