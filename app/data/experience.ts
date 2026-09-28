@@ -1,7 +1,7 @@
 import type { Experience } from '../types/content'
 
-// Years are bracketed placeholders until real content lands (see docs/content-checklist.md).
 export const experience: Experience[] = [
-  { id: 'current', from: '[2024]', to: null, current: true },
-  { id: 'previous', from: '[2022]', to: '[2024]', current: false }
+  { id: 'codest', from: 'Apr 2026', to: null, current: true },
+  { id: 'coldrun', from: 'Jul 2024', to: 'Apr 2026', current: false },
+  { id: 'ergonode', from: 'Feb 2022', to: 'Mar 2024', current: false }
 ]

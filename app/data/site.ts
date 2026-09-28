@@ -1,15 +1,14 @@
 import type { SiteData } from '../types/content'
 
-// Placeholder values are bracketed on purpose: scripts/check-placeholders.mjs fails the launch gate on them.
 export const site: SiteData = {
-  handle: '[handle]',
-  name: '[Full Name]',
-  city: '[City]',
-  email: '[email]',
+  handle: 'makuchpatryk',
+  name: 'Patryk Makuch',
+  city: 'Kraków',
+  email: 'makuchpatryk@gmail.com',
   links: {
-    github: 'https://github.com/[github-user]',
-    linkedin: 'https://www.linkedin.com/in/[linkedin-user]'
+    github: 'https://github.com/makuchpatryk',
+    linkedin: 'https://www.linkedin.com/in/makuchpatryk'
   },
-  photo: null,
+  photo: '/images/me.png',
   cv: 'cv.pdf'
 }

@@ -10,16 +10,16 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="rounded-[14px] border border-accent p-1" :class="size === 'compact' ? 'w-fit rounded-xl p-[3px]' : ''">
+  <div class="rounded-[14px]" :class="size === 'compact' ? 'w-fit rounded-xl' : ''">
     <NuxtImg
       v-if="site.photo"
       :src="site.photo"
       :alt="alt"
       :width="size === 'compact' ? 76 : 440"
-      :height="size === 'compact' ? 76 : 440"
+      :height="size === 'compact' ? 76 : undefined"
       :loading="size === 'compact' ? 'eager' : 'lazy'"
-      class="rounded-[10px] object-cover"
-      :class="size === 'compact' ? 'size-[76px]' : 'h-[440px] w-full'"
+      class="rounded-[10px]"
+      :class="size === 'compact' ? 'size-[76px] object-cover' : 'h-auto w-full'"
     />
     <div
       v-else

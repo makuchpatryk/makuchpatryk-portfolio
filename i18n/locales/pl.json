@@ -1,15 +1,15 @@
 {
   "meta": {
     "home": {
-      "title": "[Imię Nazwisko] — AI Engineer / Software Engineer",
+      "title": "Patryk Makuch — AI Engineer / Software Engineer",
       "description": "[Portfolio inżyniera AI / oprogramowania: integracje LLM, RAG i AI workflows. Wybrane projekty, case studies i CV.]"
     },
     "projects": {
-      "title": "Projekty — [Imię Nazwisko]",
+      "title": "Projekty — Patryk Makuch",
       "description": "Wszystkie projekty: RAG, AI workflows i aplikacje full-stack. Filtruj według technologii."
     },
     "notFound": {
-      "title": "Nie znaleziono strony — [Imię Nazwisko]",
+      "title": "Nie znaleziono strony — Patryk Makuch",
       "description": "Ta strona nie istnieje."
     },
     "ogHomeSubtitle": "AI Engineer / Software Engineer",
@@ -49,7 +49,7 @@
     "statusShort": "open to work · zdalnie",
     "role1": "AI Engineer",
     "role2": "Software Engineer",
-    "tagline": "[Dwa zdania: integracje LLM, RAG i AI workflows, jaki problem biznesowy rozwiązujesz i jakiej roli szukasz.]",
+    "tagline": "Dostarczam oprogramowanie od A do Z — od designu przez frontend, backend po DevOps — i korzystam z narzędzi AI, żeby dowozić szybciej bez ścinania zakrętów.",
     "viewProjects": "zobacz projekty →",
     "github": "github ↗",
     "linkedin": "linkedin ↗",
@@ -177,22 +177,33 @@
     "nav": "Nawigacja po projektach"
   },
   "experience": {
-    "current": {
-      "role": "[Stanowisko]",
-      "company": "[Firma]",
-      "location": "[Miasto / zdalnie]",
+    "codest": {
+      "role": "Starszy Inżynier Oprogramowania",
+      "company": "The Codest",
+      "location": "Warszawa",
       "bullets": [
-        "[Konkretne osiągnięcie, najlepiej z efektem]",
-        "[Drugie osiągnięcie]"
+        "Buduję endpointy platformy i funkcje backendowe w Pythonie/FastAPI oraz testy end-to-end pokrywające pełne ścieżki żądań.",
+        "Refaktoryzuję komponenty wspólnej biblioteki UI i utrzymuję dokumentację Storybook dla współdzielonych produktów wewnętrznych.",
+        "Używam narzędzi AI na co dzień, by przyspieszyć dostarczanie i podnieść jakość code review."
       ]
     },
-    "previous": {
-      "role": "[Stanowisko]",
-      "company": "[Firma]",
-      "location": "[Miasto / zdalnie]",
+    "coldrun": {
+      "role": "Starszy Inżynier Oprogramowania",
+      "company": "Coldrun",
+      "location": "Warszawa",
       "bullets": [
-        "[Konkretne osiągnięcie, najlepiej z efektem]",
-        "[Drugie osiągnięcie]"
+        "Zaprojektowałem scentralizowaną platformę API gateway — JWT auth, wersjonowanie, rate limiting i polityki bezpieczeństwa — z odpornymi integracjami opartymi na retry.",
+        "Zaprojektowałem moduł zarządzania zamówieniami ze 100+ konfigurowalnymi parametrami, skracając onboarding nowych deweloperów z 2 tygodni do 3 dni; mentorowałem 3 inżynierów i prowadziłem cotygodniowe code review.",
+        "Poprowadziłem migrację Vue 2 → Vue 3 i współtworzyłem design system (PrimeVue + Tailwind) wdrożony w 3 aplikacjach wewnętrznych."
+      ]
+    },
+    "ergonode": {
+      "role": "Programista Frontend",
+      "company": "Ergonode.com (PIM)",
+      "location": "Kraków",
+      "bullets": [
+        "Uzgadniałem kontrakty API z inżynierami backendu i integrowałem głęboko zagnieżdżone API GraphQL dla złożonych modeli danych produktowych.",
+        "Diagnozowałem i naprawiałem wąskie gardła wydajności w widokach z dużą ilością danych; poprowadziłem redesign kluczowych widoków PIM, redukując liczbę zgłoszeń supportowych."
       ]
     }
   },
@@ -204,33 +215,36 @@
       "frontend": "frontend"
     },
     "items": {
-      "rag": "RAG",
+      "llmApi": "Integracje LLM API",
       "agents": "AI workflows i agenci",
       "embeddings": "Embeddingi, bazy wektorowe",
-      "llmApi": "Integracje LLM API",
       "llmEval": "Ewaluacja LLM",
+      "rag": "RAG",
       "python": "Python",
       "fastapi": "FastAPI",
-      "postgres": "PostgreSQL / pgvector",
-      "rest": "REST API",
+      "nestjs": "NestJS",
+      "nodejs": "Node.js",
+      "postgres": "PostgreSQL",
       "aws": "AWS",
       "docker": "Docker",
       "cicd": "CI/CD",
       "git": "Git",
       "typescript": "TypeScript",
-      "vue": "Vue"
+      "vue": "Vue",
+      "nuxt": "Nuxt.js",
+      "tailwind": "Tailwind CSS"
     }
   },
   "about": {
-    "lead": "[Główne zdanie o Tobie, np. czym się zajmujesz na co dzień i co Cię napędza w pracy z AI.]",
-    "body": "[2–3 zdania: jak trafiłeś do AI, z czego jesteś najbardziej dumny, jak łączysz inżynierię oprogramowania z AI (np. od prototypu RAG po wdrożenie na AWS).]",
+    "lead": "Starszy inżynier oprogramowania z 9+ latami doświadczenia w budowie systemów backendowych i platform API — dziś łączący to z codziennym używaniem LLM-ów i narzędzi AI, by projektować, sprawdzać i dowozić szybciej.",
+    "body": "Prowadziłem usługi od A do Z: bramki API, schematy PostgreSQL, backendy w NestJS/FastAPI, Docker i pipeline'y CI/CD. Na co dzień dochodzą do tego eksperymenty z RAG i workflowy wspierane przez LLM — od oceny odpowiedzi modeli po narzędzia AI jako codzienny element pracy w całym stacku.",
     "photoPlaceholder": "[twoje zdjęcie]",
     "now": "obecnie",
-    "nowValue": "[nad czym pracujesz]",
+    "nowValue": "Senior Software Engineer w The Codest — buduję funkcje full-stack.",
     "looking": "szukam",
-    "lookingValue": "[rola: AI / Software Engineer]",
+    "lookingValue": "roli Software Engineera, gdzie mogę odpowiadać za realny produkt od A do Z, z narzędziami AI jako częścią warsztatu.",
     "outside": "poza kodem",
-    "outsideValue": "[hobby / zainteresowania]"
+    "outsideValue": "Górskie szlaki i poranne bieganie — najlepsze debugowanie dzieje się z dala od ekranu."
   },
   "contact": {
     "headingA": "Zbudujmy coś",

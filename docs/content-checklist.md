@@ -5,19 +5,19 @@ The site is built with bracketed placeholders (`[Full Name]`, `[Project 1 name]`
 Replace copy in `i18n/locales/en.json` **and** `pl.json` (a test enforces identical keys); replace structured data in `app/data/*`.
 
 ## Identity — `app/data/site.ts`
-- [ ] `name`, `handle` (shown as `~/handle`), `city`
-- [ ] `email`
-- [ ] GitHub and LinkedIn URLs
-- [ ] `photo`: put the file in `public/images/`, set e.g. `'images/photo.jpg'` (rendered with `NuxtImg`, 440×440)
+- [x] `name`, `handle` (shown as `~/handle`), `city`
+- [x] `email`
+- [x] GitHub and LinkedIn URLs
+- [x] `photo`: put the file in `public/images/`, set e.g. `'images/photo.jpg'` (rendered with `NuxtImg`, 440×440)
 - [ ] Replace `public/cv.pdf` (placeholder PDF), single EN file for both locales
 - [ ] Favicon (`public/favicon.svg`) and brand line in `app/components/OgImage/PortfolioCard.satori.vue`
 
 ## Copy — both locales
 - [ ] `meta.*` page titles and descriptions (home, projects)
-- [ ] `hero.tagline`
-- [ ] `about.*` (lead, body, currently / looking for / outside code)
-- [ ] `experience.<id>.*` and the years in `app/data/experience.ts` (currently `'[2024]'`…)
-- [ ] `stack` groups/items if they differ
+- [x] `hero.tagline`
+- [x] `about.*` (lead, body, currently / looking for / outside code) — `outsideValue` left bracketed on purpose, no CV source for hobbies
+- [x] `experience.<id>.*` and the years in `app/data/experience.ts` — 3 roles (`codest`/`coldrun`/`ergonode`); Scooploop/Tekpaw (2017–2022) still open
+- [x] `stack` groups/items — backend/cloud/frontend expanded from the CV; `ai` group untouched
 
 ## Projects — `app/data/projects.ts` + `projects.<slug>.*`
 - [ ] Decide the real list (7+), tags, categories, `featured` (exactly 3), `order`, `meta.year`/`type`
