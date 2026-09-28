@@ -237,7 +237,7 @@
   },
   "about": {
     "lead": "Starszy inżynier oprogramowania z 9+ latami doświadczenia w budowie systemów backendowych i platform API — dziś łączący to z codziennym używaniem LLM-ów i narzędzi AI, by projektować, sprawdzać i dowozić szybciej.",
-    "body": "Prowadziłem usługi od A do Z: bramki API, schematy PostgreSQL, backendy w NestJS/FastAPI, Docker i pipeline'y CI/CD. Na co dzień dochodzą do tego eksperymenty z RAG i workflowy wspierane przez LLM — od oceny odpowiedzi modeli po narzędzia AI jako codzienny element pracy w całym stacku.",
+    "body": "Prowadziłem usługi od A do Z: bramki API, schematy PostgreSQL, backendy w NestJS/FastAPI, Docker i pipeline'y CI/CD. Na co dzień dochodzą do tego eksperymenty z AI i workflowy wspierane przez LLM — od oceny odpowiedzi modeli po narzędzia AI jako codzienny element pracy w całym stacku.",
     "photoPlaceholder": "[twoje zdjęcie]",
     "now": "obecnie",
     "nowValue": "Senior Software Engineer w The Codest — buduję funkcje full-stack.",

@@ -236,8 +236,8 @@
     }
   },
   "about": {
-    "lead": "Senior software engineer with 9+ years shipping backend systems and API platforms — now pairing that with heavy day-to-day use of LLMs and AI tooling to design, review and ship faster.",
-    "body": "I've owned services end to end: API gateways, PostgreSQL schemas, NestJS/FastAPI backends, Docker and CI/CD pipelines. Day to day that now includes RAG experiments and LLM-assisted workflows — from evaluating model output to using AI coding tools as a daily driver across the stack.",
+    "lead": "Senior software engineer with 9+ years shipping full-stack systems and API platforms — now pairing that with heavy day-to-day use of LLMs and AI tooling to design, review and ship faster.",
+    "body": "I've owned services end to end: API gateways, PostgreSQL schemas, NestJS/FastAPI backends, Vue frontends, Docker and CI/CD pipelines. Day to day that now includes AI experiments and LLM-assisted workflows — from evaluating model output to using AI coding tools as a daily driver across the stack.",
     "photoPlaceholder": "[your photo]",
     "now": "currently",
     "nowValue": "Senior Software Engineer at The Codest, building full-stack features.",
