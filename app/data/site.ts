@@ -9,6 +9,6 @@ export const site: SiteData = {
     github: 'https://github.com/makuchpatryk',
     linkedin: 'https://www.linkedin.com/in/makuchpatryk'
   },
-  photo: '/images/me.png',
+  photo: '/images/me.webp',
   cv: 'cv.pdf'
 }
