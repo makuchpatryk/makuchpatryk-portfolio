@@ -3,8 +3,14 @@ name: ci
 on:
   pull_request:
   push:
+    branches: [main]
   workflow_dispatch:
   workflow_call:
+    inputs:
+      skip-lighthouse:
+        description: Skip the non-blocking Lighthouse job (deploy does not need it)
+        type: boolean
+        default: false
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
@@ -14,81 +20,107 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  # static checks and the site build are independent, so they run in parallel
+  check:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm check:locales
       - run: pnpm check:video-size
+
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          nuxt-cache: 'true'
       - run: pnpm generate
         env:
           NUXT_PUBLIC_SITE_URL: https://example.com
       # launch gate: warns while content is placeholder; fails on a `release*` tag
       - run: node scripts/check-placeholders.mjs ${{ startsWith(github.ref, 'refs/tags/release') && '--strict' || '' }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: site
           path: .output/public
           retention-days: 3
 
   e2e:
-    needs: verify
+    needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: root base
+            base: /
+            port: 4173
+          - name: non-root base (GitHub project-page shape)
+            base: /makuchpatryk/
+            port: 4174
+    name: e2e (${{ matrix.name }})
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
         with:
-          node-version-file: .nvmrc
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
-      - uses: actions/download-artifact@v4
+          nuxt-cache: ${{ matrix.base != '/' }}
+      - id: pw
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+      # browsers come from the cache; system libraries are not cached, so they are always installed
+      - if: steps.pw.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install --with-deps chromium
+      - if: steps.pw.outputs.cache-hit == 'true'
+        run: pnpm exec playwright install-deps chromium
+      - if: matrix.base == '/'
+        uses: actions/download-artifact@v8
         with:
           name: site
           path: .output/public
-      - name: e2e (root base)
-        run: pnpm test:e2e
-      - name: e2e (non-root base, GitHub project-page shape)
-        run: |
-          NITRO_PRESET=github_pages NUXT_APP_BASE_URL=/makuchpatryk/ NUXT_PUBLIC_SITE_URL=https://user.github.io pnpm generate
-          PORT=4174 E2E_BASE=/makuchpatryk/ pnpm test:e2e
-      - uses: actions/upload-artifact@v4
+      - if: matrix.base != '/'
+        run: pnpm generate
+        env:
+          NITRO_PRESET: github_pages
+          NUXT_APP_BASE_URL: ${{ matrix.base }}
+          NUXT_PUBLIC_SITE_URL: https://user.github.io
+      - run: pnpm test:e2e
+        env:
+          PORT: ${{ matrix.port }}
+          E2E_BASE: ${{ matrix.base }}
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.port }}
           path: playwright-report
           retention-days: 7
 
   lighthouse:
-    needs: verify
+    if: ${{ !inputs.skip-lighthouse }}
+    needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     # Desktop scores 100 locally. Mobile perf is 0.81-0.94 on CI (hydration cost under 4x CPU throttle), so its gate is 0.75.
     # Non-blocking until desktop numbers are confirmed on CI runners — then remove continue-on-error.
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - uses: actions/download-artifact@v8
         with:
           name: site
           path: .output/public
       - run: pnpm lhci
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: lighthouse

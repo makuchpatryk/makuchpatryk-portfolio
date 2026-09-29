@@ -176,12 +176,14 @@ Skip link, one `h1` per page with a logical heading order (project titles are `h
 ## 13. CI/CD
 
 ```
-pull_request ─> ci.yml: lint, typecheck, unit, locale parity, video budget, generate, placeholder gate
-                        ├─> e2e (root + non-root base)
-                        └─> lighthouse (non-blocking for now; mobile perf ≥0.75, rest ≥0.95)
+PR / push to main ─> ci.yml: check (lint, typecheck, unit, locale parity, video budget)   ┐ parallel
+                             build (generate, placeholder gate) ─> e2e (root | non-root base, matrix)
+                                                                ─> lighthouse (non-blocking; mobile perf ≥0.75, rest ≥0.95)
 
-manual (pick branch or tag) ─> deploy.yml: ci.yml ─> build (NITRO_PRESET=github_pages) ─> upload-pages-artifact ─> deploy-pages
+manual (pick branch or tag) ─> deploy.yml: ci.yml (no lighthouse) ─> build (NITRO_PRESET=github_pages) ─> upload-pages-artifact ─> deploy-pages
 ```
+
+Setup (pnpm, Node from `.nvmrc`, cached install, optional `node_modules/.cache` for optimised/OG images) lives once in the composite action `.github/actions/setup`. Playwright browsers are cached by lockfile hash. Every job has a `timeout-minutes`; the deploy concurrency group never cancels a running deploy.
 
 The placeholder gate warns on a branch and fails the build on a `release*` tag. Locally, Husky + lint-staged run ESLint on staged files and the project typecheck; CI stays the source of truth.
 

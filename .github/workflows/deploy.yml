@@ -11,25 +11,26 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # never cancel a running deploy half-way; a newer run waits for it
+  cancel-in-progress: false
 
 jobs:
   ci:
     uses: ./.github/workflows/ci.yml
+    with:
+      skip-lighthouse: true
     permissions:
       contents: read
 
   build:
     needs: ci
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
         with:
-          node-version-file: .nvmrc
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          nuxt-cache: 'true'
       - run: pnpm generate
         env:
           NITRO_PRESET: github_pages
@@ -39,16 +40,17 @@ jobs:
           NUXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL }}
       # warns while content is placeholder; a `release*` tag makes it a hard gate
       - run: node scripts/check-placeholders.mjs ${{ startsWith(github.ref, 'refs/tags/release') && '--strict' || '' }}
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: .output/public
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.d.outputs.page_url }}
     steps:
       - id: d
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

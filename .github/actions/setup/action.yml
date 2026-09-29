@@ -1,0 +1,27 @@
+name: setup
+description: pnpm + Node from .nvmrc, cached install, optional Nuxt build cache. Run after actions/checkout.
+
+inputs:
+  nuxt-cache:
+    description: Restore/save node_modules/.cache (optimised images, OG images) for jobs that run `nuxt generate`
+    default: 'false'
+
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/action-setup@v6
+    - uses: actions/setup-node@v7
+      with:
+        node-version-file: .nvmrc
+        cache: pnpm
+    - run: pnpm install --frozen-lockfile
+      shell: bash
+    # image + OG rendering dominate `nuxt generate`; unchanged inputs are reused across runs
+    - if: inputs.nuxt-cache == 'true'
+      uses: actions/cache@v6
+      with:
+        path: node_modules/.cache
+        key: nuxt-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'public/images/**') }}-${{ github.sha }}
+        restore-keys: |
+          nuxt-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'public/images/**') }}-
+          nuxt-${{ runner.os }}-
