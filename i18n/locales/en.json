@@ -116,13 +116,13 @@
       "question": "question",
       "retrieval": "retrieval top-k",
       "llm": "LLM",
-      "fastapi": "FastAPI",
-      "ui": "UI",
-      "trigger": "trigger",
-      "extraction": "extraction",
-      "validation": "validation",
-      "action": "action",
-      "audit": "audit log"
+      "parsing": "parsing",
+      "rewrite": "query rewrite",
+      "rerank": "LLM re-rank",
+      "schema": "schema",
+      "records": "records",
+      "cli": "CLI",
+      "ui": "UI"
     }
   },
   "projectsPage": {
@@ -262,167 +262,293 @@
     "back": "← back to home"
   },
   "projects": {
-    "rag-assistant": {
-      "title": "[Project 1 name]",
-      "summary": "[Project 1: problem → solution → outcome, 1–2 sentences.]",
-      "role": "[pipeline, API, deployment]",
-      "effect": "[accuracy, time, cost, users]",
-      "duration": "[e.g. 3 months, 2025]",
+    "ai-book-chat": {
+      "title": "AI Book Chat",
+      "summary": "Upload a PDF and ask questions about it. Answers stream in with the pages they came from, backed by a local RAG pipeline.",
+      "role": "backend, RAG pipeline, React UI",
+      "effect": "streamed answers with page citations",
+      "duration": "Aug – Sep 2026",
       "problem": {
-        "heading": "[What problem needed solving?]",
-        "body": "[Context: who had the problem, how it looked before, why the obvious solution was not enough.]"
+        "heading": "Can you trust an answer about a long book?",
+        "body": "A plain chat model answers from general knowledge and cannot show where a claim comes from. For a long PDF you want answers grounded in the text, pages to check them against, and an honest signal when the book does not cover the question."
       },
       "solution": {
-        "heading": "[What did you build?]",
-        "body": "[The solution and key technical decisions: why this model, this chunking strategy, this vector store.]"
+        "heading": "Retrieval with re-ranking and citations",
+        "body": "A worker parses the PDF, detects sections (outline first, then heading heuristics, then flat pages) and cuts chunks of about 600 tokens with 15% overlap that never cross a section boundary. Each question is rewritten into a standalone query from the recent turns, matched by cosine search in pgvector and re-ranked by an LLM before generation. Sources are streamed first, so the UI shows citations while the answer is still being written; when nothing relevant is found, the answer says so up front."
       },
       "architecture": {
-        "body": "[Briefly describe the flow and where it is hosted, e.g. AWS: Lambda / ECS, S3, RDS.]"
+        "body": "A React frontend talks HTTP and SSE to a FastAPI API backed by PostgreSQL with pgvector (HNSW, cosine). Uploads are queued in Redis and processed by a Celery worker: PyMuPDF parsing, chunking and batch embedding with local Ollama (nomic-embed-text). Chat, query rewriting and re-ranking use any OpenAI-compatible endpoint, Groq by default. pnpm workspaces and Turborepo drive both apps."
       },
       "lessons": [
-        "[Biggest challenge and how you solved it]",
-        "[What you would do differently / next steps]"
+        "Embeddings are deliberately not switchable: the vector column has a fixed width, so another model means a migration and a re-ingest. The app refuses to start when the configured dimensions and the column disagree, instead of returning plausible but meaningless results.",
+        "Follow-up questions like \"and what about his brother?\" only work because of the rewrite step; retrieval alone sees no context. Still out of scope: cross-document queries, OCR for scanned PDFs and accounts."
       ],
       "metrics": {
-        "accuracy": {
+        "ingest": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "time from upload to READY for a book"
         },
         "latency": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "time to first token of an answer"
         },
-        "cost": {
+        "tests": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "automated tests (pytest + vitest)"
         }
       }
     },
-    "ai-workflow-automation": {
-      "title": "[Project 2 name]",
-      "summary": "[Project 2: problem → solution → outcome, 1–2 sentences.]",
-      "role": "[pipeline, API, deployment]",
-      "effect": "[accuracy, time, cost, users]",
-      "duration": "[e.g. 3 months, 2025]",
+    "blind-clue": {
+      "title": "BlindClue",
+      "summary": "Real-time multiplayer social deduction game: everyone gets the secret word except one player, who only gets a hint and has to blend in.",
+      "role": "full stack: realtime backend, Vue frontend",
+      "effect": "full game loop from lobby to scoring over WebSockets",
+      "duration": "May – Aug 2026",
       "problem": {
-        "heading": "[What problem needed solving?]",
-        "body": "[Context: who had the problem, how it looked before, why the obvious solution was not enough.]"
+        "heading": "A party game needs everyone in the same moment",
+        "body": "The game only works if all players move through the same phases together: describe the word, vote, reveal. Each phase has to reach every player as it happens, and the scoring has to be decided in one place."
       },
       "solution": {
-        "heading": "[What did you build?]",
-        "body": "[The solution and key technical decisions: why this model, this chunking strategy, this vector store.]"
+        "heading": "A server-authoritative game over Socket.io",
+        "body": "Two to four players join a lobby and play three rounds of describing the word without naming it, then vote on who the impostor is. Votes are revealed, and a caught impostor can still score by guessing the word. The server owns the game state and the scoring; clients send events such as joinGame, submitDescription and voteImpostor and react to GameStarted, VotingStarted, VotesRevealed and GameEnded."
       },
       "architecture": {
-        "body": "[Briefly describe the flow and where it is hosted, e.g. AWS: Lambda / ECS, S3, RDS.]"
+        "body": "A pnpm monorepo: a Fastify + Socket.io + SQLite backend built in Clean Architecture layers (domain entities, use cases, application services, adapters) and a Vue 3 + Vite + Pinia + Tailwind frontend. Running games live in memory in a GameManager and are removed when they end; categories and words are managed through admin endpoints. The backend ships as a Docker image."
       },
       "lessons": [
-        "[Biggest challenge and how you solved it]",
-        "[What you would do differently / next steps]"
+        "Keeping running games only in memory keeps the model simple; the flip side is that a restart would end the games in progress.",
+        "Returning a Result from every operation makes failure paths explicit and easy to test, including the scoring cases for a caught and an uncaught impostor."
       ],
       "metrics": {
-        "time": {
+        "players": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "players per room"
         },
-        "volume": {
+        "events": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "realtime socket events"
         },
-        "errors": {
+        "tests": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "automated tests"
         }
       }
     },
-    "fullstack-platform": {
-      "title": "[Project 3 name]",
-      "summary": "[Project 3: problem → solution → outcome, 1–2 sentences.]",
-      "role": "[pipeline, API, deployment]",
-      "effect": "[accuracy, time, cost, users]",
-      "duration": "[e.g. 3 months, 2025]",
+    "perplex-image": {
+      "title": "PerplexImage",
+      "summary": "Image puzzle game: pick a photo, rearrange the tiles with drag and drop and beat your own time and move count.",
+      "role": "sole author: gameplay, state, API proxy, tests",
+      "effect": "three difficulty levels, covered by unit and e2e tests",
+      "duration": "Feb 2024 – May 2026",
       "problem": {
-        "heading": "[What problem needed solving?]",
-        "body": "[Context: who had the problem, how it looked before, why the obvious solution was not enough.]"
+        "heading": "A puzzle that works on every screen",
+        "body": "Drag-and-drop puzzles are easy to build for a mouse and awkward everywhere else. The goal was a game that plays the same on mobile, tablet and desktop and never runs out of images to solve."
       },
       "solution": {
-        "heading": "[What did you build?]",
-        "body": "[The solution and key technical decisions: why this model, this chunking strategy, this vector store.]"
+        "heading": "Tile puzzles on three difficulty levels",
+        "body": "Players choose an image from the Pexels API, pick a level (9×13, 15×23 or 20×30 tiles) and drag pieces into place while a timer and a move counter run. The game can be paused and reset, and it shows progress. Pinia holds the game state; a Nitro server route proxies Pexels so the API key stays on the server, and an adapter for Supabase storage exists next to the Pexels one."
       },
       "architecture": {
-        "body": "[Briefly describe the flow and where it is hosted, e.g. AWS: Lambda / ECS, S3, RDS.]"
+        "body": "Nuxt 3 with the Vue 3 Composition API, split into modules: core (shared utilities, store, types), game (pages, components, logic) and ui (generic components). Server routes under /server/api fetch images behind an adapter interface. Vitest covers units, Playwright covers end-to-end flows and Husky pre-commit hooks run the linter."
       },
       "lessons": [
-        "[Biggest challenge and how you solved it]",
-        "[What you would do differently / next steps]"
+        "Keeping game logic in its own module, apart from generic UI components, keeps it testable with plain unit tests.",
+        "The image source sits behind an adapter, so Pexels and Supabase storage are interchangeable for the game."
       ],
       "metrics": {
-        "users": {
+        "levels": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "difficulty levels (largest board in tiles)"
         },
-        "uptime": {
+        "tests": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "unit and e2e tests"
         },
-        "deploys": {
+        "commits": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "commits"
         }
       }
     },
-    "llm-eval-harness": {
-      "title": "[Project 4 name]",
-      "summary": "[Project 4: problem → solution → outcome, 1–2 sentences.]",
-      "role": "[pipeline, API, deployment]",
-      "effect": "[accuracy, time, cost, users]",
-      "duration": "[e.g. 3 months, 2025]",
+    "ai-semantic-db": {
+      "title": "Semantic DB",
+      "summary": "CLI for local semantic search over your own structured data: define a schema, add records and search in plain language. No cloud, no API keys.",
+      "role": "design and implementation: schema model, CLI, embeddings, tests",
+      "effect": "records are searchable the moment they are saved",
+      "duration": "Aug – Sep 2026",
       "problem": {
-        "heading": "[What problem needed solving?]",
-        "body": "[Context: who had the problem, how it looked before, why the obvious solution was not enough.]"
+        "heading": "Semantic search without a cloud service",
+        "body": "Existing semantic search tools are cloud-based or tied to one data source. The aim was to define your own structure, keep the data on your machine and search it by meaning instead of by keyword."
       },
       "solution": {
-        "heading": "[What did you build?]",
-        "body": "[The solution and key technical decisions: why this model, this chunking strategy, this vector store.]"
+        "heading": "Schema-driven collections with local embeddings",
+        "body": "A collection is defined with a compact field grammar such as price:float:embed:unit=PLN, supporting text, enum, int, float, bool, date and string array types. Each record is rendered into one formatted text card and embedded with bge-m3 through Ollama on save, so added means searchable. Search is cosine top-k with a Rich table and an --explain mode; it refuses to run when a collection was embedded with a different model, because cross-model distances mean nothing."
       },
       "architecture": {
-        "body": "[Briefly describe the flow and where it is hosted, e.g. AWS: Lambda / ECS, S3, RDS.]"
+        "body": "A Python 3.12 CLI built with Typer on a layered structure: domain, application (ports and use cases), infrastructure (SQLAlchemy, Alembic, Ollama client) and cli, with import-linter contracts keeping dependencies pointing inward. Records are JSONB payloads in PostgreSQL 17 with pgvector (halfvec 1024), so schemas change without per-collection DDL. Writes are use cases; reads go through a single queries facade."
       },
       "lessons": [
-        "[Biggest challenge and how you solved it]",
-        "[What you would do differently / next steps]"
+        "JSONB payloads instead of per-collection tables trade some speed for far simpler migrations and arbitrary schemas.",
+        "Storing the exact rendered text next to each vector prevents silent drift when a template changes after embeddings exist."
       ],
       "metrics": {
-        "cases": {
+        "search": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "query time on a collection of N records"
         },
-        "runtime": {
+        "fieldTypes": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "supported field types"
         },
-        "regressions": {
+        "tests": {
           "value": "[value]",
-          "label": "[e.g. answer accuracy]"
+          "label": "automated tests (unit + integration)"
         }
       }
     },
-    "document-search": {
-      "title": "[Project 5 name]",
-      "summary": "[Project 5: problem → solution → outcome, 1–2 sentences.]",
-      "role": "[pipeline, API, deployment]",
-      "effect": "[accuracy, time, cost, users]"
+    "quiz-forge": {
+      "title": "Quiz Forge",
+      "summary": "Full-stack quiz app: users browse and play quizzes, admins manage content in a dashboard. A TypeScript monorepo with Nuxt 4 and NestJS.",
+      "role": "full stack: NestJS API, Nuxt frontend, auth, tests",
+      "effect": "JWT auth with role-based access and a documented REST API",
+      "duration": "Mar 2026",
+      "problem": {
+        "heading": "Quizzes need a player side and an admin side",
+        "body": "A quiz app has two audiences: players who browse, play and submit answers, and admins who create the question sets. Each needs its own access rules and its own screens."
+      },
+      "solution": {
+        "heading": "A role-based quiz platform",
+        "body": "Users sign in with JWT access and refresh tokens kept in HTTP-only cookies. Admins create quizzes with questions and answer options; players pick a quiz, play it and submit their responses. Server-side guards enforce the admin and user roles, quiz listings are paginated and Swagger documents the API. The interface has a Polish locale."
+      },
+      "architecture": {
+        "body": "A Turborepo + pnpm monorepo. apps/backend is a NestJS REST API on TypeORM and PostgreSQL 15 with auth, quiz and user modules; apps/frontend is a layer-based Nuxt 4 app (core, base, auth) with Tailwind and Pinia. Shared DTOs live in a shared-types package. Vitest covers units, Playwright covers end-to-end flows and Docker Compose runs the database."
+      },
+      "lessons": [
+        "Shared TypeScript DTOs in one package keep the frontend and backend contracts in sync.",
+        "Splitting the Nuxt app into core, base and auth layers keeps layouts and i18n apart from the feature pages."
+      ],
+      "metrics": {
+        "endpoints": {
+          "value": "[value]",
+          "label": "REST API endpoints"
+        },
+        "tests": {
+          "value": "[value]",
+          "label": "unit and e2e tests"
+        },
+        "packages": {
+          "value": "[value]",
+          "label": "workspace packages"
+        }
+      }
     },
-    "internal-dashboard": {
-      "title": "[Project 6 name]",
-      "summary": "[Project 6: problem → solution → outcome, 1–2 sentences.]",
-      "role": "[pipeline, API, deployment]",
-      "effect": "[accuracy, time, cost, users]"
+    "lean-track": {
+      "title": "LeanTrack",
+      "summary": "Calorie and macro tracker: set goals, log meals in a daily diary and monitor progress. Vue 3 frontend, Fastify API, PostgreSQL.",
+      "role": "full stack: Fastify API, Vue frontend, database",
+      "effect": "diary, products and goals behind an authenticated API",
+      "duration": "May 2026",
+      "problem": {
+        "heading": "Tracking nutrition without friction",
+        "body": "Staying on track means seeing calories and macros against your goals every day, with as little effort as possible when logging a meal."
+      },
+      "solution": {
+        "heading": "Goals, products and a daily diary",
+        "body": "Users register and sign in, set nutrition goals, manage a list of products and add food diary entries. The API exposes auth, products, diary and goals endpoints, and the frontend is organised by the same features."
+      },
+      "architecture": {
+        "body": "A pnpm monorepo with a Fastify + TypeORM backend (feature modules for auth, diary, products and goals; config for environment, JWT and database; migrations) and a Vue 3 + Vite frontend split into features, shared code and the router. PostgreSQL runs in Docker Compose. Both apps use TypeScript strict mode, ESLint, Prettier and Vitest."
+      },
+      "lessons": [
+        "Mirroring the backend modules in frontend features keeps each feature easy to find on both sides.",
+        "A PRD, a tech spec and user-flow diagrams sit in docs/ next to the code, so the intent behind each module stays on record."
+      ],
+      "metrics": {
+        "modules": {
+          "value": "[value]",
+          "label": "backend modules"
+        },
+        "endpoints": {
+          "value": "[value]",
+          "label": "API endpoints"
+        },
+        "tests": {
+          "value": "[value]",
+          "label": "automated tests"
+        }
+      }
     },
-    "api-gateway": {
-      "title": "[Project 7 name]",
-      "summary": "[Project 7: problem → solution → outcome, 1–2 sentences.]",
-      "role": "[pipeline, API, deployment]",
-      "effect": "[accuracy, time, cost, users]"
+    "match-colours": {
+      "title": "Match Colours",
+      "summary": "Colour memory game: click the colours in the order they appeared to reach the next level. Difficulty grows and scores are tracked.",
+      "role": "design and implementation in Nuxt 3",
+      "effect": "playable in the browser on any screen size",
+      "duration": "May 2024 – May 2026",
+      "problem": {
+        "heading": "A small game to practise a real app structure",
+        "body": "Match Colours was built for fun and learning: a simple idea with enough state (sequences, levels, scores) to practise structuring a Nuxt application."
+      },
+      "solution": {
+        "heading": "Remember the sequence, repeat it in order",
+        "body": "Players are shown a sequence of colours and click them back in the same order to advance. Later levels bring more challenging sequences, scores are tracked between attempts and the layout is responsive."
+      },
+      "architecture": {
+        "body": "A Nuxt 3 and Vue 3 application made of pages, components, composables, stores and server routes, deployed on Vercel."
+      },
+      "lessons": [
+        "Putting state in stores and reusable logic in composables keeps the pages thin.",
+        "A game this small still benefits from tests; later projects such as PerplexImage add Vitest and Playwright coverage."
+      ],
+      "metrics": {
+        "levels": {
+          "value": "[value]",
+          "label": "levels"
+        },
+        "bundle": {
+          "value": "[value]",
+          "label": "JavaScript bundle size"
+        },
+        "lighthouse": {
+          "value": "[value]",
+          "label": "Lighthouse performance score"
+        }
+      }
+    },
+    "sudoku": {
+      "title": "Sudoku",
+      "summary": "Browser Sudoku with several difficulty levels, instant move validation and a timer. Built with Next.js.",
+      "role": "design and implementation in Next.js",
+      "effect": "playable online with validation and a timer",
+      "duration": "Apr 2024 – May 2026",
+      "problem": {
+        "heading": "Sudoku that checks you as you play",
+        "body": "Pen-and-paper Sudoku gives no feedback until you finish. A web version can validate every move and time the run."
+      },
+      "solution": {
+        "heading": "An interactive board with instant feedback",
+        "body": "Players enter numbers and move between cells on a dynamic board, choose a difficulty from easy to hard and get immediate feedback from built-in validation. An integrated timer tracks the solving time."
+      },
+      "architecture": {
+        "body": "A Next.js 14 and React 18 application in TypeScript, structured as pages, components, hooks, reducers and context, with a Prisma schema and seed data. Docker files are included and a static export is published on GitHub Pages."
+      },
+      "lessons": [
+        "Reducers and context keep the board state in one place, away from the cell components.",
+        "A static export on GitHub Pages is enough hosting for a client-side game."
+      ],
+      "metrics": {
+        "difficulties": {
+          "value": "[value]",
+          "label": "difficulty levels"
+        },
+        "bundle": {
+          "value": "[value]",
+          "label": "JavaScript bundle size"
+        },
+        "lighthouse": {
+          "value": "[value]",
+          "label": "Lighthouse performance score"
+        }
+      }
     }
   }
 }

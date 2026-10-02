@@ -116,13 +116,13 @@
       "question": "pytanie",
       "retrieval": "retrieval top-k",
       "llm": "LLM",
-      "fastapi": "FastAPI",
-      "ui": "UI",
-      "trigger": "wyzwalacz",
-      "extraction": "ekstrakcja",
-      "validation": "walidacja",
-      "action": "akcja",
-      "audit": "log audytu"
+      "parsing": "parsowanie",
+      "rewrite": "przepisanie pytania",
+      "rerank": "LLM re-rank",
+      "schema": "schemat",
+      "records": "rekordy",
+      "cli": "CLI",
+      "ui": "UI"
     }
   },
   "projectsPage": {
@@ -262,167 +262,293 @@
     "back": "← wróć na stronę główną"
   },
   "projects": {
-    "rag-assistant": {
-      "title": "[Nazwa projektu 1]",
-      "summary": "[Projekt 1: problem → rozwiązanie → efekt, 1–2 zdania.]",
-      "role": "[pipeline, API, wdrożenie]",
-      "effect": "[trafność, czas, koszt, użytkownicy]",
-      "duration": "[np. 3 miesiące, 2025]",
+    "ai-book-chat": {
+      "title": "AI Book Chat",
+      "summary": "Wgrywasz PDF i zadajesz pytania o jego treść. Odpowiedzi spływają strumieniowo ze wskazaniem stron źródłowych, na lokalnym pipeline RAG.",
+      "role": "backend, pipeline RAG, interfejs w React",
+      "effect": "strumieniowane odpowiedzi z cytatami stron",
+      "duration": "sie – wrz 2026",
       "problem": {
-        "heading": "[Jaki problem był do rozwiązania?]",
-        "body": "[Kontekst: kto miał problem, jak to wyglądało wcześniej, dlaczego zwykłe rozwiązanie nie wystarczało.]"
+        "heading": "Czy można ufać odpowiedzi o długiej książce?",
+        "body": "Zwykły model czatu odpowiada z ogólnej wiedzy i nie pokaże, skąd wziął twierdzenie. Przy długim PDF-ie potrzeba odpowiedzi opartych na tekście, stron do sprawdzenia i uczciwej informacji, że książka nie porusza danego tematu."
       },
       "solution": {
-        "heading": "[Co zbudowałeś?]",
-        "body": "[Opis rozwiązania i kluczowe decyzje techniczne: dlaczego ten model, ta strategia chunkingu, ta baza wektorowa.]"
+        "heading": "Wyszukiwanie z re-rankingiem i cytatami",
+        "body": "Worker parsuje PDF, wykrywa sekcje (najpierw spis treści, potem heurystyki nagłówków, na końcu zwykłe strony) i tnie tekst na chunki po ok. 600 tokenów z 15% zakładką, które nigdy nie przekraczają granicy sekcji. Każde pytanie jest przepisywane na samodzielne zapytanie na podstawie ostatnich wypowiedzi, dopasowywane wyszukiwaniem kosinusowym w pgvector i re-rankowane przez LLM przed generowaniem. Źródła płyną jako pierwsze, więc interfejs pokazuje cytaty, zanim odpowiedź się skończy; gdy nic trafnego nie znaleziono, odpowiedź mówi o tym na początku."
       },
       "architecture": {
-        "body": "[Krótko opisz przepływ i gdzie to jest hostowane, np. AWS: Lambda / ECS, S3, RDS.]"
+        "body": "Frontend w React komunikuje się przez HTTP i SSE z API w FastAPI, opartym na PostgreSQL z pgvector (HNSW, cosinus). Wgrane pliki trafiają do kolejki w Redis i przetwarza je worker Celery: parsowanie PyMuPDF, chunking i wsadowe embeddingi w lokalnym Ollama (nomic-embed-text). Czat, przepisywanie zapytań i re-ranking używają dowolnego endpointu zgodnego z OpenAI, domyślnie Groq. Obie aplikacje obsługują pnpm workspaces i Turborepo."
       },
       "lessons": [
-        "[Największe wyzwanie i jak je rozwiązałeś]",
-        "[Co zrobiłbyś inaczej / następne kroki]"
+        "Embeddingów celowo nie da się podmienić: kolumna wektorowa ma stałą szerokość, więc inny model to migracja i ponowny import. Aplikacja nie startuje, gdy skonfigurowane wymiary nie zgadzają się z kolumną, zamiast zwracać wyniki, które wyglądają wiarygodnie, ale nic nie znaczą.",
+        "Pytania uzupełniające, jak „a co z jego bratem?”, działają tylko dzięki krokowi przepisywania; samo wyszukiwanie nie widzi kontekstu. Poza zakresem na razie: zapytania między dokumentami, OCR skanów i konta użytkowników."
       ],
       "metrics": {
-        "accuracy": {
+        "ingest": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "czas od wgrania do READY dla książki"
         },
         "latency": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "czas do pierwszego tokenu odpowiedzi"
         },
-        "cost": {
+        "tests": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "testy automatyczne (pytest + vitest)"
         }
       }
     },
-    "ai-workflow-automation": {
-      "title": "[Nazwa projektu 2]",
-      "summary": "[Projekt 2: problem → rozwiązanie → efekt, 1–2 zdania.]",
-      "role": "[pipeline, API, wdrożenie]",
-      "effect": "[trafność, czas, koszt, użytkownicy]",
-      "duration": "[np. 3 miesiące, 2025]",
+    "blind-clue": {
+      "title": "BlindClue",
+      "summary": "Wieloosobowa gra dedukcyjna w czasie rzeczywistym: wszyscy dostają tajne słowo poza jednym graczem, który ma tylko podpowiedź i musi się wtopić.",
+      "role": "full stack: backend realtime, frontend w Vue",
+      "effect": "pełna pętla gry od lobby do punktacji przez WebSockets",
+      "duration": "maj – sie 2026",
       "problem": {
-        "heading": "[Jaki problem był do rozwiązania?]",
-        "body": "[Kontekst: kto miał problem, jak to wyglądało wcześniej, dlaczego zwykłe rozwiązanie nie wystarczało.]"
+        "heading": "Gra imprezowa wymaga, by wszyscy byli w tym samym momencie",
+        "body": "Gra działa tylko wtedy, gdy wszyscy gracze przechodzą przez te same fazy razem: opis słowa, głosowanie, ujawnienie. Każda faza musi dotrzeć do każdego gracza na bieżąco, a punktacja musi być rozstrzygana w jednym miejscu."
       },
       "solution": {
-        "heading": "[Co zbudowałeś?]",
-        "body": "[Opis rozwiązania i kluczowe decyzje techniczne: dlaczego ten model, ta strategia chunkingu, ta baza wektorowa.]"
+        "heading": "Gra sterowana przez serwer na Socket.io",
+        "body": "Od dwóch do czterech graczy dołącza do lobby i gra trzy rundy opisywania słowa bez jego wymieniania, po czym głosuje, kto jest impostorem. Głosy są ujawniane, a przyłapany impostor może jeszcze zdobyć punkty, zgadując słowo. Serwer jest właścicielem stanu gry i punktacji; klienci wysyłają zdarzenia, takie jak joinGame, submitDescription i voteImpostor, a reagują na GameStarted, VotingStarted, VotesRevealed i GameEnded."
       },
       "architecture": {
-        "body": "[Krótko opisz przepływ i gdzie to jest hostowane, np. AWS: Lambda / ECS, S3, RDS.]"
+        "body": "Monorepo pnpm: backend Fastify + Socket.io + SQLite zbudowany w warstwach Clean Architecture (encje domeny, przypadki użycia, serwisy aplikacji, adaptery) oraz frontend Vue 3 + Vite + Pinia + Tailwind. Trwające gry żyją w pamięci w GameManagerze i znikają po zakończeniu; kategorie i słowa zarządzane są endpointami administracyjnymi. Backend jest dostarczany jako obraz Dockera."
       },
       "lessons": [
-        "[Największe wyzwanie i jak je rozwiązałeś]",
-        "[Co zrobiłbyś inaczej / następne kroki]"
+        "Trzymanie trwających gier wyłącznie w pamięci upraszcza model; druga strona to fakt, że restart zakończyłby gry w toku.",
+        "Zwracanie Result z każdej operacji czyni ścieżki błędów jawnymi i łatwymi do testowania, także dla punktacji przy przyłapanym i nieprzyłapanym impostorze."
       ],
       "metrics": {
-        "time": {
+        "players": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "graczy w pokoju"
         },
-        "volume": {
+        "events": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "zdarzeń socketowych w czasie rzeczywistym"
         },
-        "errors": {
+        "tests": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "testów automatycznych"
         }
       }
     },
-    "fullstack-platform": {
-      "title": "[Nazwa projektu 3]",
-      "summary": "[Projekt 3: problem → rozwiązanie → efekt, 1–2 zdania.]",
-      "role": "[pipeline, API, wdrożenie]",
-      "effect": "[trafność, czas, koszt, użytkownicy]",
-      "duration": "[np. 3 miesiące, 2025]",
+    "perplex-image": {
+      "title": "PerplexImage",
+      "summary": "Gra w obrazkowe puzzle: wybierasz zdjęcie, układasz kafelki przeciągając je myszą lub palcem i próbujesz pobić swój czas i liczbę ruchów.",
+      "role": "jedyny autor: rozgrywka, stan, proxy API, testy",
+      "effect": "trzy poziomy trudności, pokryte testami jednostkowymi i e2e",
+      "duration": "lut 2024 – maj 2026",
       "problem": {
-        "heading": "[Jaki problem był do rozwiązania?]",
-        "body": "[Kontekst: kto miał problem, jak to wyglądało wcześniej, dlaczego zwykłe rozwiązanie nie wystarczało.]"
+        "heading": "Układanka, która działa na każdym ekranie",
+        "body": "Puzzle z przeciąganiem łatwo zrobić pod mysz, a gdzie indziej bywają kłopotliwe. Celem była gra, która zachowuje się tak samo na telefonie, tablecie i komputerze i nie kończą się w niej obrazy do ułożenia."
       },
       "solution": {
-        "heading": "[Co zbudowałeś?]",
-        "body": "[Opis rozwiązania i kluczowe decyzje techniczne: dlaczego ten model, ta strategia chunkingu, ta baza wektorowa.]"
+        "heading": "Puzzle z kafelków na trzech poziomach trudności",
+        "body": "Gracz wybiera obraz z API Pexels, ustawia poziom (9×13, 15×23 lub 20×30 kafelków) i przeciąga elementy na miejsce, gdy działa stoper i licznik ruchów. Grę można wstrzymać i zresetować, a widać też postęp. Stan gry trzyma Pinia; trasa serwerowa Nitro pośredniczy w zapytaniach do Pexels, więc klucz API zostaje na serwerze, a obok adaptera Pexels jest adapter do storage’u Supabase."
       },
       "architecture": {
-        "body": "[Krótko opisz przepływ i gdzie to jest hostowane, np. AWS: Lambda / ECS, S3, RDS.]"
+        "body": "Nuxt 3 z Composition API Vue 3, podzielony na moduły: core (wspólne narzędzia, store, typy), game (strony, komponenty, logika) i ui (komponenty generyczne). Trasy serwerowe w /server/api pobierają obrazy przez interfejs adaptera. Vitest pokrywa testy jednostkowe, Playwright przepływy end-to-end, a hooki pre-commit Husky uruchamiają linter."
       },
       "lessons": [
-        "[Największe wyzwanie i jak je rozwiązałeś]",
-        "[Co zrobiłbyś inaczej / następne kroki]"
+        "Trzymanie logiki gry w osobnym module, oddzielnie od generycznych komponentów UI, pozwala testować ją zwykłymi testami jednostkowymi.",
+        "Źródło obrazów jest schowane za adapterem, więc Pexels i storage Supabase są dla gry wymienne."
       ],
       "metrics": {
-        "users": {
+        "levels": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "poziomów trudności (największa plansza w kafelkach)"
         },
-        "uptime": {
+        "tests": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "testów jednostkowych i e2e"
         },
-        "deploys": {
+        "commits": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "commitów"
         }
       }
     },
-    "llm-eval-harness": {
-      "title": "[Nazwa projektu 4]",
-      "summary": "[Projekt 4: problem → rozwiązanie → efekt, 1–2 zdania.]",
-      "role": "[pipeline, API, wdrożenie]",
-      "effect": "[trafność, czas, koszt, użytkownicy]",
-      "duration": "[np. 3 miesiące, 2025]",
+    "ai-semantic-db": {
+      "title": "Semantic DB",
+      "summary": "CLI do lokalnego wyszukiwania semantycznego w twoich danych strukturalnych: definiujesz schemat, dodajesz rekordy i szukasz zwykłym językiem. Bez chmury i kluczy API.",
+      "role": "projekt i implementacja: model schematu, CLI, embeddingi, testy",
+      "effect": "rekordy są przeszukiwalne od razu po zapisaniu",
+      "duration": "sie – wrz 2026",
       "problem": {
-        "heading": "[Jaki problem był do rozwiązania?]",
-        "body": "[Kontekst: kto miał problem, jak to wyglądało wcześniej, dlaczego zwykłe rozwiązanie nie wystarczało.]"
+        "heading": "Wyszukiwanie semantyczne bez usługi w chmurze",
+        "body": "Istniejące narzędzia do wyszukiwania semantycznego działają w chmurze albo są związane z jednym źródłem danych. Celem było zdefiniowanie własnej struktury, trzymanie danych na własnej maszynie i szukanie po znaczeniu, a nie po słowach kluczowych."
       },
       "solution": {
-        "heading": "[Co zbudowałeś?]",
-        "body": "[Opis rozwiązania i kluczowe decyzje techniczne: dlaczego ten model, ta strategia chunkingu, ta baza wektorowa.]"
+        "heading": "Kolekcje sterowane schematem z lokalnymi embeddingami",
+        "body": "Kolekcję definiuje się zwięzłą gramatyką pól, np. price:float:embed:unit=PLN, obsługującą typy text, enum, int, float, bool, date i tablice stringów. Każdy rekord jest renderowany do jednej sformatowanej karty tekstowej i przy zapisie osadzany modelem bge-m3 przez Ollama, więc dodany znaczy przeszukiwalny. Wyszukiwanie to cosinusowe top-k z tabelą Rich i trybem --explain; odmawia działania, gdy kolekcję osadzono innym modelem, bo odległości między modelami nic nie znaczą."
       },
       "architecture": {
-        "body": "[Krótko opisz przepływ i gdzie to jest hostowane, np. AWS: Lambda / ECS, S3, RDS.]"
+        "body": "CLI w Pythonie 3.12 na Typer, w warstwach: domain, application (porty i przypadki użycia), infrastructure (SQLAlchemy, Alembic, klient Ollama) i cli, a kontrakty import-linter pilnują, by zależności szły do środka. Rekordy to payloady JSONB w PostgreSQL 17 z pgvector (halfvec 1024), więc schemat zmienia się bez DDL dla każdej kolekcji. Zapisy to przypadki użycia; odczyty przechodzą przez jedną fasadę zapytań."
       },
       "lessons": [
-        "[Największe wyzwanie i jak je rozwiązałeś]",
-        "[Co zrobiłbyś inaczej / następne kroki]"
+        "Payloady JSONB zamiast tabel dla każdej kolekcji kosztują trochę szybkości, ale dają dużo prostsze migracje i dowolne schematy.",
+        "Zapisywanie dokładnie wyrenderowanego tekstu obok każdego wektora chroni przed cichym rozjazdem, gdy szablon zmieni się po utworzeniu embeddingów."
       ],
       "metrics": {
-        "cases": {
+        "search": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "czas zapytania w kolekcji N rekordów"
         },
-        "runtime": {
+        "fieldTypes": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "obsługiwanych typów pól"
         },
-        "regressions": {
+        "tests": {
           "value": "[wartość]",
-          "label": "[np. trafność odpowiedzi]"
+          "label": "testów automatycznych (jednostkowe + integracyjne)"
         }
       }
     },
-    "document-search": {
-      "title": "[Nazwa projektu 5]",
-      "summary": "[Projekt 5: problem → rozwiązanie → efekt, 1–2 zdania.]",
-      "role": "[pipeline, API, wdrożenie]",
-      "effect": "[trafność, czas, koszt, użytkownicy]"
+    "quiz-forge": {
+      "title": "Quiz Forge",
+      "summary": "Aplikacja quizowa full stack: użytkownicy przeglądają i rozwiązują quizy, a admini zarządzają treścią w panelu. Monorepo w TypeScript z Nuxt 4 i NestJS.",
+      "role": "full stack: API w NestJS, frontend w Nuxt, auth, testy",
+      "effect": "auth JWT z dostępem opartym na rolach i udokumentowane REST API",
+      "duration": "mar 2026",
+      "problem": {
+        "heading": "Quizy potrzebują strony gracza i strony admina",
+        "body": "Aplikacja quizowa ma dwie grupy odbiorców: graczy, którzy przeglądają, rozwiązują i wysyłają odpowiedzi, oraz adminów, którzy tworzą zestawy pytań. Każda potrzebuje własnych reguł dostępu i własnych ekranów."
+      },
+      "solution": {
+        "heading": "Platforma quizowa oparta na rolach",
+        "body": "Użytkownicy logują się tokenami JWT (access i refresh) trzymanymi w ciasteczkach HTTP-only. Admini tworzą quizy z pytaniami i opcjami odpowiedzi; gracze wybierają quiz, rozwiązują go i wysyłają odpowiedzi. Guardy po stronie serwera pilnują ról admina i użytkownika, listy quizów są stronicowane, a API opisuje Swagger. Interfejs ma polską wersję językową."
+      },
+      "architecture": {
+        "body": "Monorepo Turborepo + pnpm. apps/backend to REST API w NestJS na TypeORM i PostgreSQL 15 z modułami auth, quiz i user; apps/frontend to aplikacja Nuxt 4 oparta na warstwach (core, base, auth) z Tailwind i Pinia. Wspólne DTO leżą w paczce shared-types. Vitest pokrywa testy jednostkowe, Playwright przepływy end-to-end, a Docker Compose uruchamia bazę."
+      },
+      "lessons": [
+        "Wspólne DTO w TypeScripcie w jednej paczce utrzymują spójne kontrakty frontendu i backendu.",
+        "Podział aplikacji Nuxt na warstwy core, base i auth oddziela layouty i i18n od stron funkcjonalnych."
+      ],
+      "metrics": {
+        "endpoints": {
+          "value": "[wartość]",
+          "label": "endpointów REST API"
+        },
+        "tests": {
+          "value": "[wartość]",
+          "label": "testów jednostkowych i e2e"
+        },
+        "packages": {
+          "value": "[wartość]",
+          "label": "paczek w workspace"
+        }
+      }
     },
-    "internal-dashboard": {
-      "title": "[Nazwa projektu 6]",
-      "summary": "[Projekt 6: problem → rozwiązanie → efekt, 1–2 zdania.]",
-      "role": "[pipeline, API, wdrożenie]",
-      "effect": "[trafność, czas, koszt, użytkownicy]"
+    "lean-track": {
+      "title": "LeanTrack",
+      "summary": "Tracker kalorii i makroskładników: ustawiasz cele, zapisujesz posiłki w dzienniku dnia i śledzisz postępy. Frontend w Vue 3, API w Fastify, PostgreSQL.",
+      "role": "full stack: API w Fastify, frontend w Vue, baza danych",
+      "effect": "dziennik, produkty i cele za uwierzytelnionym API",
+      "duration": "maj 2026",
+      "problem": {
+        "heading": "Śledzenie odżywiania bez tarcia",
+        "body": "Trzymanie się planu oznacza codzienny podgląd kalorii i makroskładników na tle celów, przy jak najmniejszym wysiłku przy zapisywaniu posiłku."
+      },
+      "solution": {
+        "heading": "Cele, produkty i dzienny dziennik",
+        "body": "Użytkownicy rejestrują się i logują, ustawiają cele żywieniowe, zarządzają listą produktów i dodają wpisy do dziennika żywieniowego. API udostępnia endpointy auth, products, diary i goals, a frontend jest zorganizowany według tych samych funkcji."
+      },
+      "architecture": {
+        "body": "Monorepo pnpm z backendem Fastify + TypeORM (moduły funkcjonalne auth, diary, products i goals; konfiguracja środowiska, JWT i bazy; migracje) oraz frontendem Vue 3 + Vite podzielonym na features, kod współdzielony i router. PostgreSQL działa w Docker Compose. Obie aplikacje używają TypeScript strict, ESLint, Prettier i Vitest."
+      },
+      "lessons": [
+        "Odzwierciedlenie modułów backendu we frontendowych features ułatwia znalezienie każdej funkcji po obu stronach.",
+        "PRD, specyfikacja techniczna i diagramy przepływów użytkownika leżą w docs/ obok kodu, więc intencja każdego modułu pozostaje udokumentowana."
+      ],
+      "metrics": {
+        "modules": {
+          "value": "[wartość]",
+          "label": "modułów backendu"
+        },
+        "endpoints": {
+          "value": "[wartość]",
+          "label": "endpointów API"
+        },
+        "tests": {
+          "value": "[wartość]",
+          "label": "testów automatycznych"
+        }
+      }
     },
-    "api-gateway": {
-      "title": "[Nazwa projektu 7]",
-      "summary": "[Projekt 7: problem → rozwiązanie → efekt, 1–2 zdania.]",
-      "role": "[pipeline, API, wdrożenie]",
-      "effect": "[trafność, czas, koszt, użytkownicy]"
+    "match-colours": {
+      "title": "Match Colours",
+      "summary": "Gra pamięciowa na kolory: klikasz kolory w kolejności, w jakiej się pojawiły, by przejść poziom wyżej. Trudność rośnie, a wyniki są zapisywane.",
+      "role": "projekt i implementacja w Nuxt 3",
+      "effect": "grywalna w przeglądarce na ekranie dowolnej wielkości",
+      "duration": "maj 2024 – maj 2026",
+      "problem": {
+        "heading": "Mała gra do ćwiczenia struktury prawdziwej aplikacji",
+        "body": "Match Colours powstało dla zabawy i nauki: prosty pomysł z wystarczającą ilością stanu (sekwencje, poziomy, wyniki), by ćwiczyć strukturę aplikacji w Nuxt."
+      },
+      "solution": {
+        "heading": "Zapamiętaj sekwencję i powtórz ją po kolei",
+        "body": "Gracz widzi sekwencję kolorów i klika je w tej samej kolejności, by przejść dalej. Kolejne poziomy przynoszą trudniejsze sekwencje, wyniki są zapisywane między podejściami, a układ jest responsywny."
+      },
+      "architecture": {
+        "body": "Aplikacja Nuxt 3 i Vue 3 złożona ze stron, komponentów, composables, storów i tras serwerowych, wdrożona na Vercel."
+      },
+      "lessons": [
+        "Stan w storach, a logika wielokrotnego użytku w composables, utrzymuje cienkie strony.",
+        "Nawet tak mała gra zyskuje na testach; późniejsze projekty, jak PerplexImage, mają już pokrycie Vitest i Playwright."
+      ],
+      "metrics": {
+        "levels": {
+          "value": "[wartość]",
+          "label": "poziomów"
+        },
+        "bundle": {
+          "value": "[wartość]",
+          "label": "rozmiar bundla JavaScript"
+        },
+        "lighthouse": {
+          "value": "[wartość]",
+          "label": "wynik wydajności w Lighthouse"
+        }
+      }
+    },
+    "sudoku": {
+      "title": "Sudoku",
+      "summary": "Sudoku w przeglądarce z kilkoma poziomami trudności, natychmiastową walidacją ruchów i stoperem. Zbudowane w Next.js.",
+      "role": "projekt i implementacja w Next.js",
+      "effect": "grywalne online z walidacją i stoperem",
+      "duration": "kwi 2024 – maj 2026",
+      "problem": {
+        "heading": "Sudoku, które sprawdza cię w trakcie gry",
+        "body": "Sudoku na papierze nie daje informacji zwrotnej, dopóki nie skończysz. Wersja webowa może sprawdzać każdy ruch i mierzyć czas."
+      },
+      "solution": {
+        "heading": "Interaktywna plansza z natychmiastową informacją zwrotną",
+        "body": "Gracz wpisuje cyfry i porusza się po dynamicznej planszy, wybiera poziom trudności od łatwego do trudnego i dostaje natychmiastową informację z wbudowanej walidacji. Zintegrowany stoper mierzy czas rozwiązywania."
+      },
+      "architecture": {
+        "body": "Aplikacja Next.js 14 i React 18 w TypeScripcie, zorganizowana w strony, komponenty, hooki, reducery i kontekst, ze schematem Prisma i danymi seed. Dołączone są pliki Dockera, a statyczny eksport jest opublikowany na GitHub Pages."
+      },
+      "lessons": [
+        "Reducery i kontekst trzymają stan planszy w jednym miejscu, z dala od komponentów komórek.",
+        "Statyczny eksport na GitHub Pages w zupełności wystarcza jako hosting gry działającej po stronie klienta."
+      ],
+      "metrics": {
+        "difficulties": {
+          "value": "[wartość]",
+          "label": "poziomów trudności"
+        },
+        "bundle": {
+          "value": "[wartość]",
+          "label": "rozmiar bundla JavaScript"
+        },
+        "lighthouse": {
+          "value": "[wartość]",
+          "label": "wynik wydajności w Lighthouse"
+        }
+      }
     }
   }
 }

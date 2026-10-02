@@ -34,8 +34,9 @@ for (const { code, prefix } of locales) {
 }
 
 test('titles and descriptions are unique across pages × locales', async ({ page }) => {
-  const seen = new Map<string, string>()
   for (const { prefix } of locales) {
+    // project names are brand names, identical in EN and PL; uniqueness is per locale
+    const seen = new Map<string, string>()
     for (const route of routes) {
       await page.goto(rel(prefix, route))
       const title = await page.title()
@@ -44,7 +45,6 @@ test('titles and descriptions are unique across pages × locales', async ({ page
       for (const [kind, value] of [['title', title], ['description', description], ['og:image', ogImage]] as const) {
         const key = `${kind}:${value}`
         const clash = seen.get(key)
-        // pages that share a placeholder title are only allowed to differ by locale/route
         expect(clash, `duplicate ${kind} "${value}" on ${prefix}${route} and ${clash}`).toBeUndefined()
         seen.set(key, `${prefix}${route}`)
       }
@@ -59,8 +59,8 @@ test('unknown route serves 404.html with a way home', async ({ page }) => {
   await expect(page.getByRole('link', { name: /home|główn/i }).first()).toBeVisible()
 })
 
-test('project without detail page is not prerendered', async ({ page }) => {
-  const response = await page.goto('projects/document-search')
+test('unknown project slug is not prerendered', async ({ page }) => {
+  const response = await page.goto('projects/does-not-exist')
   expect(response?.status()).toBe(404)
 })
 

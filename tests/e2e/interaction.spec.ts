@@ -35,15 +35,15 @@ test.describe('theme', () => {
 
 test.describe('language', () => {
   test('switcher keeps the path', async ({ page, isMobile }) => {
-    await page.goto('projects/rag-assistant')
+    await page.goto('projects/ai-book-chat')
     if (isMobile) await openMobileMenu(page)
     await page.getByRole('link', { name: 'Polski' }).first().click()
-    await expect(page).toHaveURL(/\/pl\/projects\/rag-assistant\/?$/)
+    await expect(page).toHaveURL(/\/pl\/projects\/ai-book-chat\/?$/)
     await expect(page.locator('html')).toHaveAttribute('lang', 'pl-PL')
 
     if (isMobile) await openMobileMenu(page)
     await page.getByRole('link', { name: 'English' }).first().click()
-    await expect(page).toHaveURL(/\/projects\/rag-assistant\/?$/)
+    await expect(page).toHaveURL(/\/projects\/ai-book-chat\/?$/)
     await expect(page).not.toHaveURL(/\/pl\//)
   })
 
@@ -76,9 +76,9 @@ test.describe('navigation', () => {
   })
 
   test('detail page: prev/next cycles among detail projects', async ({ page }) => {
-    await page.goto('projects/rag-assistant')
+    await page.goto('projects/ai-book-chat')
     await page.getByRole('link', { name: /next project/i }).click()
-    await expect(page).toHaveURL(/ai-workflow-automation/)
+    await expect(page).toHaveURL(/blind-clue/)
   })
 })
 
@@ -87,7 +87,7 @@ test.describe('tag filter', () => {
     await page.goto('projects')
     const cards = page.getByRole('article')
     const total = await cards.count()
-    expect(total).toBe(7)
+    expect(total).toBe(8)
 
     await page.getByRole('button', { name: 'vue', exact: true }).click()
     await expect(page).toHaveURL(/tag=vue/)
@@ -108,7 +108,7 @@ test.describe('tag filter', () => {
     const context = await browser.newContext({ javaScriptEnabled: false })
     const page = await context.newPage()
     await page.goto('http://localhost:' + (process.env.PORT || 4173) + (process.env.E2E_BASE || '/') + 'projects')
-    await expect(page.getByRole('article')).toHaveCount(7)
+    await expect(page.getByRole('article')).toHaveCount(8)
     await context.close()
   })
 })
@@ -168,7 +168,7 @@ test.describe('keyboard', () => {
 
 test.describe('media', () => {
   test('detail page shows the video slot (placeholder until a demo video is configured)', async ({ page }) => {
-    await page.goto('projects/rag-assistant')
+    await page.goto('projects/ai-book-chat')
     await expect(page.getByText('demo.mp4')).toBeVisible()
     const videos = page.locator('video')
     if (await videos.count()) {

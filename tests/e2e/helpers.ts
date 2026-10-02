@@ -6,7 +6,7 @@ export const locales = [
 ] as const
 
 /** paths relative to Playwright's baseURL (keeps the non-root base check working) */
-export const routes = ['', 'projects', 'projects/rag-assistant', 'projects/fullstack-platform']
+export const routes = ['', 'projects', 'projects/ai-book-chat', 'projects/blind-clue']
 
 export async function setTheme(page: Page, theme: 'dark' | 'light') {
   await page.addInitScript(value => localStorage.setItem('theme', value), theme)

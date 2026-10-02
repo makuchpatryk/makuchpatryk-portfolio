@@ -20,7 +20,7 @@ One-time setup:
 
 Without `BASE_URL` the workflow uses `/<repo-name>/` (project page: `https://<user>.github.io/<repo>/`).
 
-Post-deploy smoke check (manual): live URL, `/pl/`, a deep link such as `/projects/rag-assistant`, a non-existent path (serves `404.html`), `/sitemap_index.xml`, `/cv.pdf`.
+Post-deploy smoke check (manual): live URL, `/pl/`, a deep link such as `/projects/ai-book-chat`, a non-existent path (serves `404.html`), `/sitemap_index.xml`, `/cv.pdf`.
 
 ### Launch gate
 

@@ -2,94 +2,110 @@ import type { Project } from '../types/content'
 
 export const projects: Project[] = [
   {
-    slug: 'rag-assistant',
+    slug: 'ai-book-chat',
     featured: true,
     order: 1,
     category: 'rag',
-    tags: ['python', 'fastapi', 'rag', 'pgvector', 'aws'],
-    stack: ['Python', 'FastAPI', 'pgvector', 'AWS'],
-    links: { demo: 'https://example.com/[demo]', code: 'https://github.com/[github-user]/[repo]' },
+    tags: ['rag', 'python', 'fastapi', 'pgvector', 'celery', 'ollama', 'react'],
+    stack: ['Python', 'FastAPI', 'PostgreSQL + pgvector', 'Celery + Redis', 'Ollama', 'Groq', 'React 19', 'TypeScript'],
+    links: { code: 'https://github.com/makuchpatryk/ai-book-chat' },
     detail: true,
-    meta: { year: 2025, type: 'commercial' },
+    meta: { year: 2026, type: 'personal' },
     pipeline: {
-      ingest: ['documents', 'chunking', 'embeddings', 'pgvector'],
-      query: ['question', 'retrieval', 'llm', 'fastapi', 'ui'],
-      highlight: ['pgvector', 'llm']
+      ingest: ['documents', 'parsing', 'chunking', 'embeddings', 'pgvector'],
+      query: ['question', 'rewrite', 'retrieval', 'rerank', 'llm', 'ui'],
+      highlight: ['pgvector', 'rerank']
     },
-    metrics: [{ key: 'accuracy' }, { key: 'latency' }, { key: 'cost' }]
+    metrics: [{ key: 'ingest' }, { key: 'latency' }, { key: 'tests' }]
   },
   {
-    slug: 'ai-workflow-automation',
+    slug: 'blind-clue',
     featured: true,
     order: 2,
-    category: 'ai-workflow',
-    tags: ['python', 'ai-workflow', 'aws'],
-    stack: ['Python', 'AWS'],
-    links: { demo: 'https://example.com/[demo]', code: 'https://github.com/[github-user]/[repo]' },
+    category: 'full-stack',
+    tags: ['typescript', 'vue', 'fastify', 'websockets', 'sqlite', 'multiplayer', 'game'],
+    stack: ['TypeScript', 'Vue 3', 'Pinia', 'Fastify', 'Socket.io', 'SQLite'],
+    // blind-clue.xyz fails its TLS handshake (checked 2026-10-02), so no demo link until it is fixed
+    links: { code: 'https://github.com/makuchpatryk/BlindClue' },
     detail: true,
-    meta: { year: 2025, type: 'commercial' },
-    pipeline: {
-      ingest: ['trigger', 'extraction', 'llm'],
-      query: ['validation', 'action', 'audit'],
-      highlight: ['llm']
-    },
-    metrics: [{ key: 'time' }, { key: 'volume' }, { key: 'errors' }]
+    meta: { year: 2026, type: 'personal' },
+    metrics: [{ key: 'players' }, { key: 'events' }, { key: 'tests' }]
   },
   {
-    slug: 'fullstack-platform',
+    slug: 'perplex-image',
     featured: true,
     order: 3,
     category: 'full-stack',
-    tags: ['fastapi', 'postgres', 'vue', 'typescript'],
-    stack: ['FastAPI', 'PostgreSQL', 'Vue', 'TypeScript'],
-    links: { demo: 'https://example.com/[demo]', code: 'https://github.com/[github-user]/[repo]' },
+    tags: ['typescript', 'nuxt', 'supabase', 'pinia', 'playwright', 'game', 'puzzle'],
+    stack: ['Nuxt 3', 'TypeScript', 'Pinia', 'Tailwind', 'Supabase', 'Vitest', 'Playwright'],
+    links: { demo: 'https://perplex-image.vercel.app', code: 'https://github.com/CodingCru/perplex-image' },
     detail: true,
     meta: { year: 2024, type: 'personal' },
-    metrics: [{ key: 'users' }, { key: 'uptime' }, { key: 'deploys' }]
+    metrics: [{ key: 'levels' }, { key: 'tests' }, { key: 'commits' }]
   },
   {
-    slug: 'llm-eval-harness',
+    slug: 'ai-semantic-db',
     featured: false,
     order: 4,
-    category: 'ai-workflow',
-    tags: ['python', 'llm-eval', 'docker'],
-    stack: ['Python', 'Docker'],
-    links: { code: 'https://github.com/[github-user]/[repo]' },
+    category: 'rag',
+    tags: ['rag', 'python', 'pgvector', 'ollama', 'cli', 'docker'],
+    stack: ['Python 3.12', 'Typer', 'SQLAlchemy', 'Alembic', 'PostgreSQL + pgvector', 'Ollama (bge-m3)'],
+    links: { code: 'https://github.com/makuchpatryk/ai-semantic-db' },
     detail: true,
-    meta: { year: 2025, type: 'personal' },
-    metrics: [{ key: 'cases' }, { key: 'runtime' }, { key: 'regressions' }]
+    meta: { year: 2026, type: 'personal' },
+    pipeline: {
+      ingest: ['schema', 'records', 'embeddings', 'pgvector'],
+      query: ['question', 'embeddings', 'retrieval', 'cli'],
+      highlight: ['pgvector']
+    },
+    metrics: [{ key: 'search' }, { key: 'fieldTypes' }, { key: 'tests' }]
   },
   {
-    slug: 'document-search',
+    slug: 'quiz-forge',
     featured: false,
     order: 5,
-    category: 'rag',
-    tags: ['rag', 'postgres', 'pgvector'],
-    stack: ['PostgreSQL', 'pgvector'],
-    links: { code: 'https://github.com/[github-user]/[repo]' },
-    detail: false,
-    meta: { year: 2024, type: 'personal' }
+    category: 'full-stack',
+    tags: ['typescript', 'nuxt', 'nestjs', 'postgres', 'turborepo', 'playwright', 'education'],
+    stack: ['Nuxt 4', 'NestJS', 'TypeORM', 'PostgreSQL', 'Turborepo', 'Docker'],
+    links: { code: 'https://github.com/makuchpatryk/quiz-forge' },
+    detail: true,
+    meta: { year: 2026, type: 'personal' },
+    metrics: [{ key: 'endpoints' }, { key: 'tests' }, { key: 'packages' }]
   },
   {
-    slug: 'internal-dashboard',
+    slug: 'lean-track',
     featured: false,
     order: 6,
     category: 'full-stack',
-    tags: ['vue', 'typescript', 'docker'],
-    stack: ['Vue', 'TypeScript', 'Docker'],
-    links: { demo: 'https://example.com/[demo]' },
-    detail: false,
-    meta: { year: 2023, type: 'commercial' }
+    tags: ['typescript', 'vue', 'fastify', 'postgres', 'docker', 'jwt', 'nutrition'],
+    stack: ['Vue 3', 'Fastify', 'TypeORM', 'PostgreSQL', 'Docker'],
+    links: { code: 'https://github.com/makuchpatryk/lean-track' },
+    detail: true,
+    meta: { year: 2026, type: 'personal' },
+    metrics: [{ key: 'modules' }, { key: 'endpoints' }, { key: 'tests' }]
   },
   {
-    slug: 'api-gateway',
+    slug: 'match-colours',
     featured: false,
     order: 7,
     category: 'full-stack',
-    tags: ['python', 'fastapi', 'aws', 'docker'],
-    stack: ['Python', 'FastAPI', 'AWS'],
-    links: { code: 'https://github.com/[github-user]/[repo]' },
-    detail: false,
-    meta: { year: 2023, type: 'commercial' }
+    tags: ['vue', 'nuxt', 'game'],
+    stack: ['Nuxt 3', 'Vue 3'],
+    links: { demo: 'https://match-colours.vercel.app', code: 'https://github.com/makuchpatryk/MatchColours' },
+    detail: true,
+    meta: { year: 2024, type: 'personal' },
+    metrics: [{ key: 'levels' }, { key: 'bundle' }, { key: 'lighthouse' }]
+  },
+  {
+    slug: 'sudoku',
+    featured: false,
+    order: 8,
+    category: 'full-stack',
+    tags: ['typescript', 'nextjs', 'react', 'game', 'puzzle'],
+    stack: ['Next.js', 'React', 'TypeScript'],
+    links: { demo: 'https://makuchpatryk.github.io/sudoku/', code: 'https://github.com/makuchpatryk/sudoku' },
+    detail: true,
+    meta: { year: 2024, type: 'personal' },
+    metrics: [{ key: 'difficulties' }, { key: 'bundle' }, { key: 'lighthouse' }]
   }
 ]

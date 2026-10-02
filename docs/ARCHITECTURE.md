@@ -108,6 +108,8 @@ Other copy: `experience.<id>.*`, `stack.groups.*` / `stack.items.*`, `pipeline.s
 
 Content ships as bracketed placeholders (`[Full Name]`, `[Project 1 name]`, `'[2024]'`). They are numbered per project so titles, descriptions and OG images stay unique while content is fake. `scripts/check-placeholders.mjs` scans built HTML (text and attributes, not scripts/styles) and is the launch gate. Legit brackets are safe: section numbers (`[01]`) don't match, and the hero terminal's `[rag, ai-workflows]` is drawn with CSS `::before/::after`, so brackets never appear in the HTML.
 
+Project copy is real (drafted from each repo's README); only `projects.<slug>.metrics.<key>.value` stays bracketed until the owner supplies measured numbers.
+
 ## 6. Data flow on a page
 
 ```
