@@ -201,5 +201,4 @@ Tracked here so it is deliberate, not forgotten. Fix opportunistically when touc
 - Repeated link/button class strings (DRY).
 - `pages/projects/index.vue` passes raw `projects` from `app/data` into `useProjectFilter` while also using `useProjects()`; the filter could take slugs from `useProjects()` instead (separation, dependency direction).
 - `pages/projects/[slug].vue` is long: header, video, five sections and gallery in one file. Splitting the sections into components would help once a second detail layout or more sections appear (not before, per YAGNI).
-- The `ai-workflow` category (type, colour token, `categories.ai-workflow`, `pipeline.label.ai-workflow`) has no project; kept on purpose by the owner (YAGNI exception).
 - `nuxt.config.ts` builds sitemap URLs itself; if more page types are added, move that helper out of the config.

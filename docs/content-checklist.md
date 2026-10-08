@@ -20,11 +20,11 @@ Replace copy in `i18n/locales/en.json` **and** `pl.json` (a test enforces identi
 - [x] `stack` groups/items — backend/cloud/frontend expanded from the CV; `ai` group untouched
 
 ## Projects — `app/data/projects.ts` + `projects.<slug>.*`
-- [x] Decide the real list (7+), tags, categories, `featured` (exactly 3), `order`, `meta.year`/`type` — 8 projects from GitHub, `ai-workflow` category kept but unused
+- [x] Decide the real list (7+), tags, categories, `featured` (exactly 3), `order`, `meta.year`/`type` — 9 projects from GitHub, `ai-workflow` used by `screencaster`
 - [x] Links: `links.demo` / `links.code` — `blind-clue.xyz` fails its TLS handshake, demo link left out until it is fixed
 - [x] Card copy for every project: `title`, `summary`, `role`, `effect`
 - [x] For each `detail: true` project (unit test enforces the keys): `duration`, `problem.*`, `solution.*`, `architecture.body`, `lessons[]` — drafted from READMEs, `lessons` and PL wording await owner review
-- [ ] `metrics.<key>.value` for every project (24 values, still `[value]` / `[wartość]`)
+- [x] Metrics disabled for all projects (`metrics` removed from `app/data/projects.ts` and locale files; `MetricGrid` hides when absent)
 - [x] `pipeline` steps (labels live in `pipeline.steps.*`; add new keys in both locales)
 - [ ] Media: `media.cover`, `media.gallery[]` (+ optional captions `projects.<slug>.gallery.<n>`), `media.poster`
 - [ ] Video: encode with `scripts/encode-video.sh in.mov public/videos/<slug>.mp4` (720p, CRF 28, faststart), set `media.video: 'videos/<slug>.mp4'`. Budget: ≤15 MiB per file, ≤120 MiB total (`pnpm check:video-size`). Add a captions track if the video has speech.

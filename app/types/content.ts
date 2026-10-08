@@ -31,6 +31,9 @@ export type Tag
     | 'multiplayer'
     | 'nutrition'
     | 'education'
+    | 'go'
+    | 'mcp'
+    | 'ffmpeg'
 
 export interface Pipeline {
   ingest: string[]

@@ -15,8 +15,7 @@ export const projects: Project[] = [
       ingest: ['documents', 'parsing', 'chunking', 'embeddings', 'pgvector'],
       query: ['question', 'rewrite', 'retrieval', 'rerank', 'llm', 'ui'],
       highlight: ['pgvector', 'rerank']
-    },
-    metrics: [{ key: 'ingest' }, { key: 'latency' }, { key: 'tests' }]
+    }
   },
   {
     slug: 'blind-clue',
@@ -28,8 +27,7 @@ export const projects: Project[] = [
     // blind-clue.xyz fails its TLS handshake (checked 2026-10-02), so no demo link until it is fixed
     links: { code: 'https://github.com/makuchpatryk/BlindClue' },
     detail: true,
-    meta: { year: 2026, type: 'personal' },
-    metrics: [{ key: 'players' }, { key: 'events' }, { key: 'tests' }]
+    meta: { year: 2026, type: 'personal' }
   },
   {
     slug: 'perplex-image',
@@ -40,8 +38,7 @@ export const projects: Project[] = [
     stack: ['Nuxt 3', 'TypeScript', 'Pinia', 'Tailwind', 'Supabase', 'Vitest', 'Playwright'],
     links: { demo: 'https://perplex-image.vercel.app', code: 'https://github.com/CodingCru/perplex-image' },
     detail: true,
-    meta: { year: 2024, type: 'personal' },
-    metrics: [{ key: 'levels' }, { key: 'tests' }, { key: 'commits' }]
+    meta: { year: 2024, type: 'personal' }
   },
   {
     slug: 'ai-semantic-db',
@@ -57,8 +54,7 @@ export const projects: Project[] = [
       ingest: ['schema', 'records', 'embeddings', 'pgvector'],
       query: ['question', 'embeddings', 'retrieval', 'cli'],
       highlight: ['pgvector']
-    },
-    metrics: [{ key: 'search' }, { key: 'fieldTypes' }, { key: 'tests' }]
+    }
   },
   {
     slug: 'quiz-forge',
@@ -69,8 +65,7 @@ export const projects: Project[] = [
     stack: ['Nuxt 4', 'NestJS', 'TypeORM', 'PostgreSQL', 'Turborepo', 'Docker'],
     links: { code: 'https://github.com/makuchpatryk/quiz-forge' },
     detail: true,
-    meta: { year: 2026, type: 'personal' },
-    metrics: [{ key: 'endpoints' }, { key: 'tests' }, { key: 'packages' }]
+    meta: { year: 2026, type: 'personal' }
   },
   {
     slug: 'lean-track',
@@ -81,8 +76,7 @@ export const projects: Project[] = [
     stack: ['Vue 3', 'Fastify', 'TypeORM', 'PostgreSQL', 'Docker'],
     links: { code: 'https://github.com/makuchpatryk/lean-track' },
     detail: true,
-    meta: { year: 2026, type: 'personal' },
-    metrics: [{ key: 'modules' }, { key: 'endpoints' }, { key: 'tests' }]
+    meta: { year: 2026, type: 'personal' }
   },
   {
     slug: 'match-colours',
@@ -93,8 +87,7 @@ export const projects: Project[] = [
     stack: ['Nuxt 3', 'Vue 3'],
     links: { demo: 'https://match-colours.vercel.app', code: 'https://github.com/makuchpatryk/MatchColours' },
     detail: true,
-    meta: { year: 2024, type: 'personal' },
-    metrics: [{ key: 'levels' }, { key: 'bundle' }, { key: 'lighthouse' }]
+    meta: { year: 2024, type: 'personal' }
   },
   {
     slug: 'sudoku',
@@ -105,7 +98,17 @@ export const projects: Project[] = [
     stack: ['Next.js', 'React', 'TypeScript'],
     links: { demo: 'https://makuchpatryk.github.io/sudoku/', code: 'https://github.com/makuchpatryk/sudoku' },
     detail: true,
-    meta: { year: 2024, type: 'personal' },
-    metrics: [{ key: 'difficulties' }, { key: 'bundle' }, { key: 'lighthouse' }]
+    meta: { year: 2024, type: 'personal' }
+  },
+  {
+    slug: 'screencaster',
+    featured: false,
+    order: 9,
+    category: 'ai-workflow',
+    tags: ['ai-workflow', 'go', 'mcp', 'playwright', 'ffmpeg', 'docker', 'cli'],
+    stack: ['Go', 'Playwright', 'Piper TTS', 'ffmpeg', 'SQLite', 'MCP', 'Docker'],
+    links: { code: 'https://github.com/makuchpatryk/screencaster' },
+    detail: true,
+    meta: { year: 2026, type: 'personal' }
   }
 ]

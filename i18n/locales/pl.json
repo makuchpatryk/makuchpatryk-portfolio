@@ -282,21 +282,7 @@
       "lessons": [
         "Embeddingów celowo nie da się podmienić: kolumna wektorowa ma stałą szerokość, więc inny model to migracja i ponowny import. Aplikacja nie startuje, gdy skonfigurowane wymiary nie zgadzają się z kolumną, zamiast zwracać wyniki, które wyglądają wiarygodnie, ale nic nie znaczą.",
         "Pytania uzupełniające, jak „a co z jego bratem?”, działają tylko dzięki krokowi przepisywania; samo wyszukiwanie nie widzi kontekstu. Poza zakresem na razie: zapytania między dokumentami, OCR skanów i konta użytkowników."
-      ],
-      "metrics": {
-        "ingest": {
-          "value": "[wartość]",
-          "label": "czas od wgrania do READY dla książki"
-        },
-        "latency": {
-          "value": "[wartość]",
-          "label": "czas do pierwszego tokenu odpowiedzi"
-        },
-        "tests": {
-          "value": "[wartość]",
-          "label": "testy automatyczne (pytest + vitest)"
-        }
-      }
+      ]
     },
     "blind-clue": {
       "title": "BlindClue",
@@ -318,21 +304,7 @@
       "lessons": [
         "Trzymanie trwających gier wyłącznie w pamięci upraszcza model; druga strona to fakt, że restart zakończyłby gry w toku.",
         "Zwracanie Result z każdej operacji czyni ścieżki błędów jawnymi i łatwymi do testowania, także dla punktacji przy przyłapanym i nieprzyłapanym impostorze."
-      ],
-      "metrics": {
-        "players": {
-          "value": "[wartość]",
-          "label": "graczy w pokoju"
-        },
-        "events": {
-          "value": "[wartość]",
-          "label": "zdarzeń socketowych w czasie rzeczywistym"
-        },
-        "tests": {
-          "value": "[wartość]",
-          "label": "testów automatycznych"
-        }
-      }
+      ]
     },
     "perplex-image": {
       "title": "PerplexImage",
@@ -354,21 +326,7 @@
       "lessons": [
         "Trzymanie logiki gry w osobnym module, oddzielnie od generycznych komponentów UI, pozwala testować ją zwykłymi testami jednostkowymi.",
         "Źródło obrazów jest schowane za adapterem, więc Pexels i storage Supabase są dla gry wymienne."
-      ],
-      "metrics": {
-        "levels": {
-          "value": "[wartość]",
-          "label": "poziomów trudności (największa plansza w kafelkach)"
-        },
-        "tests": {
-          "value": "[wartość]",
-          "label": "testów jednostkowych i e2e"
-        },
-        "commits": {
-          "value": "[wartość]",
-          "label": "commitów"
-        }
-      }
+      ]
     },
     "ai-semantic-db": {
       "title": "Semantic DB",
@@ -390,21 +348,7 @@
       "lessons": [
         "Payloady JSONB zamiast tabel dla każdej kolekcji kosztują trochę szybkości, ale dają dużo prostsze migracje i dowolne schematy.",
         "Zapisywanie dokładnie wyrenderowanego tekstu obok każdego wektora chroni przed cichym rozjazdem, gdy szablon zmieni się po utworzeniu embeddingów."
-      ],
-      "metrics": {
-        "search": {
-          "value": "[wartość]",
-          "label": "czas zapytania w kolekcji N rekordów"
-        },
-        "fieldTypes": {
-          "value": "[wartość]",
-          "label": "obsługiwanych typów pól"
-        },
-        "tests": {
-          "value": "[wartość]",
-          "label": "testów automatycznych (jednostkowe + integracyjne)"
-        }
-      }
+      ]
     },
     "quiz-forge": {
       "title": "Quiz Forge",
@@ -426,21 +370,7 @@
       "lessons": [
         "Wspólne DTO w TypeScripcie w jednej paczce utrzymują spójne kontrakty frontendu i backendu.",
         "Podział aplikacji Nuxt na warstwy core, base i auth oddziela layouty i i18n od stron funkcjonalnych."
-      ],
-      "metrics": {
-        "endpoints": {
-          "value": "[wartość]",
-          "label": "endpointów REST API"
-        },
-        "tests": {
-          "value": "[wartość]",
-          "label": "testów jednostkowych i e2e"
-        },
-        "packages": {
-          "value": "[wartość]",
-          "label": "paczek w workspace"
-        }
-      }
+      ]
     },
     "lean-track": {
       "title": "LeanTrack",
@@ -462,21 +392,7 @@
       "lessons": [
         "Odzwierciedlenie modułów backendu we frontendowych features ułatwia znalezienie każdej funkcji po obu stronach.",
         "PRD, specyfikacja techniczna i diagramy przepływów użytkownika leżą w docs/ obok kodu, więc intencja każdego modułu pozostaje udokumentowana."
-      ],
-      "metrics": {
-        "modules": {
-          "value": "[wartość]",
-          "label": "modułów backendu"
-        },
-        "endpoints": {
-          "value": "[wartość]",
-          "label": "endpointów API"
-        },
-        "tests": {
-          "value": "[wartość]",
-          "label": "testów automatycznych"
-        }
-      }
+      ]
     },
     "match-colours": {
       "title": "Match Colours",
@@ -498,21 +414,7 @@
       "lessons": [
         "Stan w storach, a logika wielokrotnego użytku w composables, utrzymuje cienkie strony.",
         "Nawet tak mała gra zyskuje na testach; późniejsze projekty, jak PerplexImage, mają już pokrycie Vitest i Playwright."
-      ],
-      "metrics": {
-        "levels": {
-          "value": "[wartość]",
-          "label": "poziomów"
-        },
-        "bundle": {
-          "value": "[wartość]",
-          "label": "rozmiar bundla JavaScript"
-        },
-        "lighthouse": {
-          "value": "[wartość]",
-          "label": "wynik wydajności w Lighthouse"
-        }
-      }
+      ]
     },
     "sudoku": {
       "title": "Sudoku",
@@ -534,21 +436,29 @@
       "lessons": [
         "Reducery i kontekst trzymają stan planszy w jednym miejscu, z dala od komponentów komórek.",
         "Statyczny eksport na GitHub Pages w zupełności wystarcza jako hosting gry działającej po stronie klienta."
-      ],
-      "metrics": {
-        "difficulties": {
-          "value": "[wartość]",
-          "label": "poziomów trudności"
-        },
-        "bundle": {
-          "value": "[wartość]",
-          "label": "rozmiar bundla JavaScript"
-        },
-        "lighthouse": {
-          "value": "[wartość]",
-          "label": "wynik wydajności w Lighthouse"
-        }
-      }
+      ]
+    },
+    "screencaster": {
+      "title": "Screencaster",
+      "summary": "Piszesz skrypt w YAML, uruchamiasz jedno polecenie i dostajesz film MP4 z lektorem, pokazujący działanie strony. Render działa w Dockerze z Playwrightem, offline'owym głosem Piper i ffmpeg; serwer MCP pozwala tworzyć dema z poziomu Claude Code.",
+      "role": "projekt i implementacja: CLI w Go, serwer MCP, potok renderowania",
+      "effect": "filmy demo z lektorem z jednego skryptu YAML, renderowane bez LLM",
+      "duration": "paź 2026",
+      "problem": {
+        "heading": "Filmy demo nigdy nie powstają",
+        "body": "Nagranie, lektor i montaż robione ręcznie kosztują zbyt wiele, więc notatki do wydań ukazują się bez wideo. Każda zmiana w interfejsie oznaczałaby nagrywanie od nowa."
+      },
+      "solution": {
+        "heading": "Demo to skrypt, a nie nagranie",
+        "body": "Demo opisuje się zwykłym językiem, Claude Code zapisuje je jako skrypt YAML, a CLI albo serwer MCP go renderuje. Playwright wykonuje kroki w przeglądarce, lokalny głos Piper czyta narrację w chwili rozpoczęcia akcji, a ffmpeg składa MP4. Render nie wywołuje LLM, więc ten sam skrypt zawsze odtwarza to samo demo, a zmiana w interfejsie oznacza poprawkę jednego kroku i ponowny render."
+      },
+      "architecture": {
+        "body": "Jeden moduł Go z warstwową strukturą internal/: czyste reguły domenowe, przypadki użycia za portami i jeden adapter na każde zewnętrzne narzędzie (Playwright, Piper, ffmpeg, SQLite, MCP). CLI screencaster i serwer MCP współdzielą ten sam potok renderowania, a całość działa w jednym obrazie Dockera."
+      },
+      "lessons": [
+        "Brak wywołań LLM przy renderowaniu sprawia, że demo jest artefaktem do odtworzenia: ten sam skrypt, te same kroki, ten sam czas.",
+        "Jeden proces i jeden plik SQLite wystarczają narzędziu, z którego korzysta jeden programista, więc projekt pomija kwestie skalowania."
+      ]
     }
   }
 }

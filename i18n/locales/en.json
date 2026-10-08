@@ -282,21 +282,7 @@
       "lessons": [
         "Embeddings are deliberately not switchable: the vector column has a fixed width, so another model means a migration and a re-ingest. The app refuses to start when the configured dimensions and the column disagree, instead of returning plausible but meaningless results.",
         "Follow-up questions like \"and what about his brother?\" only work because of the rewrite step; retrieval alone sees no context. Still out of scope: cross-document queries, OCR for scanned PDFs and accounts."
-      ],
-      "metrics": {
-        "ingest": {
-          "value": "[value]",
-          "label": "time from upload to READY for a book"
-        },
-        "latency": {
-          "value": "[value]",
-          "label": "time to first token of an answer"
-        },
-        "tests": {
-          "value": "[value]",
-          "label": "automated tests (pytest + vitest)"
-        }
-      }
+      ]
     },
     "blind-clue": {
       "title": "BlindClue",
@@ -318,21 +304,7 @@
       "lessons": [
         "Keeping running games only in memory keeps the model simple; the flip side is that a restart would end the games in progress.",
         "Returning a Result from every operation makes failure paths explicit and easy to test, including the scoring cases for a caught and an uncaught impostor."
-      ],
-      "metrics": {
-        "players": {
-          "value": "[value]",
-          "label": "players per room"
-        },
-        "events": {
-          "value": "[value]",
-          "label": "realtime socket events"
-        },
-        "tests": {
-          "value": "[value]",
-          "label": "automated tests"
-        }
-      }
+      ]
     },
     "perplex-image": {
       "title": "PerplexImage",
@@ -354,21 +326,7 @@
       "lessons": [
         "Keeping game logic in its own module, apart from generic UI components, keeps it testable with plain unit tests.",
         "The image source sits behind an adapter, so Pexels and Supabase storage are interchangeable for the game."
-      ],
-      "metrics": {
-        "levels": {
-          "value": "[value]",
-          "label": "difficulty levels (largest board in tiles)"
-        },
-        "tests": {
-          "value": "[value]",
-          "label": "unit and e2e tests"
-        },
-        "commits": {
-          "value": "[value]",
-          "label": "commits"
-        }
-      }
+      ]
     },
     "ai-semantic-db": {
       "title": "Semantic DB",
@@ -390,21 +348,7 @@
       "lessons": [
         "JSONB payloads instead of per-collection tables trade some speed for far simpler migrations and arbitrary schemas.",
         "Storing the exact rendered text next to each vector prevents silent drift when a template changes after embeddings exist."
-      ],
-      "metrics": {
-        "search": {
-          "value": "[value]",
-          "label": "query time on a collection of N records"
-        },
-        "fieldTypes": {
-          "value": "[value]",
-          "label": "supported field types"
-        },
-        "tests": {
-          "value": "[value]",
-          "label": "automated tests (unit + integration)"
-        }
-      }
+      ]
     },
     "quiz-forge": {
       "title": "Quiz Forge",
@@ -426,21 +370,7 @@
       "lessons": [
         "Shared TypeScript DTOs in one package keep the frontend and backend contracts in sync.",
         "Splitting the Nuxt app into core, base and auth layers keeps layouts and i18n apart from the feature pages."
-      ],
-      "metrics": {
-        "endpoints": {
-          "value": "[value]",
-          "label": "REST API endpoints"
-        },
-        "tests": {
-          "value": "[value]",
-          "label": "unit and e2e tests"
-        },
-        "packages": {
-          "value": "[value]",
-          "label": "workspace packages"
-        }
-      }
+      ]
     },
     "lean-track": {
       "title": "LeanTrack",
@@ -462,21 +392,7 @@
       "lessons": [
         "Mirroring the backend modules in frontend features keeps each feature easy to find on both sides.",
         "A PRD, a tech spec and user-flow diagrams sit in docs/ next to the code, so the intent behind each module stays on record."
-      ],
-      "metrics": {
-        "modules": {
-          "value": "[value]",
-          "label": "backend modules"
-        },
-        "endpoints": {
-          "value": "[value]",
-          "label": "API endpoints"
-        },
-        "tests": {
-          "value": "[value]",
-          "label": "automated tests"
-        }
-      }
+      ]
     },
     "match-colours": {
       "title": "Match Colours",
@@ -498,21 +414,7 @@
       "lessons": [
         "Putting state in stores and reusable logic in composables keeps the pages thin.",
         "A game this small still benefits from tests; later projects such as PerplexImage add Vitest and Playwright coverage."
-      ],
-      "metrics": {
-        "levels": {
-          "value": "[value]",
-          "label": "levels"
-        },
-        "bundle": {
-          "value": "[value]",
-          "label": "JavaScript bundle size"
-        },
-        "lighthouse": {
-          "value": "[value]",
-          "label": "Lighthouse performance score"
-        }
-      }
+      ]
     },
     "sudoku": {
       "title": "Sudoku",
@@ -534,21 +436,29 @@
       "lessons": [
         "Reducers and context keep the board state in one place, away from the cell components.",
         "A static export on GitHub Pages is enough hosting for a client-side game."
-      ],
-      "metrics": {
-        "difficulties": {
-          "value": "[value]",
-          "label": "difficulty levels"
-        },
-        "bundle": {
-          "value": "[value]",
-          "label": "JavaScript bundle size"
-        },
-        "lighthouse": {
-          "value": "[value]",
-          "label": "Lighthouse performance score"
-        }
-      }
+      ]
+    },
+    "screencaster": {
+      "title": "Screencaster",
+      "summary": "Write a YAML script, run one command, get a narrated MP4 of a website. Renders run in Docker with Playwright, offline Piper voices and ffmpeg; an MCP server lets Claude Code create demos from chat.",
+      "role": "design and implementation: Go CLI, MCP server, render pipeline",
+      "effect": "narrated demo videos from a YAML script, rendered without an LLM",
+      "duration": "Oct 2026",
+      "problem": {
+        "heading": "Demo videos never get made",
+        "body": "Recording, voiceover and editing by hand cost too much, so release notes ship without video. Every UI change would mean recording again."
+      },
+      "solution": {
+        "heading": "A demo is a script, not a recording",
+        "body": "A demo is described in plain language, Claude Code writes it as a YAML script, and the CLI or MCP server renders it. Playwright performs the steps in a browser, a local Piper voice narrates each step as its action starts and ffmpeg assembles the MP4. Rendering makes no LLM call, so the same script replays the same demo, and a UI change means fixing one step and rendering again."
+      },
+      "architecture": {
+        "body": "A single Go module with a layered internal/ tree: pure domain rules, use cases behind ports, and one adapter per external tool (Playwright, Piper, ffmpeg, SQLite, MCP). The screencaster CLI and the MCP server share one render pipeline, and everything runs in one Docker image."
+      },
+      "lessons": [
+        "Keeping rendering free of LLM calls makes a demo a replayable artifact: same script, same steps, same timing.",
+        "One process and one SQLite file are enough for a tool a single developer runs, so the design skips scaling concerns."
+      ]
     }
   }
 }
