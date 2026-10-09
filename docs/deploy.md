@@ -20,6 +20,10 @@ One-time setup:
 
 Without `BASE_URL` the workflow uses `/<repo-name>/` (project page: `https://<user>.github.io/<repo>/`).
 
+### Releasing
+
+**Actions → release → Run workflow**: enter `version` (e.g. `1.0.12`) and optionally tick `deploy`. The workflow validates the number, refuses an existing tag, creates the annotated tag `v<version>` on the commit of the branch picked in **Use workflow from**, and with `deploy` dispatches `deploy.yml` on that tag. Deploying a tag needs the `v*` pattern allowed under **Settings → Environments → github-pages → Deployment branches and tags**.
+
 Post-deploy smoke check (manual): live URL, `/pl/`, a deep link such as `/projects/ai-book-chat`, a non-existent path (serves `404.html`), `/sitemap_index.xml`, `/cv.pdf`.
 
 ### Launch gate

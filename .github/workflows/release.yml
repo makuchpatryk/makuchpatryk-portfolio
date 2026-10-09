@@ -1,0 +1,64 @@
+name: release
+
+# manual only: Actions -> release -> Run workflow. Tags the commit of the branch picked in "Use workflow from".
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version number without the prefix, e.g. 1.0.12 (the tag becomes v1.0.12)
+        type: string
+        required: true
+      deploy:
+        description: Deploy the new tag to GitHub Pages right after tagging
+        type: boolean
+        default: false
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  # push the tag
+  contents: write
+  # dispatch deploy.yml
+  actions: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - id: v
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          version="${VERSION#v}"
+          if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Version must look like 1.2.3, got '$VERSION'"
+            exit 1
+          fi
+          tag="v$version"
+          if git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null; then
+            echo "::error::Tag $tag already exists"
+            exit 1
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+      - name: Create and push tag
+        env:
+          TAG: ${{ steps.v.outputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" -m "$TAG"
+          git push origin "refs/tags/$TAG"
+          echo "Tagged $TAG at $GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+      # a push made with GITHUB_TOKEN triggers no workflows, but workflow_dispatch is exempt
+      - name: Deploy tag
+        if: inputs.deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.v.outputs.tag }}
+        run: |
+          gh workflow run deploy.yml --ref "$TAG"
+          echo "Deploy of $TAG dispatched (see the deploy workflow run)" >> "$GITHUB_STEP_SUMMARY"
