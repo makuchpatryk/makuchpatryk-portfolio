@@ -31,7 +31,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'perplex-image',
-    featured: true,
+    featured: false,
     order: 3,
     category: 'full-stack',
     tags: ['typescript', 'nuxt', 'supabase', 'pinia', 'playwright', 'game', 'puzzle'],
@@ -102,7 +102,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'screencaster',
-    featured: false,
+    featured: true,
     order: 9,
     category: 'ai-workflow',
     tags: ['ai-workflow', 'go', 'mcp', 'playwright', 'ffmpeg', 'docker', 'cli'],
