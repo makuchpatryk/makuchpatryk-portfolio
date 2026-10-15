@@ -458,7 +458,37 @@
       "lessons": [
         "Keeping rendering free of LLM calls makes a demo a replayable artifact: same script, same steps, same timing.",
         "One process and one SQLite file are enough for a tool a single developer runs, so the design skips scaling concerns."
-      ]
+      ],
+      "gallery": {
+        "0": "The YAML script, typed in the terminal: one step per action, with optional narration",
+        "1": "One command renders it: narration, recording and assembly run step by step"
+      }
+    },
+    "first-million": {
+      "title": "First Million",
+      "summary": "Real-time stock trading game: pick your starting capital and goal, trade against the clock, or race up to 3 rivals in a shared room where everyone trades the same price.",
+      "role": "full stack: shared simulation engine, realtime backend, Vue frontend",
+      "effect": "solo and room rounds on one engine, covered by unit and e2e tests",
+      "duration": "Oct 2026",
+      "problem": {
+        "heading": "A market game needs one price for everyone",
+        "body": "A trading game feels fair only when every player in a room trades the same price and the round ends for everyone at the same moment. The price cannot come from each browser, or players would see different markets. Nothing is stored between rounds, and the whole game has to run at zero cost."
+      },
+      "solution": {
+        "heading": "The server owns the price, the browser sends intent",
+        "body": "Players pick a round length of 3, 5 or 10 minutes, a starting capital from $1,000 to $100,000 and a goal with no upper limit, then buy, sell or close a position in sizes from 10 to 250 units. Speed runs at 1×, 3× or 8×, and the round can be paused. A room of up to four players trades one price from a Durable Object, and a player whose equity falls to zero is eliminated. The browser only sends orders; the server checks them and runs the round."
+      },
+      "architecture": {
+        "body": "A pnpm monorepo with three packages. shared is a pure TypeScript engine with no platform APIs: the random generator and the elapsed time are passed in, so the same rules run in the browser for single play and in the Worker for rooms. worker runs on Cloudflare Workers, with a Lobby and one Room Durable Object per room, and verifies Firebase ID tokens. web is a Vue 3 app that renders state produced by pure reducers. State lives in memory only, with no storage, KV or D1."
+      },
+      "lessons": [
+        "Writing the engine as pure functions with the random generator and the clock passed in made the same rules testable with a fixed seed and a fake clock, in both single play and rooms.",
+        "Keeping state in memory only means a restart ends the rooms in progress, but it keeps the model simple and the cost at zero."
+      ],
+      "gallery": {
+        "0": "Setup: starting capital, goal and round length",
+        "1": "Margin call: equity falls to zero and the round ends"
+      }
     }
   }
 }

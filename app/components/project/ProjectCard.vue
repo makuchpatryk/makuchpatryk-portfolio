@@ -22,13 +22,13 @@ const detailPath = computed(() => localePath({ name: 'projects-slug', params: { 
       :src="project.media.cover"
       alt=""
       width="640"
-      height="220"
+      height="360"
       loading="lazy"
-      class="h-[220px] w-full rounded-lg border border-border object-cover"
+      class="aspect-video w-full rounded-lg border border-border object-cover"
     />
     <div
       v-else
-      class="gridbg hidden h-[220px] items-center justify-center rounded-lg border border-border font-mono text-[13px] text-faint md:flex"
+      class="gridbg hidden aspect-video items-center justify-center rounded-lg border border-border font-mono text-[13px] text-faint md:flex"
     >
       {{ t('projectCard.visualPlaceholder') }}
     </div>

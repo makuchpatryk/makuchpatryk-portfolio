@@ -75,7 +75,7 @@ The build has no host logic. Three env vars decide everything (details in [deplo
 | `NUXT_PUBLIC_SITE_URL` | site **origin only**; canonical, hreflang, sitemap and OG URLs. The modules append the base path themselves |
 | `NITRO_PRESET` | `github_pages` in the deploy workflow only (emits `.nojekyll` so `_nuxt/` isn't dropped by Jekyll) |
 
-Rule for code: never hardcode a leading `/` for files in `public/`. Use `NuxtLink`/`NuxtImg` for routes and images, and `usePublicUrl()` (wraps `withBase` around `app.baseURL`) for raw `<a href="cv.pdf">` and `<video src>`.
+Rule for code: never hardcode a leading `/` for files in `public/`. Use `NuxtLink`/`NuxtImg` for routes and images, and `usePublicUrl()` (prefixes `app.baseURL`, root-anchored so nested routes resolve it too) for raw `<a href="cv.pdf">` and `<video src>`.
 
 ## 5. Content model
 

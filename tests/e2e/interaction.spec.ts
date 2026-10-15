@@ -78,7 +78,7 @@ test.describe('navigation', () => {
   test('detail page: prev/next cycles among detail projects', async ({ page }) => {
     await page.goto('projects/ai-book-chat')
     await page.getByRole('link', { name: /next project/i }).click()
-    await expect(page).toHaveURL(/blind-clue/)
+    await expect(page).toHaveURL(/first-million/)
   })
 })
 
@@ -87,7 +87,7 @@ test.describe('tag filter', () => {
     await page.goto('projects')
     const cards = page.getByRole('article')
     const total = await cards.count()
-    expect(total).toBe(9)
+    expect(total).toBe(10)
 
     await page.getByRole('button', { name: 'vue', exact: true }).click()
     await expect(page).toHaveURL(/tag=vue/)
@@ -108,7 +108,7 @@ test.describe('tag filter', () => {
     const context = await browser.newContext({ javaScriptEnabled: false })
     const page = await context.newPage()
     await page.goto('http://localhost:' + (process.env.PORT || 4173) + (process.env.E2E_BASE || '/') + 'projects')
-    await expect(page.getByRole('article')).toHaveCount(9)
+    await expect(page.getByRole('article')).toHaveCount(10)
     await context.close()
   })
 })

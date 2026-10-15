@@ -27,13 +27,13 @@ const tiles = computed(() =>
         :src="tile.src"
         :alt="tile.caption"
         width="640"
-        height="260"
+        height="360"
         loading="lazy"
-        class="h-[260px] w-full rounded-[10px] border border-border object-cover"
+        class="aspect-video w-full rounded-[10px] border border-border object-cover"
       />
       <div
         v-else
-        class="flex h-[260px] items-center justify-center rounded-[10px] border border-dashed border-border-strong bg-surface font-mono text-[13px] text-muted"
+        class="flex aspect-video items-center justify-center rounded-[10px] border border-dashed border-border-strong bg-surface font-mono text-[13px] text-muted"
       >
         {{ cols === 2 ? t('project.screenshotPlaceholder', { n: i + 1 }) : t('project.galleryPlaceholder') }}
       </div>
