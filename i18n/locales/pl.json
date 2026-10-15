@@ -458,7 +458,37 @@
       "lessons": [
         "Brak wywołań LLM przy renderowaniu sprawia, że demo jest artefaktem do odtworzenia: ten sam skrypt, te same kroki, ten sam czas.",
         "Jeden proces i jeden plik SQLite wystarczają narzędziu, z którego korzysta jeden programista, więc projekt pomija kwestie skalowania."
-      ]
+      ],
+      "gallery": {
+        "0": "Skrypt YAML wpisywany w terminalu: jeden krok na akcję, z opcjonalną narracją",
+        "1": "Jedno polecenie renderuje całość: narracja, nagranie i montaż krok po kroku"
+      }
+    },
+    "first-million": {
+      "title": "First Million",
+      "summary": "Gra giełdowa w czasie rzeczywistym: wybierasz kapitał startowy i cel, handlujesz na czas i ścigasz się z celem solo albo z do trzema rywalami w jednym pokoju, gdzie wszyscy handlują tą samą ceną.",
+      "role": "full stack: wspólny silnik symulacji, backend realtime, frontend w Vue",
+      "effect": "rundy solo i wieloosobowe na jednym silniku, pokryte testami jednostkowymi i e2e",
+      "duration": "paź 2026",
+      "problem": {
+        "heading": "Gra giełdowa wymaga jednej ceny dla wszystkich",
+        "body": "Gra handlowa wydaje się uczciwa tylko wtedy, gdy każdy gracz w pokoju handluje tą samą ceną, a runda kończy się dla wszystkich w tym samym momencie. Cena nie może pochodzić z każdej przeglądarki osobno, bo gracze widzieliby różne rynki. Między rundami nic nie jest zapisywane, a całość ma działać za zero złotych."
+      },
+      "solution": {
+        "heading": "Cenę trzyma serwer, przeglądarka wysyła intencje",
+        "body": "Gracz wybiera długość rundy: 3, 5 lub 10 minut, kapitał startowy od 1 000 do 100 000 $ i cel bez górnej granicy, a potem kupuje, sprzedaje lub zamyka pozycję o wielkości od 10 do 250 jednostek. Tempo to 1×, 3× lub 8×, a rundę można wstrzymać. Pokój do czterech graczy handluje jedną ceną z obiektu Durable Object, a gracz, którego kapitał spadnie do zera, odpada. Przeglądarka tylko wysyła zlecenia; serwer je sprawdza i prowadzi rundę."
+      },
+      "architecture": {
+        "body": "Monorepo pnpm z trzema pakietami. shared to czysty silnik w TypeScript bez API platformy: generator losowy i czas są przekazywane z zewnątrz, więc te same reguły działają w przeglądarce w grze solo i w Workerze w pokojach. worker działa na Cloudflare Workers, z jednym obiektem Lobby i jednym Room Durable Object na pokój, i weryfikuje tokeny ID Firebase. web to aplikacja Vue 3, która renderuje stan wytworzony przez czyste reducery. Stan żyje wyłącznie w pamięci, bez storage'u, KV i D1."
+      },
+      "lessons": [
+        "Napisanie silnika jako czystych funkcji, z generatorem losowym i zegarem przekazywanymi z zewnątrz, pozwoliło testować te same reguły ze stałym ziarnem i sztucznym zegarem, zarówno w grze solo, jak i w pokojach.",
+        "Trzymanie stanu tylko w pamięci oznacza, że restart kończy trwające pokoje, ale utrzymuje model w prostocie i koszt na zero."
+      ],
+      "gallery": {
+        "0": "Ustawienia: kapitał startowy, cel i długość rundy",
+        "1": "Margin call: kapitał spada do zera i runda się kończy"
+      }
     }
   }
 }
