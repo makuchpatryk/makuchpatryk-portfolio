@@ -187,3 +187,20 @@ test.describe('media', () => {
     }
   })
 })
+
+test.describe('image lightbox', () => {
+  test('opens full screen, zooms, closes with Escape', async ({ page }) => {
+    await page.goto('projects/robak-remonty')
+    await page.getByRole('button', { name: /open image|otwórz obraz/i }).first().click()
+    const dialog = page.getByRole('dialog')
+    await expect(dialog).toBeVisible()
+
+    const img = dialog.locator('img')
+    const fitWidth = (await img.boundingBox())!.width
+    await dialog.getByRole('button', { name: /zoom in|powiększ/i }).click()
+    expect((await img.boundingBox())!.width).toBeGreaterThan(fitWidth)
+
+    await page.keyboard.press('Escape')
+    await expect(dialog).toBeHidden()
+  })
+})
