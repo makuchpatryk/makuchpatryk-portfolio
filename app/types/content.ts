@@ -48,6 +48,8 @@ export interface Pipeline {
 export interface ProjectMedia {
   video?: string
   poster?: string
+  /** English WebVTT captions for `video`, path relative to `public/` */
+  captions?: string
   cover?: string
   gallery?: string[]
 }

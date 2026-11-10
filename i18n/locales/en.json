@@ -150,6 +150,7 @@
     "videoPlaceholder": "[demo video: screen recording, 1–3 min]",
     "videoLabel": "Demo video: {title}",
     "videoFallback": "Your browser cannot play this video.",
+    "captionsLabel": "English",
     "toc": "table of contents",
     "tocLabel": "Table of contents",
     "sections": {

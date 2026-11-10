@@ -1,0 +1,95 @@
+# Demo of the robak-remonty app running LOCALLY with sample content (see specs/robak-remonty-video.md).
+# Do not render this file directly: `node demos/robak-seed.mjs` fills the base URL and storageState placeholders
+# (a logged-in session) and writes demos/.build/robak-remonty.yaml, which is the script to render.
+name: robak-remonty
+storageState: __STORAGE_STATE__
+languages: [en]
+subtitles: true
+meta:
+  title: K&R Robak Remonty, a showcase site with an admin panel
+  description: A tour of the public site and the admin panel, recorded on a local copy with sample content.
+  audience: marketing
+steps:
+  - goto: __BASE__/
+    narration:
+      en: "This is a showcase website I built for K&R Robak Remonty, a renovation company from Małopolska in Poland. What you see is a local copy, filled with sample content and generated placeholder photos."
+  - wait: 1500
+  - click: role=link[name="DE"]
+    narration:
+      en: "The site comes in Polish, German and English. Here is the German version."
+  - wait: 1500
+  - click: role=link[name="EN"]
+    narration:
+      en: "And English. A text missing in a language falls back to Polish, field by field."
+  - wait: 1500
+  - click: role=button[name="Switch to dark mode"]
+    narration:
+      en: "Visitors can switch between a light and a dark theme."
+  - wait: 1500
+  - click: role=button[name="Switch to light mode"]
+  - scroll: role=region[name="What we do"]
+    narration:
+      en: "The services section lists the six kinds of work the company does, and each one has its own page."
+  - wait: 1500
+  - scroll: role=region[name="Our projects"]
+    narration:
+      en: "Below are albums of finished jobs. Every album in this recording is a sample."
+  - wait: 1500
+  # by href: a role name with a colon has no usable selector in the page tree
+  - click: 'a[href="/en/projects/przyklad-lazienka-z-plytkami"]'
+    narration:
+      en: "Opening an album shows its photo viewer."
+  - wait: role=region[name="Photo viewer"]
+  - click: role=button[name="Next photo"]
+    narration:
+      en: "Visitors can step through the photos with the arrows,"
+  - wait: 1000
+  - click: role=button[name="Photo 3"]
+    narration:
+      en: "jump to any photo from the thumbnails,"
+  - wait: 1000
+  - click: role=button[name="Open full screen"]
+    narration:
+      en: "or open one in full screen."
+  - wait: 2000
+  - press: Escape
+  - goto: __BASE__/panel-admin/albumy
+    narration:
+      en: "Now the other side: the admin panel, which the owner uses alone. It is in Polish. This is the list of albums."
+  - wait: 2000
+  - click: role=link[name="Nowy album"]
+    narration:
+      en: "Adding an album starts with a title."
+  - fill: { selector: 'role=textbox[name="Tytuł albumu"]', value: "Przykład: kuchnia po remoncie" }
+  - wait: 1000
+  - click: role=button[name="Utwórz album"]
+    narration:
+      en: "One click creates it. Photos are compressed to WebP in the browser before they are uploaded, which keeps the server within the free tier."
+  - wait: 2500
+  - click: role=link[name="← Albumy"]
+  - wait: 1500
+  - click: role=link[name="Edytuj"] >> nth=0
+    narration:
+      en: "An album with photos can be edited: captions, their order and which photo is the cover."
+  - wait: 1500
+  - hover: role=button[name="Ustaw jako okładkę"] >> nth=1
+  - wait: 1500
+  - click: role=switch[name="Widoczny na stronie"]
+    narration:
+      en: "A switch decides whether visitors can see the album. I will hide this one and save."
+  - click: role=button[name="Zapisz zmiany"] >> nth=0
+  - wait: 1500
+  - goto: __BASE__/en/projects
+    narration:
+      en: "The public list is already updated. There is no redeploy, because the pages read the database on every request."
+  - wait: 2500
+  - goto: __BASE__/panel-admin/ogolne
+    narration:
+      en: "The general settings hold the language switches and the contact data shown on the site."
+  - wait: 2500
+  - scroll: role=region[name="Języki strony"]
+  - wait: 1500
+  - goto: __BASE__/en
+    narration:
+      en: "The whole project runs on one Cloudflare Worker, with D1 for the data and R2 for the photos, at no running cost."
+  - wait: 3000

@@ -14,6 +14,7 @@ ffmpeg -y -i "$1" \
   -vf "scale=-2:720" \
   -c:v libx264 -crf 28 -preset slow -pix_fmt yuv420p \
   -c:a aac -b:a 96k \
+  -sn \
   -movflags +faststart \
   "$2"
 

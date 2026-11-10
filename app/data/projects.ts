@@ -153,6 +153,9 @@ export const projects: Project[] = [
     links: { demo: 'https://remontyrobak.com' },
     detail: true,
     media: {
+      video: 'videos/robak-remonty.mp4',
+      poster: 'images/robak-remonty/poster.webp',
+      captions: 'videos/robak-remonty.en.vtt',
       cover: 'images/robak-remonty/cover.webp',
       gallery: ['images/robak-remonty/services.webp', 'images/robak-remonty/admin.webp']
     },

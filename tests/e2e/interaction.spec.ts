@@ -167,6 +167,16 @@ test.describe('keyboard', () => {
 })
 
 test.describe('media', () => {
+  test('robak-remonty video has an English captions track and loads lazily', async ({ page }) => {
+    await page.goto('projects/robak-remonty')
+    await expect(page.locator('video')).toHaveAttribute('preload', 'none')
+    const track = page.locator('video track[kind="captions"][srclang="en"]')
+    await expect(track).toHaveCount(1)
+    const src = await track.getAttribute('src')
+    const res = await page.request.get(new URL(src!, page.url()).href)
+    expect(res.status()).toBe(200)
+  })
+
   test('detail page shows the video slot (placeholder until a demo video is configured)', async ({ page }) => {
     await page.goto('projects/ai-book-chat')
     await expect(page.getByText('demo.mp4')).toBeVisible()

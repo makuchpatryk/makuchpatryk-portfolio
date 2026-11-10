@@ -51,6 +51,7 @@ i18n/
   locales/en.json, pl.json   all copy
 public/                      cv.pdf, favicon.svg, images/, videos/
 scripts/                     check-placeholders, check-locales, check-video-size, encode-video, serve
+demos/                       robak-seed.mjs + robak-remonty.template.yaml: tooling that records the robak-remonty demo video with screencaster (never imported by app/); .build/ and output/ are git-ignored
 tests/                       unit/ (Vitest) and e2e/ (Playwright)
 docs/                        this file, deploy.md, content-checklist.md, design/ (tokens, boards)
 ```
@@ -93,7 +94,7 @@ interface Project {
   tags: Tag[]; stack: string[]
   links: { demo?: string; code?: string }
   detail: boolean                                   // true => /projects/[slug] is prerendered
-  media?: { video?; poster?; cover?; gallery? }
+  media?: { video?; poster?; captions?; cover?; gallery? }   // captions: English WebVTT for video
   meta: { year: number; type: 'commercial' | 'personal' }
   pipeline?: { ingest: string[]; query: string[]; highlight?: string[] }  // step keys -> i18n
   metrics?: { key: string }[]                       // label/value via i18n
@@ -142,7 +143,7 @@ Pure logic (`app/utils/projects.ts`) has no Nuxt imports, so Vitest tests it dir
 - **Nav anchors**: section links are `localePath('/') + '#projects'` etc., so they also work from other pages.
 - **Home** is one page of sections (`projects`, `experience`, `stack`, `about`, `contact`) matching the design boards; there are no separate `/about` or `/stack` routes.
 - **Detail page**: header meta grid, video slot, sticky table of contents (IntersectionObserver highlights the current section), five sections, gallery, prev/next among detail projects.
-- **Media**: `VideoPlayer` renders `<video preload="none" playsinline controls>` with a `usePublicUrl` source when `media.video` is set, else a placeholder. `PhotoFrame`, `ProjectCard` and `Gallery` use `NuxtImg` when an image path exists and placeholders otherwise.
+- **Media**: `VideoPlayer` renders `<video preload="none" playsinline controls>` with a `usePublicUrl` source when `media.video` is set, else a placeholder. When `media.captions` is set it adds an English `<track kind="captions">` (not `default`, label from `project.captionsLabel`); the `.vtt` is a separate file next to the video, and the site MP4 carries no embedded subtitle stream (`encode-video.sh` passes `-sn`). `PhotoFrame`, `ProjectCard` and `Gallery` use `NuxtImg` when an image path exists and placeholders otherwise.
 
 ## 9. Hydration and performance
 
@@ -205,4 +206,4 @@ The placeholder gate warns on a branch and fails the build on a `release*` tag. 
 | Explicit per-locale sitemaps | automatic locale split is wrong under a base path |
 | pnpm `allowBuilds` in `pnpm-workspace.yaml` | pnpm 11 blocks dependency build scripts (esbuild, sharp, resvg) unless allowed |
 
-Known limitations: no `robots.txt` on a project-page subpath (only valid at a domain root); mobile Lighthouse performance is gated at 0.75, not 0.95 (see §9); demo videos are placeholders until real files are added.
+Known limitations: no `robots.txt` on a project-page subpath (only valid at a domain root); mobile Lighthouse performance is gated at 0.75, not 0.95 (see §9); demo videos exist for `screencaster`, `first-million` and `robak-remonty`, the other projects still show the placeholder slot.
