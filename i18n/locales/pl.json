@@ -489,6 +489,32 @@
         "0": "Ustawienia: kapitał startowy, cel i długość rundy",
         "1": "Margin call: kapitał spada do zera i runda się kończy"
       }
+    },
+    "robak-remonty": {
+      "title": "K&R Robak Remonty",
+      "summary": "Strona wizytówka firmy remontowej z Małopolski po polsku, niemiecku i angielsku: usługi, albumy zdjęć z wykonanych prac, opinie klientów i polski panel admina, który obsługuje sam właściciel.",
+      "role": "solo: Nuxt SSR i API w Hono, warstwa danych D1/R2, panel admina, i18n, pipeline wdrożenia",
+      "effect": "działająca strona klienta na jednym Workerze Cloudflare, treści zmieniane bez wdrożenia",
+      "duration": "paź–lis 2026",
+      "problem": {
+        "heading": "Same polecenia nie pozwalają sprawdzić firmy",
+        "body": "Firma wykańcza i remontuje domy oraz mieszkania, a każde zlecenie przychodzi z polecenia. Polecony klient nie może zobaczyć prac przed telefonem, a firma nie dociera do nowych klientów. Chce pokazać swoje realizacje w sieci, być widoczna w Google i mieć stronę, którą właściciel aktualizuje bez programisty, wszystko w darmowych limitach Cloudflare."
+      },
+      "solution": {
+        "heading": "Strona wizytówka z panelem admina w tle",
+        "body": "Odwiedzający widzą usługi, albumy zrealizowanych prac z przeglądarką zdjęć, opinie oraz kontakt telefoniczny i mailowy, po polsku, niemiecku lub angielsku, w jasnym lub ciemnym motywie. Właściciel loguje się do polskiego panelu, w którym zarządza albumami, zdjęciami, opiniami, usługami, aktualnościami, tekstami strony i przełącznikami języków. Brakujący tekst po niemiecku lub angielsku wraca do polskiego pole po polu, a ukryty album lub usługa to 404 na każdej stronie publicznej."
+      },
+      "architecture": {
+        "body": "Nuxt 4 renderuje strony na serwerze, a Hono obsługuje API, oba w jednym Workerze Cloudflare, z D1 na dane i R2 na zdjęcia. Strony czytają D1 przy każdym żądaniu, więc zmiana jest widoczna w ciągu minuty. Przeglądarka kompresuje każde zdjęcie do WebP przed wysłaniem, dzięki czemu obróbka obrazów nie obciąża limitu CPU Workera. Kod to workspace pnpm z logiką serwera, wspólnym czystym kodem, zestawem UI i aplikacją Nuxt, a reguły importów pilnuje ESLint. Dostęp do panelu to jedno konto, ciasteczko JWT, sprawdzanie Origin i limit prób logowania."
+      },
+      "lessons": [
+        "Darmowy limit CPU Workera zdecydował o projekcie: obróbka zdjęć trafiła do przeglądarki, a serwer tylko sprawdza wynik, co utrzymało koszt działania strony na zero.",
+        "Podział kodu na warstwy z regułami importów sprawdzanymi przez linter trzyma reguły (widoczność, fallback języka, kolejność, limit miejsca) w jednym miejscu, a nie rozsypane po handlerach i stronach."
+      ],
+      "gallery": {
+        "0": "Sekcja usług na stronie głównej: łazienki, wykończenia wnętrz, adaptacja poddaszy, szpachlowanie, malowanie i flizy",
+        "1": "Logowanie do panelu admina, jedyna droga do zarządzania treścią"
+      }
     }
   }
 }

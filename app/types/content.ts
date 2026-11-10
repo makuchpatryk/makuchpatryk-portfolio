@@ -34,6 +34,9 @@ export type Tag
     | 'go'
     | 'mcp'
     | 'ffmpeg'
+    | 'hono'
+    | 'cloudflare'
+    | 'i18n'
 
 export interface Pipeline {
   ingest: string[]
