@@ -15,6 +15,5 @@ test-results
 .claude
 .screencaster
 
-# robak demo: the generated script holds a session cookie, outputs are MP4s
-demos/.build/
-demos/output/
+# local demo recording tooling (robak seed + script holds a session cookie; outputs are MP4s)
+demos/

@@ -51,7 +51,7 @@ i18n/
   locales/en.json, pl.json   all copy
 public/                      cv.pdf, favicon.svg, images/, videos/
 scripts/                     check-placeholders, check-locales, check-video-size, encode-video, serve
-demos/                       robak-seed.mjs + robak-remonty.template.yaml: tooling that records the robak-remonty demo video with screencaster (never imported by app/); .build/ and output/ are git-ignored
+demos/                       local, git-ignored: scripts that record demo videos with screencaster (never imported by app/)
 tests/                       unit/ (Vitest) and e2e/ (Playwright)
 docs/                        this file, deploy.md, content-checklist.md, design/ (tokens, boards)
 ```

@@ -27,7 +27,7 @@ Replace copy in `i18n/locales/en.json` **and** `pl.json` (a test enforces identi
 - [x] Metrics disabled for all projects (`metrics` removed from `app/data/projects.ts` and locale files; `MetricGrid` hides when absent)
 - [x] `pipeline` steps (labels live in `pipeline.steps.*`; add new keys in both locales)
 - [ ] Media: `media.cover`, `media.gallery[]` (+ optional captions `projects.<slug>.gallery.<n>`), `media.poster`
-- [ ] Video: encode with `scripts/encode-video.sh in.mov public/videos/<slug>.mp4` (720p, CRF 28, faststart), set `media.video: 'videos/<slug>.mp4'`. Budget: ≤15 MiB per file, ≤120 MiB total (`pnpm check:video-size`). If the video has speech, add English captions as `public/videos/<slug>.en.vtt` and set `media.captions: 'videos/<slug>.en.vtt'` (the player adds the `<track>`). `robak-remonty` is the worked example, recorded by `demos/robak-seed.mjs`.
+- [ ] Video: encode with `scripts/encode-video.sh in.mov public/videos/<slug>.mp4` (720p, CRF 28, faststart), set `media.video: 'videos/<slug>.mp4'`. Budget: ≤15 MiB per file, ≤120 MiB total (`pnpm check:video-size`). If the video has speech, add English captions as `public/videos/<slug>.en.vtt` and set `media.captions: 'videos/<slug>.en.vtt'` (the player adds the `<track>`). `robak-remonty` is the worked example (its recording scripts stay local, in the git-ignored `demos/`).
 
 ## Before tagging `release`
 - [ ] `node scripts/check-placeholders.mjs --strict` passes
