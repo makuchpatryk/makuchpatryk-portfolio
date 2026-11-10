@@ -9,7 +9,7 @@ Replace copy in `i18n/locales/en.json` **and** `pl.json` (a test enforces identi
 - [x] `email`
 - [x] GitHub and LinkedIn URLs
 - [x] `photo`: put the file in `public/images/`, set e.g. `'images/photo.jpg'` (rendered with `NuxtImg`, 440×440)
-- [ ] Replace `public/cv.pdf` (placeholder PDF), single EN file for both locales
+- [x] Replace `public/cv.pdf` (placeholder PDF), single EN file for both locales
 - [ ] Favicon (`public/favicon.svg`) and brand line in `app/components/OgImage/PortfolioCard.satori.vue`
 
 ## Copy — both locales
