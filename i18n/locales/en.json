@@ -150,6 +150,7 @@
     "videoPlaceholder": "[demo video: screen recording, 1–3 min]",
     "videoLabel": "Demo video: {title}",
     "videoFallback": "Your browser cannot play this video.",
+    "captionsLabel": "English",
     "toc": "table of contents",
     "tocLabel": "Table of contents",
     "sections": {
@@ -166,6 +167,11 @@
     "gallery": "gallery",
     "galleryPlaceholder": "[photo]",
     "galleryCaption": "[caption]",
+    "imageOpen": "open image: {caption}",
+    "imageViewer": "image viewer",
+    "imageZoomIn": "zoom in",
+    "imageZoomOut": "zoom out",
+    "imageClose": "close",
     "back": "← back",
     "allProjects": "All projects",
     "next": "next project →",
@@ -488,6 +494,32 @@
       "gallery": {
         "0": "Setup: starting capital, goal and round length",
         "1": "Margin call: equity falls to zero and the round ends"
+      }
+    },
+    "robak-remonty": {
+      "title": "K&R Robak Remonty",
+      "summary": "Showcase website for a renovation company in Małopolska, in Polish, German and English, with service pages, photo albums of finished jobs, customer reviews and a Polish admin panel the owner runs alone.",
+      "role": "solo build: Nuxt SSR and Hono API, D1/R2 data layer, admin panel, i18n, deploy pipeline",
+      "effect": "live client site on one Cloudflare Worker, content edited without a redeploy",
+      "duration": "Oct–Nov 2026",
+      "problem": {
+        "heading": "Referrals alone give customers nothing to check",
+        "body": "The company finishes and renovates houses and flats, and every order comes from a personal referral. A referred customer has no way to see the work before calling, and the company cannot reach new customers. It wants proof of its work online, to be found on Google, and a site the owner can update without a developer, all within the free tiers of Cloudflare."
+      },
+      "solution": {
+        "heading": "A showcase site with an admin panel behind it",
+        "body": "Visitors see the services, albums of finished jobs with a photo viewer, reviews and direct phone and e-mail contact, in Polish, German or English, in a light or dark theme. The owner logs into a Polish admin panel to manage albums, photos, reviews, services, news notices, site texts and language switches. A text missing in German or English falls back to Polish field by field, and a hidden album or service is a 404 on every public page."
+      },
+      "architecture": {
+        "body": "Nuxt 4 renders the pages on the server and Hono serves the API, both in one Cloudflare Worker, with D1 for data and R2 for photos. Pages read D1 on every request, so an edit is live within a minute. The browser compresses each photo to WebP before upload, which keeps image work off the Worker's CPU limit. The code is a pnpm workspace of server logic, shared pure code, a UI kit and the Nuxt app, with import rules enforced by ESLint. Admin access is one account, a JWT cookie, an Origin check and a login rate limit."
+      },
+      "lessons": [
+        "The free Worker CPU limit decided the design: photo processing moved to the browser and the server only checks the result, which kept the whole site at zero running cost.",
+        "Splitting the code into layers with import rules checked by the linter kept the rules (visibility, language fallback, ordering, storage limit) in one place instead of spread across handlers and pages."
+      ],
+      "gallery": {
+        "0": "The home page services section: bathrooms, interior finishing, attic conversions, plastering, painting and tiling",
+        "1": "The admin panel login, the only way into content management"
       }
     }
   }

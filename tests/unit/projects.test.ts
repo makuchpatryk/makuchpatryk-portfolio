@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { projects } from '../../app/data/projects'
 import type { Project } from '../../app/types/content'
@@ -71,6 +73,16 @@ describe('selection helpers', () => {
 
   it('every featured project has a detail page (home links to case studies)', () => {
     expect(featuredProjects(projects).every(p => p.detail)).toBe(true)
+  })
+
+  it('every media file a project points at exists in public/ (captions are WebVTT)', () => {
+    for (const p of projects) {
+      const { video, poster, captions, cover, gallery = [] } = p.media ?? {}
+      for (const file of [video, poster, captions, cover, ...gallery].filter((f): f is string => !!f)) {
+        expect(existsSync(join('public', file)), `${p.slug}: ${file}`).toBe(true)
+      }
+      if (captions) expect(readFileSync(join('public', captions), 'utf8').startsWith('WEBVTT')).toBe(true)
+    }
   })
 
   it('has unique slugs and orders', () => {

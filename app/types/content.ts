@@ -34,6 +34,9 @@ export type Tag
     | 'go'
     | 'mcp'
     | 'ffmpeg'
+    | 'hono'
+    | 'cloudflare'
+    | 'i18n'
 
 export interface Pipeline {
   ingest: string[]
@@ -45,6 +48,8 @@ export interface Pipeline {
 export interface ProjectMedia {
   video?: string
   poster?: string
+  /** English WebVTT captions for `video`, path relative to `public/` */
+  captions?: string
   cover?: string
   gallery?: string[]
 }

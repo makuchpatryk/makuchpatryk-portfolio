@@ -87,7 +87,7 @@ test.describe('tag filter', () => {
     await page.goto('projects')
     const cards = page.getByRole('article')
     const total = await cards.count()
-    expect(total).toBe(10)
+    expect(total).toBe(11)
 
     await page.getByRole('button', { name: 'vue', exact: true }).click()
     await expect(page).toHaveURL(/tag=vue/)
@@ -108,7 +108,7 @@ test.describe('tag filter', () => {
     const context = await browser.newContext({ javaScriptEnabled: false })
     const page = await context.newPage()
     await page.goto('http://localhost:' + (process.env.PORT || 4173) + (process.env.E2E_BASE || '/') + 'projects')
-    await expect(page.getByRole('article')).toHaveCount(10)
+    await expect(page.getByRole('article')).toHaveCount(11)
     await context.close()
   })
 })
@@ -167,6 +167,16 @@ test.describe('keyboard', () => {
 })
 
 test.describe('media', () => {
+  test('robak-remonty video has an English captions track and loads lazily', async ({ page }) => {
+    await page.goto('projects/robak-remonty')
+    await expect(page.locator('video')).toHaveAttribute('preload', 'none')
+    const track = page.locator('video track[kind="captions"][srclang="en"]')
+    await expect(track).toHaveCount(1)
+    const src = await track.getAttribute('src')
+    const res = await page.request.get(new URL(src!, page.url()).href)
+    expect(res.status()).toBe(200)
+  })
+
   test('detail page shows the video slot (placeholder until a demo video is configured)', async ({ page }) => {
     await page.goto('projects/ai-book-chat')
     await expect(page.getByText('demo.mp4')).toBeVisible()
@@ -175,5 +185,22 @@ test.describe('media', () => {
       await expect(videos.first()).toHaveAttribute('preload', 'none')
       await expect(videos.first()).toHaveAttribute('playsinline', '')
     }
+  })
+})
+
+test.describe('image lightbox', () => {
+  test('opens full screen, zooms, closes with Escape', async ({ page }) => {
+    await page.goto('projects/robak-remonty')
+    await page.getByRole('button', { name: /open image|otwórz obraz/i }).first().click()
+    const dialog = page.getByRole('dialog')
+    await expect(dialog).toBeVisible()
+
+    const img = dialog.locator('img')
+    const fitWidth = (await img.boundingBox())!.width
+    await dialog.getByRole('button', { name: /zoom in|powiększ/i }).click()
+    expect((await img.boundingBox())!.width).toBeGreaterThan(fitWidth)
+
+    await page.keyboard.press('Escape')
+    await expect(dialog).toBeHidden()
   })
 })

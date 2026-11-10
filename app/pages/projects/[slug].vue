@@ -95,7 +95,7 @@ usePageSeo(() => ({
 
     <section class="border-b border-border">
       <div class="container-page py-10 md:py-16">
-        <ProjectVideoPlayer :src="p.media?.video" :poster="p.media?.poster" :title="p.title" />
+        <ProjectVideoPlayer :src="p.media?.video" :poster="p.media?.poster" :captions="p.media?.captions" :title="p.title" />
       </div>
     </section>
 

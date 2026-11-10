@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00.070 --> 00:12.600
+This is a showcase website I built for K&R Robak Remonty, a renovation company from Małopolska in Poland. What you see is a local copy, filled with sample content and generated placeholder photos.
+
+00:14.110 --> 00:18.390
+The site comes in Polish, German and English. Here is the German version.
+
+00:19.890 --> 00:24.730
+And English. A text missing in a language falls back to Polish, field by field.
+
+00:26.230 --> 00:29.110
+Visitors can switch between a light and a dark theme.
+
+00:31.110 --> 00:36.580
+The services section lists the six kinds of work the company does, and each one has its own page.
+
+00:38.090 --> 00:42.600
+Below are albums of finished jobs. Every album in this recording is a sample.
+
+00:44.100 --> 00:46.560
+Opening an album shows its photo viewer.
+
+00:46.580 --> 00:49.180
+Visitors can step through the photos with the arrows,
+
+00:50.180 --> 00:52.380
+jump to any photo from the thumbnails,
+
+00:53.380 --> 00:55.210
+or open one in full screen.
+
+00:57.240 --> 01:04.180
+Now the other side: the admin panel, which the owner uses alone. It is in Polish. This is the list of albums.
+
+01:06.180 --> 01:08.160
+Adding an album starts with a title.
+
+01:11.600 --> 01:18.700
+One click creates it. Photos are compressed to WebP in the browser before they are uploaded, which keeps the server within the free tier.
+
+01:23.210 --> 01:28.510
+An album with photos can be edited: captions, their order and which photo is the cover.
+
+01:32.080 --> 01:36.620
+A switch decides whether visitors can see the album. I will hide this one and save.
+
+01:38.870 --> 01:45.640
+The public list is already updated. There is no redeploy, because the pages read the database on every request.
+
+01:48.140 --> 01:52.750
+The general settings hold the language switches and the contact data shown on the site.
+
+01:56.880 --> 02:04.020
+The whole project runs on one Cloudflare Worker, with D1 for the data and R2 for the photos, at no running cost.

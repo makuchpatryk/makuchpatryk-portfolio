@@ -141,5 +141,24 @@ export const projects: Project[] = [
       gallery: ['images/first-million/setup.webp', 'images/first-million/margin-call.webp']
     },
     meta: { year: 2026, type: 'personal' }
+  },
+  {
+    slug: 'robak-remonty',
+    featured: false,
+    order: 11,
+    category: 'full-stack',
+    tags: ['typescript', 'nuxt', 'hono', 'cloudflare', 'i18n'],
+    stack: ['Nuxt 4', 'Hono', 'Cloudflare Workers', 'D1', 'R2', 'TypeScript'],
+    // the repo is private, so no code link
+    links: { demo: 'https://remontyrobak.com' },
+    detail: true,
+    media: {
+      video: 'videos/robak-remonty.mp4',
+      poster: 'images/robak-remonty/poster.webp',
+      captions: 'videos/robak-remonty.en.vtt',
+      cover: 'images/robak-remonty/cover.webp',
+      gallery: ['images/robak-remonty/services.webp', 'images/robak-remonty/admin.webp']
+    },
+    meta: { year: 2026, type: 'commercial' }
   }
 ]
