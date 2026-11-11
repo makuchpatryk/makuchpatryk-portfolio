@@ -145,7 +145,7 @@ usePageSeo(() => ({
     <section v-if="!gallery || moreImages.length" class="border-b border-border">
       <div class="container-page flex flex-col gap-6 py-12 md:py-[88px]">
         <h2 class="font-mono text-[13px] font-normal text-accent">{{ t('project.gallery') }}</h2>
-        <ProjectGallery :slug="p.slug" :images="gallery ? moreImages : []" :placeholders="3" />
+        <ProjectGallery :slug="p.slug" :images="gallery ? moreImages : []" :offset="shots?.length ?? 0" :placeholders="3" />
       </div>
     </section>
 

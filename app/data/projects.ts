@@ -42,7 +42,13 @@ export const projects: Project[] = [
     detail: true,
     media: {
       cover: 'images/perplex-image/cover.webp',
-      gallery: ['images/perplex-image/play.webp', 'images/perplex-image/picker.webp']
+      gallery: [
+        'images/perplex-image/play.webp',
+        'images/perplex-image/picker.webp',
+        'images/perplex-image/grid.webp',
+        'images/perplex-image/preview.webp',
+        'images/perplex-image/pause.webp'
+      ]
     },
     meta: { year: 2024, type: 'personal' }
   },
@@ -98,7 +104,12 @@ export const projects: Project[] = [
     detail: true,
     media: {
       cover: 'images/match-colours/cover.webp',
-      gallery: ['images/match-colours/game.webp']
+      gallery: [
+        'images/match-colours/levels.webp',
+        'images/match-colours/easy.webp',
+        'images/match-colours/game.webp',
+        'images/match-colours/hard.webp'
+      ]
     },
     meta: { year: 2024, type: 'personal' }
   },
@@ -113,7 +124,13 @@ export const projects: Project[] = [
     detail: true,
     media: {
       cover: 'images/sudoku/cover.webp',
-      gallery: ['images/sudoku/start.webp', 'images/sudoku/board.webp']
+      gallery: [
+        'images/sudoku/start.webp',
+        'images/sudoku/board.webp',
+        'images/sudoku/levels.webp',
+        'images/sudoku/hard.webp',
+        'images/sudoku/pencil.webp'
+      ]
     },
     meta: { year: 2024, type: 'personal' }
   },
@@ -130,7 +147,13 @@ export const projects: Project[] = [
       video: 'videos/screencaster.mp4',
       poster: 'images/screencaster/poster.webp',
       cover: 'images/screencaster/cover.webp',
-      gallery: ['images/screencaster/script.webp', 'images/screencaster/render.webp']
+      gallery: [
+        'images/screencaster/script.webp',
+        'images/screencaster/render.webp',
+        'images/screencaster/progress.webp',
+        'images/screencaster/output.webp',
+        'images/screencaster/tour.webp'
+      ]
     },
     meta: { year: 2026, type: 'personal' }
   },
@@ -147,7 +170,13 @@ export const projects: Project[] = [
       video: 'videos/first-million.mp4',
       poster: 'images/first-million/poster.webp',
       cover: 'images/first-million/cover.webp',
-      gallery: ['images/first-million/setup.webp', 'images/first-million/margin-call.webp']
+      gallery: [
+        'images/first-million/setup.webp',
+        'images/first-million/margin-call.webp',
+        'images/first-million/trade-open.webp',
+        'images/first-million/trade-history.webp',
+        'images/first-million/stake.webp'
+      ]
     },
     meta: { year: 2026, type: 'personal' }
   },
@@ -170,7 +199,8 @@ export const projects: Project[] = [
         'images/robak-remonty/services.webp',
         'images/robak-remonty/admin.webp',
         'images/robak-remonty/hero.webp',
-        'images/robak-remonty/contact.webp'
+        'images/robak-remonty/contact.webp',
+        'images/robak-remonty/dark.webp'
       ]
     },
     meta: { year: 2026, type: 'commercial' }

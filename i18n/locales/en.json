@@ -335,7 +335,10 @@
       ],
       "gallery": {
         "0": "A puzzle in progress: shuffled tiles, move counter and timer",
-        "1": "Choosing the picture to turn into a puzzle"
+        "1": "Choosing the picture to turn into a puzzle",
+        "2": "The medium 15×23 grid, with the same controls",
+        "3": "Preview shows the finished picture without leaving the game",
+        "4": "Pause hides the tiles so the timer cannot be gamed"
       }
     },
     "ai-semantic-db": {
@@ -426,7 +429,10 @@
         "A game this small still benefits from tests; later projects such as PerplexImage add Vitest and Playwright coverage."
       ],
       "gallery": {
-        "0": "The game board: bottles to put in the right order, with time, tries and correct matches"
+        "0": "Starting a game: the level picker, with easy, medium and hard",
+        "1": "Easy level: three bottles to put in the right order",
+        "2": "Medium level: six bottles, with time, tries and correct matches",
+        "3": "Hard level: nine bottles"
       }
     },
     "sudoku": {
@@ -452,7 +458,10 @@
       ],
       "gallery": {
         "0": "The start screen: pick a name and a difficulty level",
-        "1": "The board: timer, trial counter, pencil notes and live validation"
+        "1": "The board: timer, trial counter, pencil notes and live validation",
+        "2": "Four difficulty levels: easy, medium, hard and extremal",
+        "3": "A hard board, with fewer digits given",
+        "4": "Pencil mode switched on, for marking candidate digits in a cell"
       }
     },
     "screencaster": {
@@ -478,7 +487,10 @@
       ],
       "gallery": {
         "0": "The YAML script, typed in the terminal: one step per action, with optional narration",
-        "1": "One command renders it: narration, recording and assembly run step by step"
+        "1": "One command renders it: narration, recording and assembly run step by step",
+        "2": "Mid-render: each step of the script is logged as it runs",
+        "3": "A frame of the finished video: the intro card",
+        "4": "Another frame: the narrated tour of the portfolio"
       }
     },
     "first-million": {
@@ -504,7 +516,10 @@
       ],
       "gallery": {
         "0": "Setup: starting capital, goal and round length",
-        "1": "Margin call: equity falls to zero and the round ends"
+        "1": "Margin call: equity falls to zero and the round ends",
+        "2": "Trading screen with an open position, buy, close and sell buttons and size picker",
+        "3": "Recent trades listed with their result, while the clock keeps running",
+        "4": "Single play and rooms: a round is set by a stake and a goal"
       }
     },
     "robak-remonty": {
@@ -532,7 +547,8 @@
         "0": "The home page services section: bathrooms, interior finishing, attic conversions, plastering, painting and tiling",
         "1": "The admin panel login, the only way into content management",
         "2": "The home page hero: headline, phone and e-mail calls to action",
-        "3": "Contact section with both phone numbers and the e-mail address"
+        "3": "Contact section with both phone numbers and the e-mail address",
+        "4": "The same page in the dark theme"
       }
     }
   }
