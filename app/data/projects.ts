@@ -40,7 +40,10 @@ export const projects: Project[] = [
     stack: ['Nuxt 3', 'TypeScript', 'Pinia', 'Tailwind', 'Supabase', 'Vitest', 'Playwright'],
     links: { demo: 'https://perplex-image.vercel.app', code: 'https://github.com/CodingCru/perplex-image' },
     detail: true,
-    media: { cover: 'images/perplex-image/cover.webp' },
+    media: {
+      cover: 'images/perplex-image/cover.webp',
+      gallery: ['images/perplex-image/play.webp', 'images/perplex-image/picker.webp']
+    },
     meta: { year: 2024, type: 'personal' }
   },
   {
@@ -93,7 +96,10 @@ export const projects: Project[] = [
     stack: ['Nuxt 3', 'Vue 3'],
     links: { demo: 'https://match-colours.vercel.app', code: 'https://github.com/makuchpatryk/MatchColours' },
     detail: true,
-    media: { cover: 'images/match-colours/cover.webp' },
+    media: {
+      cover: 'images/match-colours/cover.webp',
+      gallery: ['images/match-colours/game.webp']
+    },
     meta: { year: 2024, type: 'personal' }
   },
   {
@@ -105,7 +111,10 @@ export const projects: Project[] = [
     stack: ['Next.js', 'React', 'TypeScript'],
     links: { demo: 'https://makuchpatryk.github.io/sudoku/', code: 'https://github.com/makuchpatryk/sudoku' },
     detail: true,
-    media: { cover: 'images/sudoku/cover.webp' },
+    media: {
+      cover: 'images/sudoku/cover.webp',
+      gallery: ['images/sudoku/start.webp', 'images/sudoku/board.webp']
+    },
     meta: { year: 2024, type: 'personal' }
   },
   {
@@ -157,7 +166,12 @@ export const projects: Project[] = [
       poster: 'images/robak-remonty/poster.webp',
       captions: 'videos/robak-remonty.en.vtt',
       cover: 'images/robak-remonty/cover.webp',
-      gallery: ['images/robak-remonty/services.webp', 'images/robak-remonty/admin.webp']
+      gallery: [
+        'images/robak-remonty/services.webp',
+        'images/robak-remonty/admin.webp',
+        'images/robak-remonty/hero.webp',
+        'images/robak-remonty/contact.webp'
+      ]
     },
     meta: { year: 2026, type: 'commercial' }
   }
