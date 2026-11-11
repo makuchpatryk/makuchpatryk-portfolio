@@ -335,7 +335,10 @@
       ],
       "gallery": {
         "0": "Układanka w trakcie gry: przemieszane kafelki, licznik ruchów i czas",
-        "1": "Wybór obrazka, z którego powstaje układanka"
+        "1": "Wybór obrazka, z którego powstaje układanka",
+        "2": "Średnia siatka 15×23 z tymi samymi przyciskami",
+        "3": "Podgląd pokazuje gotowy obrazek bez wychodzenia z gry",
+        "4": "Pauza ukrywa kafelki, żeby nie dało się oszukać czasu"
       }
     },
     "ai-semantic-db": {
@@ -426,7 +429,10 @@
         "Nawet tak mała gra zyskuje na testach; późniejsze projekty, jak PerplexImage, mają już pokrycie Vitest i Playwright."
       ],
       "gallery": {
-        "0": "Plansza gry: butelki do ułożenia we właściwej kolejności, z czasem, próbami i trafieniami"
+        "0": "Start gry: wybór poziomu, łatwy, średni lub trudny",
+        "1": "Poziom łatwy: trzy butelki do ułożenia we właściwej kolejności",
+        "2": "Poziom średni: sześć butelek, z czasem, próbami i trafieniami",
+        "3": "Poziom trudny: dziewięć butelek"
       }
     },
     "sudoku": {
@@ -452,7 +458,10 @@
       ],
       "gallery": {
         "0": "Ekran startowy: wybór imienia i poziomu trudności",
-        "1": "Plansza: czas, licznik prób, notatki ołówkiem i walidacja na bieżąco"
+        "1": "Plansza: czas, licznik prób, notatki ołówkiem i walidacja na bieżąco",
+        "2": "Cztery poziomy trudności: łatwy, średni, trudny i ekstremalny",
+        "3": "Plansza na poziomie trudnym, z mniejszą liczbą podanych cyfr",
+        "4": "Włączony tryb ołówka do zaznaczania kandydatów w komórce"
       }
     },
     "screencaster": {
@@ -478,7 +487,10 @@
       ],
       "gallery": {
         "0": "Skrypt YAML wpisywany w terminalu: jeden krok na akcję, z opcjonalną narracją",
-        "1": "Jedno polecenie renderuje całość: narracja, nagranie i montaż krok po kroku"
+        "1": "Jedno polecenie renderuje całość: narracja, nagranie i montaż krok po kroku",
+        "2": "W trakcie renderu: każdy krok skryptu jest logowany na bieżąco",
+        "3": "Klatka gotowego wideo: karta otwierająca",
+        "4": "Kolejna klatka: opowiedziana wycieczka po portfolio"
       }
     },
     "first-million": {
@@ -504,7 +516,10 @@
       ],
       "gallery": {
         "0": "Ustawienia: kapitał startowy, cel i długość rundy",
-        "1": "Margin call: kapitał spada do zera i runda się kończy"
+        "1": "Margin call: kapitał spada do zera i runda się kończy",
+        "2": "Ekran handlu z otwartą pozycją, przyciski kupna, zamknięcia i sprzedaży oraz wybór wielkości",
+        "3": "Ostatnie transakcje z wynikiem, podczas gdy czas wciąż płynie",
+        "4": "Gra pojedyncza i pokoje: rundę wyznacza stawka i cel"
       }
     },
     "robak-remonty": {
@@ -532,7 +547,8 @@
         "0": "Sekcja usług na stronie głównej: łazienki, wykończenia wnętrz, adaptacja poddaszy, szpachlowanie, malowanie i flizy",
         "1": "Logowanie do panelu admina, jedyna droga do zarządzania treścią",
         "2": "Górna część strony głównej: nagłówek oraz przyciski telefonu i e-maila",
-        "3": "Sekcja kontaktowa z oboma numerami telefonu i adresem e-mail"
+        "3": "Sekcja kontaktowa z oboma numerami telefonu i adresem e-mail",
+        "4": "Ta sama strona w ciemnym motywie"
       }
     }
   }

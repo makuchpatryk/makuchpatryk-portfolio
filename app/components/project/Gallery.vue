@@ -5,7 +5,9 @@ const props = withDefaults(defineProps<{
   /** how many placeholder tiles to show when there are no images */
   placeholders?: number
   cols?: 2 | 3
-}>(), { images: () => [], placeholders: 3, cols: 3 })
+  /** index of the first image within the project's full gallery, so captions line up */
+  offset?: number
+}>(), { images: () => [], placeholders: 3, cols: 3, offset: 0 })
 
 const { t, te } = useI18n()
 const publicUrl = usePublicUrl()
@@ -14,7 +16,7 @@ const tiles = computed(() =>
   props.images.length
     ? props.images.map((src, i) => ({
         src,
-        caption: te(`projects.${props.slug}.gallery.${i}`) ? t(`projects.${props.slug}.gallery.${i}`) : ''
+        caption: te(`projects.${props.slug}.gallery.${props.offset + i}`) ? t(`projects.${props.slug}.gallery.${props.offset + i}`) : ''
       }))
     : Array.from({ length: props.placeholders }, () => ({ src: '', caption: t('project.galleryCaption') }))
 )
