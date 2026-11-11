@@ -332,7 +332,11 @@
       "lessons": [
         "Keeping game logic in its own module, apart from generic UI components, keeps it testable with plain unit tests.",
         "The image source sits behind an adapter, so Pexels and Supabase storage are interchangeable for the game."
-      ]
+      ],
+      "gallery": {
+        "0": "A puzzle in progress: shuffled tiles, move counter and timer",
+        "1": "Choosing the picture to turn into a puzzle"
+      }
     },
     "ai-semantic-db": {
       "title": "Semantic DB",
@@ -420,7 +424,10 @@
       "lessons": [
         "Putting state in stores and reusable logic in composables keeps the pages thin.",
         "A game this small still benefits from tests; later projects such as PerplexImage add Vitest and Playwright coverage."
-      ]
+      ],
+      "gallery": {
+        "0": "The game board: bottles to put in the right order, with time, tries and correct matches"
+      }
     },
     "sudoku": {
       "title": "Sudoku",
@@ -442,7 +449,11 @@
       "lessons": [
         "Reducers and context keep the board state in one place, away from the cell components.",
         "A static export on GitHub Pages is enough hosting for a client-side game."
-      ]
+      ],
+      "gallery": {
+        "0": "The start screen: pick a name and a difficulty level",
+        "1": "The board: timer, trial counter, pencil notes and live validation"
+      }
     },
     "screencaster": {
       "title": "Screencaster",
@@ -519,7 +530,9 @@
       ],
       "gallery": {
         "0": "The home page services section: bathrooms, interior finishing, attic conversions, plastering, painting and tiling",
-        "1": "The admin panel login, the only way into content management"
+        "1": "The admin panel login, the only way into content management",
+        "2": "The home page hero: headline, phone and e-mail calls to action",
+        "3": "Contact section with both phone numbers and the e-mail address"
       }
     }
   }

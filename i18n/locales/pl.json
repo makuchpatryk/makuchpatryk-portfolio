@@ -332,7 +332,11 @@
       "lessons": [
         "Trzymanie logiki gry w osobnym module, oddzielnie od generycznych komponentów UI, pozwala testować ją zwykłymi testami jednostkowymi.",
         "Źródło obrazów jest schowane za adapterem, więc Pexels i storage Supabase są dla gry wymienne."
-      ]
+      ],
+      "gallery": {
+        "0": "Układanka w trakcie gry: przemieszane kafelki, licznik ruchów i czas",
+        "1": "Wybór obrazka, z którego powstaje układanka"
+      }
     },
     "ai-semantic-db": {
       "title": "Semantic DB",
@@ -420,7 +424,10 @@
       "lessons": [
         "Stan w storach, a logika wielokrotnego użytku w composables, utrzymuje cienkie strony.",
         "Nawet tak mała gra zyskuje na testach; późniejsze projekty, jak PerplexImage, mają już pokrycie Vitest i Playwright."
-      ]
+      ],
+      "gallery": {
+        "0": "Plansza gry: butelki do ułożenia we właściwej kolejności, z czasem, próbami i trafieniami"
+      }
     },
     "sudoku": {
       "title": "Sudoku",
@@ -442,7 +449,11 @@
       "lessons": [
         "Reducery i kontekst trzymają stan planszy w jednym miejscu, z dala od komponentów komórek.",
         "Statyczny eksport na GitHub Pages w zupełności wystarcza jako hosting gry działającej po stronie klienta."
-      ]
+      ],
+      "gallery": {
+        "0": "Ekran startowy: wybór imienia i poziomu trudności",
+        "1": "Plansza: czas, licznik prób, notatki ołówkiem i walidacja na bieżąco"
+      }
     },
     "screencaster": {
       "title": "Screencaster",
@@ -519,7 +530,9 @@
       ],
       "gallery": {
         "0": "Sekcja usług na stronie głównej: łazienki, wykończenia wnętrz, adaptacja poddaszy, szpachlowanie, malowanie i flizy",
-        "1": "Logowanie do panelu admina, jedyna droga do zarządzania treścią"
+        "1": "Logowanie do panelu admina, jedyna droga do zarządzania treścią",
+        "2": "Górna część strony głównej: nagłówek oraz przyciski telefonu i e-maila",
+        "3": "Sekcja kontaktowa z oboma numerami telefonu i adresem e-mail"
       }
     }
   }
