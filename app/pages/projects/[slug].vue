@@ -93,7 +93,7 @@ usePageSeo(() => ({
       </div>
     </header>
 
-    <section class="border-b border-border">
+    <section v-if="p.media?.video" class="border-b border-border">
       <div class="container-page py-10 md:py-16">
         <ProjectVideoPlayer :src="p.media?.video" :poster="p.media?.poster" :captions="p.media?.captions" :title="p.title" />
       </div>
@@ -115,7 +115,7 @@ usePageSeo(() => ({
             <p class="font-mono text-[13px] text-accent">02 / {{ t('project.sections.solution') }}</p>
             <h2 class="text-[1.75rem] font-semibold tracking-[-0.025em] md:text-[34px]">{{ t(`${base}.solution.heading`) }}</h2>
             <p class="text-[17px] leading-[1.75] text-text-2">{{ t(`${base}.solution.body`) }}</p>
-            <ProjectGallery :slug="p.slug" :images="shots" :placeholders="2" :cols="2" />
+            <ProjectGallery :slug="p.slug" :images="shots ?? []" :cols="2" />
           </section>
 
           <section id="architecture" class="flex flex-col gap-4">
@@ -142,10 +142,10 @@ usePageSeo(() => ({
       </div>
     </section>
 
-    <section v-if="!gallery || moreImages.length" class="border-b border-border">
+    <section v-if="moreImages.length" class="border-b border-border">
       <div class="container-page flex flex-col gap-6 py-12 md:py-[88px]">
         <h2 class="font-mono text-[13px] font-normal text-accent">{{ t('project.gallery') }}</h2>
-        <ProjectGallery :slug="p.slug" :images="gallery ? moreImages : []" :offset="shots?.length ?? 0" :placeholders="3" />
+        <ProjectGallery :slug="p.slug" :images="moreImages" :offset="shots?.length ?? 0" />
       </div>
     </section>
 

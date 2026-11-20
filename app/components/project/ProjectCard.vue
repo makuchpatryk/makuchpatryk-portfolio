@@ -26,12 +26,6 @@ const detailPath = computed(() => localePath({ name: 'projects-slug', params: { 
       loading="lazy"
       class="aspect-video w-full rounded-lg border border-border object-cover"
     />
-    <div
-      v-else
-      class="gridbg hidden aspect-video items-center justify-center rounded-lg border border-border font-mono text-[13px] text-faint md:flex"
-    >
-      {{ t('projectCard.visualPlaceholder') }}
-    </div>
     <component :is="as" class="text-[22px] font-semibold tracking-[-0.02em] md:text-2xl">
       <NuxtLink v-if="project.detail" :to="detailPath" class="transition-colors hover:text-accent">{{ project.title }}</NuxtLink>
       <template v-else>{{ project.title }}</template>

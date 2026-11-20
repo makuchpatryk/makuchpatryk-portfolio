@@ -1,18 +1,18 @@
 {
   "meta": {
     "home": {
-      "title": "Patryk Makuch — Inżynier AI / Inżynier Oprogramowania",
-      "description": "Portfolio Patryka Makucha, Software Engineera budującego systemy backendowe i platformy API z użyciem narzędzi AI. Wybrane projekty, doświadczenie i CV."
+      "title": "Patryk Makuch — Inżynier Oprogramowania",
+      "description": "Portfolio Patryka Makucha, Software Engineera budującego systemy backendowe i platformy API. Wybrane projekty, doświadczenie i CV."
     },
     "projects": {
       "title": "Projekty — Patryk Makuch",
-      "description": "Wszystkie projekty: RAG, AI workflows i aplikacje full-stack. Filtruj według technologii."
+      "description": "Wszystkie projekty: systemy backendowe, full-stack i narzędzia. Filtruj według technologii."
     },
     "notFound": {
       "title": "Nie znaleziono strony — Patryk Makuch",
       "description": "Ta strona nie istnieje."
     },
-    "ogHomeSubtitle": "AI Engineer / Software Engineer",
+    "ogHomeSubtitle": "Software Engineer",
     "ogProjectsSubtitle": "Projekty"
   },
   "a11y": {
@@ -44,9 +44,8 @@
   "hero": {
     "status": "open to work · {city} / zdalnie",
     "statusShort": "open to work · zdalnie",
-    "role1": "AI Engineer",
-    "role2": "Software Engineer",
-    "tagline": "Dostarczam oprogramowanie od A do Z — od designu przez frontend, backend po DevOps — i korzystam z narzędzi AI, żeby dowozić szybciej bez ścinania zakrętów.",
+    "role": "Software Engineer",
+    "tagline": "Dostarczam oprogramowanie od A do Z — od designu przez frontend, backend po DevOps — i dowożę szybciej, bez ścinania zakrętów.",
     "viewProjects": "zobacz projekty →",
     "github": "github ↗",
     "linkedin": "linkedin ↗",
@@ -54,7 +53,7 @@
     "terminal": {
       "title": "zsh — ~/{handle}",
       "whoami": "whoami",
-      "whoamiOut": "AI / Software Engineer",
+      "whoamiOut": "Software Engineer",
       "catStack": "cat stack.yaml"
     }
   },
@@ -91,9 +90,7 @@
     "caseStudy": "case study →",
     "details": "szczegóły →",
     "viewAll": "wszystkie projekty →",
-    "visualPlaceholder": "[screenshot / schemat]",
-    "pipelineTitle": "architektura / {label}",
-    "pipelinePlaceholder": "[podmień na schemat swojego projektu]"
+    "pipelineTitle": "architektura / {label}"
   },
   "categories": {
     "rag": "rag",
@@ -128,7 +125,7 @@
   "projectsPage": {
     "eyebrow": "~/projekty",
     "title": "Projekty",
-    "lead": "RAG, AI workflows i systemy full-stack. Filtruj według technologii.",
+    "lead": "Systemy, które projektuję i buduję — od backendu po full-stack. Filtruj według technologii.",
     "filterLabel": "Filtruj według tagu",
     "all": "wszystkie",
     "count": "Projekty: {count}",
@@ -147,7 +144,6 @@
     "liveDemo": "live demo ↗",
     "codeOnGithub": "kod na github ↗",
     "videoFile": "demo.mp4",
-    "videoPlaceholder": "[wideo demo: nagranie ekranu 1–3 min]",
     "videoLabel": "Wideo demo: {title}",
     "videoFallback": "Twoja przeglądarka nie odtwarza tego wideo.",
     "captionsLabel": "angielski",
@@ -163,10 +159,7 @@
     "architectureHeading": "Jak to działa",
     "resultsHeading": "Efekt",
     "lessonsHeading": "Czego się nauczyłem",
-    "screenshotPlaceholder": "[screenshot {n}]",
     "gallery": "galeria",
-    "galleryPlaceholder": "[zdjęcie]",
-    "galleryCaption": "[podpis]",
     "imageOpen": "otwórz obraz: {caption}",
     "imageViewer": "podgląd obrazu",
     "imageZoomIn": "powiększ",
@@ -186,7 +179,7 @@
       "bullets": [
         "Buduję endpointy platformy i funkcje backendowe w Pythonie/FastAPI oraz testy end-to-end pokrywające pełne ścieżki żądań.",
         "Refaktoryzuję komponenty wspólnej biblioteki UI i utrzymuję dokumentację Storybook dla współdzielonych produktów wewnętrznych.",
-        "Używam narzędzi AI na co dzień, by przyspieszyć dostarczanie i podnieść jakość code review."
+        "Używam nowoczesnych narzędzi programistycznych na co dzień, by przyspieszyć dostarczanie i podnieść jakość code review."
       ]
     },
     "coldrun": {
@@ -195,7 +188,7 @@
       "location": "Warszawa",
       "bullets": [
         "Zaprojektowałem scentralizowaną platformę API gateway — JWT auth, wersjonowanie, rate limiting i polityki bezpieczeństwa — z odpornymi integracjami opartymi na retry.",
-        "Zaprojektowałem moduł zarządzania zamówieniami ze 100+ konfigurowalnymi parametrami.",
+        "Zaprojektowałem i zbudowałem konfigurowalny moduł zarządzania zamówieniami ze 100+ parametrami, w tym złożone wieloetapowe formularze, z wyraźnym podziałem odpowiedzialności między warstwę UI, walidację i logikę biznesową.",
         "Poprowadziłem migrację Vue 2 → Vue 3 i współtworzyłem design system (PrimeVue + Tailwind) wdrożony w 3 aplikacjach wewnętrznych."
       ]
     },
@@ -218,7 +211,6 @@
     },
     "items": {
       "llmApi": "Integracje LLM API",
-      "agents": "AI workflows i agenci",
       "embeddings": "Embeddingi, bazy wektorowe",
       "llmEval": "Ewaluacja LLM",
       "rag": "RAG",
@@ -238,19 +230,19 @@
     }
   },
   "about": {
-    "lead": "Starszy inżynier oprogramowania z 9+ latami doświadczenia w budowie systemów backendowych i platform API — dziś łączący to z codziennym używaniem LLM-ów i narzędzi AI, by projektować, sprawdzać i dowozić szybciej.",
-    "body": "Prowadziłem usługi od A do Z: bramki API, schematy PostgreSQL, backendy w NestJS/FastAPI, Docker i pipeline'y CI/CD. Na co dzień dochodzą do tego eksperymenty z AI i workflowy wspierane przez LLM — od oceny odpowiedzi modeli po narzędzia AI jako codzienny element pracy w całym stacku.",
+    "lead": "Starszy inżynier oprogramowania z 9+ latami doświadczenia w budowie systemów backendowych i platform API — dziś projektuję, sprawdzam i dowożę szybciej dzięki nowoczesnym narzędziom programistycznym.",
+    "body": "Prowadziłem usługi od A do Z: bramki API, schematy PostgreSQL, backendy w Pythonie i TypeScripcie, Docker i pipeline'y CI/CD. Na co dzień dochodzą do tego eksperymenty z nowymi narzędziami i workflowami — od oceny ich wyników po nowoczesne narzędzia programistyczne jako codzienny element pracy w całym stacku.",
     "photoPlaceholder": "[twoje zdjęcie]",
     "now": "obecnie",
     "nowValue": "Senior Software Engineer w The Codest — buduję funkcje full-stack.",
     "looking": "szukam",
-    "lookingValue": "roli Software Engineera, gdzie mogę odpowiadać za realny produkt od A do Z, z narzędziami AI jako częścią warsztatu.",
+    "lookingValue": "roli Software Engineera, gdzie mogę odpowiadać za realny produkt od A do Z, z nowoczesnymi narzędziami jako częścią warsztatu.",
     "outside": "poza kodem",
     "outsideValue": "Górskie szlaki i poranne bieganie — najlepsze debugowanie dzieje się z dala od ekranu."
   },
   "contact": {
     "headingA": "Zbudujmy coś",
-    "headingB": "z",
+    "headingB": "solidnego",
     "headingEnd": ".",
     "mail": "mail",
     "github": "github ↗",
@@ -345,100 +337,6 @@
         "2": "Średnia siatka 15×23 z tymi samymi przyciskami",
         "3": "Podgląd pokazuje gotowy obrazek bez wychodzenia z gry",
         "4": "Pauza ukrywa kafelki, żeby nie dało się oszukać czasu"
-      }
-    },
-    "ai-semantic-db": {
-      "title": "Semantic DB",
-      "summary": "CLI do lokalnego wyszukiwania semantycznego w twoich danych strukturalnych: definiujesz schemat, dodajesz rekordy i szukasz zwykłym językiem. Bez chmury i kluczy API.",
-      "role": "projekt i implementacja: model schematu, CLI, embeddingi, testy",
-      "effect": "rekordy są przeszukiwalne od razu po zapisaniu",
-      "duration": "sie – wrz 2026",
-      "problem": {
-        "heading": "Wyszukiwanie semantyczne bez usługi w chmurze",
-        "body": "Istniejące narzędzia do wyszukiwania semantycznego działają w chmurze albo są związane z jednym źródłem danych. Celem było zdefiniowanie własnej struktury, trzymanie danych na własnej maszynie i szukanie po znaczeniu, a nie po słowach kluczowych."
-      },
-      "solution": {
-        "heading": "Kolekcje sterowane schematem z lokalnymi embeddingami",
-        "body": "Kolekcję definiuje się zwięzłą gramatyką pól, np. price:float:embed:unit=PLN, obsługującą typy text, enum, int, float, bool, date i tablice stringów. Każdy rekord jest renderowany do jednej sformatowanej karty tekstowej i przy zapisie osadzany modelem bge-m3 przez Ollama, więc dodany znaczy przeszukiwalny. Wyszukiwanie to cosinusowe top-k z tabelą Rich i trybem --explain; odmawia działania, gdy kolekcję osadzono innym modelem, bo odległości między modelami nic nie znaczą."
-      },
-      "architecture": {
-        "body": "CLI w Pythonie 3.12 na Typer, w warstwach: domain, application (porty i przypadki użycia), infrastructure (SQLAlchemy, Alembic, klient Ollama) i cli, a kontrakty import-linter pilnują, by zależności szły do środka. Rekordy to payloady JSONB w PostgreSQL 17 z pgvector (halfvec 1024), więc schemat zmienia się bez DDL dla każdej kolekcji. Zapisy to przypadki użycia; odczyty przechodzą przez jedną fasadę zapytań."
-      },
-      "lessons": [
-        "Payloady JSONB zamiast tabel dla każdej kolekcji kosztują trochę szybkości, ale dają dużo prostsze migracje i dowolne schematy.",
-        "Zapisywanie dokładnie wyrenderowanego tekstu obok każdego wektora chroni przed cichym rozjazdem, gdy szablon zmieni się po utworzeniu embeddingów."
-      ]
-    },
-    "quiz-forge": {
-      "title": "Quiz Forge",
-      "summary": "Aplikacja quizowa full stack: użytkownicy przeglądają i rozwiązują quizy, a admini zarządzają treścią w panelu. Monorepo w TypeScript z Nuxt 4 i NestJS.",
-      "role": "full stack: API w NestJS, frontend w Nuxt, auth, testy",
-      "effect": "auth JWT z dostępem opartym na rolach i udokumentowane REST API",
-      "duration": "mar 2026",
-      "problem": {
-        "heading": "Quizy potrzebują strony gracza i strony admina",
-        "body": "Aplikacja quizowa ma dwie grupy odbiorców: graczy, którzy przeglądają, rozwiązują i wysyłają odpowiedzi, oraz adminów, którzy tworzą zestawy pytań. Każda potrzebuje własnych reguł dostępu i własnych ekranów."
-      },
-      "solution": {
-        "heading": "Platforma quizowa oparta na rolach",
-        "body": "Użytkownicy logują się tokenami JWT (access i refresh) trzymanymi w ciasteczkach HTTP-only. Admini tworzą quizy z pytaniami i opcjami odpowiedzi; gracze wybierają quiz, rozwiązują go i wysyłają odpowiedzi. Guardy po stronie serwera pilnują ról admina i użytkownika, listy quizów są stronicowane, a API opisuje Swagger. Interfejs ma polską wersję językową."
-      },
-      "architecture": {
-        "body": "Monorepo Turborepo + pnpm. apps/backend to REST API w NestJS na TypeORM i PostgreSQL 15 z modułami auth, quiz i user; apps/frontend to aplikacja Nuxt 4 oparta na warstwach (core, base, auth) z Tailwind i Pinia. Wspólne DTO leżą w paczce shared-types. Vitest pokrywa testy jednostkowe, Playwright przepływy end-to-end, a Docker Compose uruchamia bazę."
-      },
-      "lessons": [
-        "Wspólne DTO w TypeScripcie w jednej paczce utrzymują spójne kontrakty frontendu i backendu.",
-        "Podział aplikacji Nuxt na warstwy core, base i auth oddziela layouty i i18n od stron funkcjonalnych."
-      ]
-    },
-    "lean-track": {
-      "title": "LeanTrack",
-      "summary": "Tracker kalorii i makroskładników: ustawiasz cele, zapisujesz posiłki w dzienniku dnia i śledzisz postępy. Frontend w Vue 3, API w Fastify, PostgreSQL.",
-      "role": "full stack: API w Fastify, frontend w Vue, baza danych",
-      "effect": "dziennik, produkty i cele za uwierzytelnionym API",
-      "duration": "maj 2026",
-      "problem": {
-        "heading": "Śledzenie odżywiania bez tarcia",
-        "body": "Trzymanie się planu oznacza codzienny podgląd kalorii i makroskładników na tle celów, przy jak najmniejszym wysiłku przy zapisywaniu posiłku."
-      },
-      "solution": {
-        "heading": "Cele, produkty i dzienny dziennik",
-        "body": "Użytkownicy rejestrują się i logują, ustawiają cele żywieniowe, zarządzają listą produktów i dodają wpisy do dziennika żywieniowego. API udostępnia endpointy auth, products, diary i goals, a frontend jest zorganizowany według tych samych funkcji."
-      },
-      "architecture": {
-        "body": "Monorepo pnpm z backendem Fastify + TypeORM (moduły funkcjonalne auth, diary, products i goals; konfiguracja środowiska, JWT i bazy; migracje) oraz frontendem Vue 3 + Vite podzielonym na features, kod współdzielony i router. PostgreSQL działa w Docker Compose. Obie aplikacje używają TypeScript strict, ESLint, Prettier i Vitest."
-      },
-      "lessons": [
-        "Odzwierciedlenie modułów backendu we frontendowych features ułatwia znalezienie każdej funkcji po obu stronach.",
-        "PRD, specyfikacja techniczna i diagramy przepływów użytkownika leżą w docs/ obok kodu, więc intencja każdego modułu pozostaje udokumentowana."
-      ]
-    },
-    "match-colours": {
-      "title": "Match Colours",
-      "summary": "Gra pamięciowa na kolory: klikasz kolory w kolejności, w jakiej się pojawiły, by przejść poziom wyżej. Trudność rośnie, a wyniki są zapisywane.",
-      "role": "projekt i implementacja w Nuxt 3",
-      "effect": "grywalna w przeglądarce na ekranie dowolnej wielkości",
-      "duration": "maj 2024 – maj 2026",
-      "problem": {
-        "heading": "Mała gra do ćwiczenia struktury prawdziwej aplikacji",
-        "body": "Match Colours powstało dla zabawy i nauki: prosty pomysł z wystarczającą ilością stanu (sekwencje, poziomy, wyniki), by ćwiczyć strukturę aplikacji w Nuxt."
-      },
-      "solution": {
-        "heading": "Zapamiętaj sekwencję i powtórz ją po kolei",
-        "body": "Gracz widzi sekwencję kolorów i klika je w tej samej kolejności, by przejść dalej. Kolejne poziomy przynoszą trudniejsze sekwencje, wyniki są zapisywane między podejściami, a układ jest responsywny."
-      },
-      "architecture": {
-        "body": "Aplikacja Nuxt 3 i Vue 3 złożona ze stron, komponentów, composables, storów i tras serwerowych, wdrożona na Vercel."
-      },
-      "lessons": [
-        "Stan w storach, a logika wielokrotnego użytku w composables, utrzymuje cienkie strony.",
-        "Nawet tak mała gra zyskuje na testach; późniejsze projekty, jak PerplexImage, mają już pokrycie Vitest i Playwright."
-      ],
-      "gallery": {
-        "0": "Start gry: wybór poziomu, łatwy, średni lub trudny",
-        "1": "Poziom łatwy: trzy butelki do ułożenia we właściwej kolejności",
-        "2": "Poziom średni: sześć butelek, z czasem, próbami i trafieniami",
-        "3": "Poziom trudny: dziewięć butelek"
       }
     },
     "sudoku": {

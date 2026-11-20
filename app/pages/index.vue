@@ -12,7 +12,7 @@ usePageSeo(() => ({
 useSchemaOrg([
   definePerson({
     name: site.name,
-    jobTitle: 'AI Engineer / Software Engineer',
+    jobTitle: 'Software Engineer',
     email: site.email,
     sameAs: [site.links.github, site.links.linkedin]
   })

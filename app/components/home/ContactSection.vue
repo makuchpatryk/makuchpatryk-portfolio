@@ -10,7 +10,7 @@ const { t } = useI18n()
       <span class="font-mono text-[13px] text-accent md:text-sm">{{ t('sections.contact.eyebrow') }}</span>
       <h2 class="text-balance text-[2.75rem] font-semibold leading-none tracking-[-0.04em] md:text-7xl xl:text-[6rem]">
         {{ t('contact.headingA') }}<br>
-        {{ t('contact.headingB') }} <span class="text-accent">AI</span>{{ t('contact.headingEnd') }}
+        <span class="text-accent">{{ t('contact.headingB') }}</span>{{ t('contact.headingEnd') }}
       </h2>
       <a
         :href="`mailto:${site.email}`"

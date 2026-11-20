@@ -41,17 +41,12 @@ app/data/projects.ts (8 entries) ─┬─> nuxt.config.ts detailPaths ─> 16 p
 | 1 | `ai-book-chat` | ✓ | rag | 2026 | rag, python, fastapi, pgvector, celery, ollama, react | Python, FastAPI, PostgreSQL + pgvector, Celery + Redis, Ollama, Groq, React 19, TypeScript | code `makuchpatryk/ai-book-chat` |
 | 2 | `blind-clue` | ✓ | full-stack | 2026 | typescript, vue, fastify, websockets, sqlite, multiplayer, game | TypeScript, Vue 3, Pinia, Fastify, Socket.io, SQLite | demo `https://blind-clue.xyz`, code `makuchpatryk/BlindClue` |
 | 3 | `perplex-image` | ✓ | full-stack | 2024 | typescript, nuxt, supabase, pinia, playwright, game, puzzle | Nuxt 3, TypeScript, Pinia, Tailwind, Supabase, Vitest, Playwright | demo `https://perplex-image.vercel.app`, code `CodingCru/perplex-image` |
-| 4 | `ai-semantic-db` | | rag | 2026 | rag, python, pgvector, ollama, cli, docker | Python 3.12, Typer, SQLAlchemy, Alembic, PostgreSQL + pgvector, Ollama (bge-m3) | code `makuchpatryk/ai-semantic-db` |
-| 5 | `quiz-forge` | | full-stack | 2026 | typescript, nuxt, nestjs, postgres, turborepo, playwright, education | Nuxt 4, NestJS, TypeORM, PostgreSQL, Turborepo, Docker | code `makuchpatryk/quiz-forge` |
-| 6 | `lean-track` | | full-stack | 2026 | typescript, vue, fastify, postgres, docker, jwt, nutrition | Vue 3, Fastify, TypeORM, PostgreSQL, Docker | code `makuchpatryk/lean-track` |
-| 7 | `match-colours` | | full-stack | 2024 | vue, nuxt, game | Nuxt 3, Vue 3 | demo `https://match-colours.vercel.app`, code `makuchpatryk/MatchColours` |
 | 8 | `sudoku` | | full-stack | 2024 | typescript, nextjs, react, game, puzzle | Next.js, React, TypeScript | demo `https://makuchpatryk.github.io/sudoku/`, code `makuchpatryk/sudoku` |
 
 All `detail: true`, `meta.type: 'personal'`, no `media` (placeholders render). Slugs kebab-case to match route style.
 
 **Pipelines** (only `rag` projects — the ingest/query rows are RAG-shaped; full-stack detail pages simply skip the section, as the old `fullstack-platform` did):
 - `ai-book-chat`: ingest `documents → parsing → chunking → embeddings → pgvector`; query `question → rewrite → retrieval → rerank → llm → ui`; highlight `pgvector, rerank`.
-- `ai-semantic-db`: ingest `schema → records → embeddings → pgvector`; query `question → embeddings → retrieval → cli`; highlight `pgvector`.
 
 **Metrics** (3 per project; keys + drafted labels, values stay `[value]` until owner sends numbers):
 
@@ -60,10 +55,6 @@ All `detail: true`, `meta.type: 'personal'`, no `media` (placeholders render). S
 | ai-book-chat | `ingest` time to READY for an N-page book · `latency` time to first token · `tests` automated tests |
 | blind-clue | `players` players per room · `events` realtime socket events · `tests` automated tests |
 | perplex-image | `levels` difficulty levels / max tiles · `tests` unit + e2e tests · `commits` commits |
-| ai-semantic-db | `search` query time on N records · `fieldTypes` supported field types · `tests` automated tests |
-| quiz-forge | `endpoints` API endpoints · `tests` unit + e2e tests · `packages` workspace packages |
-| lean-track | `modules` backend modules · `endpoints` API endpoints · `tests` automated tests |
-| match-colours | `levels` levels · `bundle` JS bundle size · `lighthouse` Lighthouse score |
 | sudoku | `difficulties` difficulty levels · `bundle` JS bundle size · `lighthouse` Lighthouse score |
 
 Owner can swap any key; keys are just i18n paths.

@@ -13,9 +13,7 @@ const detailPath = computed(() => localePath({ name: 'projects-slug', params: { 
       <template v-if="project.pipeline">
         <span class="text-muted">{{ t('projectCard.pipelineTitle', { label: t(`pipeline.label.${project.category}`) }) }}</span>
         <ProjectPipelineDiagram :pipeline="project.pipeline" />
-        <span class="text-faint">{{ t('projectCard.pipelinePlaceholder') }}</span>
       </template>
-      <span v-else class="text-faint">{{ t('projectCard.visualPlaceholder') }}</span>
     </div>
     <div class="flex flex-col gap-[18px] p-5 md:p-9 lg:col-span-5 lg:pl-3">
       <span class="font-mono text-[13px] text-accent">{{ t('projectCard.featured') }}</span>

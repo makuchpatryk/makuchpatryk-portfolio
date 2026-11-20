@@ -18,7 +18,7 @@ const projectsLink = computed(() => `${localePath('/')}#projects`)
         </p>
         <h1 class="text-balance text-[2.5rem] font-semibold leading-[1.05] tracking-[-0.035em] md:text-6xl xl:text-[4.75rem] xl:leading-[1.02]">
           {{ site.name }}<br>
-          <span class="text-accent">{{ t('hero.role1') }}</span> <span class="text-faint" aria-hidden="true">/</span> {{ t('hero.role2') }}
+          <span class="text-accent">{{ t('hero.role') }}</span>
         </h1>
         <p class="max-w-[600px] text-base leading-[1.6] text-muted lg:text-[19px]">{{ t('hero.tagline') }}</p>
         <div class="flex flex-col gap-2.5 font-mono text-sm sm:flex-row sm:flex-wrap sm:gap-3.5 lg:text-[15px]">

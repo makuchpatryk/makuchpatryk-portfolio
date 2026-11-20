@@ -64,67 +64,6 @@ export const projects: Project[] = [
     meta: { year: 2024, type: 'personal' }
   },
   {
-    slug: 'ai-semantic-db',
-    featured: false,
-    order: 5,
-    category: 'rag',
-    tags: ['rag', 'python', 'pgvector', 'ollama', 'cli', 'docker'],
-    stack: ['Python 3.12', 'Typer', 'SQLAlchemy', 'Alembic', 'PostgreSQL + pgvector', 'Ollama (bge-m3)'],
-    links: { code: 'https://github.com/makuchpatryk/ai-semantic-db' },
-    detail: true,
-    media: { cover: 'images/ai-semantic-db/cover.webp' },
-    meta: { year: 2026, type: 'personal' },
-    pipeline: {
-      ingest: ['schema', 'records', 'embeddings', 'pgvector'],
-      query: ['question', 'embeddings', 'retrieval', 'cli'],
-      highlight: ['pgvector']
-    }
-  },
-  {
-    slug: 'quiz-forge',
-    featured: false,
-    order: 6,
-    category: 'full-stack',
-    tags: ['typescript', 'nuxt', 'nestjs', 'postgres', 'turborepo', 'playwright', 'education'],
-    stack: ['Nuxt 4', 'NestJS', 'TypeORM', 'PostgreSQL', 'Turborepo', 'Docker'],
-    links: { code: 'https://github.com/makuchpatryk/quiz-forge' },
-    detail: true,
-    media: { cover: 'images/quiz-forge/cover.webp' },
-    meta: { year: 2026, type: 'personal' }
-  },
-  {
-    slug: 'lean-track',
-    featured: false,
-    order: 7,
-    category: 'full-stack',
-    tags: ['typescript', 'vue', 'fastify', 'postgres', 'docker', 'jwt', 'nutrition'],
-    stack: ['Vue 3', 'Fastify', 'TypeORM', 'PostgreSQL', 'Docker'],
-    links: { code: 'https://github.com/makuchpatryk/lean-track' },
-    detail: true,
-    media: { cover: 'images/lean-track/cover.webp' },
-    meta: { year: 2026, type: 'personal' }
-  },
-  {
-    slug: 'match-colours',
-    featured: false,
-    order: 8,
-    category: 'full-stack',
-    tags: ['vue', 'nuxt', 'game'],
-    stack: ['Nuxt 3', 'Vue 3'],
-    links: { demo: 'https://match-colours.vercel.app', code: 'https://github.com/makuchpatryk/MatchColours' },
-    detail: true,
-    media: {
-      cover: 'images/match-colours/cover.webp',
-      gallery: [
-        'images/match-colours/levels.webp',
-        'images/match-colours/easy.webp',
-        'images/match-colours/game.webp',
-        'images/match-colours/hard.webp'
-      ]
-    },
-    meta: { year: 2024, type: 'personal' }
-  },
-  {
     slug: 'sudoku',
     featured: false,
     order: 9,

@@ -2,23 +2,19 @@
 const props = withDefaults(defineProps<{
   slug: string
   images?: string[]
-  /** how many placeholder tiles to show when there are no images */
-  placeholders?: number
   cols?: 2 | 3
   /** index of the first image within the project's full gallery, so captions line up */
   offset?: number
-}>(), { images: () => [], placeholders: 3, cols: 3, offset: 0 })
+}>(), { images: () => [], cols: 3, offset: 0 })
 
 const { t, te } = useI18n()
 const publicUrl = usePublicUrl()
 
 const tiles = computed(() =>
-  props.images.length
-    ? props.images.map((src, i) => ({
-        src,
-        caption: te(`projects.${props.slug}.gallery.${props.offset + i}`) ? t(`projects.${props.slug}.gallery.${props.offset + i}`) : ''
-      }))
-    : Array.from({ length: props.placeholders }, () => ({ src: '', caption: t('project.galleryCaption') }))
+  props.images.map((src, i) => ({
+    src,
+    caption: te(`projects.${props.slug}.gallery.${props.offset + i}`) ? t(`projects.${props.slug}.gallery.${props.offset + i}`) : ''
+  }))
 )
 
 const dialog = ref<HTMLDialogElement>()
@@ -42,10 +38,9 @@ function onBackdrop(e: MouseEvent) {
 </script>
 
 <template>
-  <ul class="grid gap-4" :class="cols === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'">
+  <ul v-if="tiles.length" class="grid gap-4" :class="cols === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'">
     <li v-for="(tile, i) in tiles" :key="i" class="flex flex-col gap-2.5">
       <button
-        v-if="tile.src"
         type="button"
         class="cursor-zoom-in rounded-[10px]"
         :aria-label="t('project.imageOpen', { caption: tile.caption || String(i + 1) })"
@@ -60,12 +55,6 @@ function onBackdrop(e: MouseEvent) {
           class="aspect-video w-full rounded-[10px] border border-border object-cover"
         />
       </button>
-      <div
-        v-else
-        class="flex aspect-video items-center justify-center rounded-[10px] border border-dashed border-border-strong bg-surface font-mono text-[13px] text-muted"
-      >
-        {{ cols === 2 ? t('project.screenshotPlaceholder', { n: i + 1 }) : t('project.galleryPlaceholder') }}
-      </div>
       <p v-if="tile.caption" class="text-sm text-muted">{{ tile.caption }}</p>
     </li>
   </ul>
