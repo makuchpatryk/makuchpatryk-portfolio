@@ -193,8 +193,14 @@ test.describe('media', () => {
     await expect(page.locator('video track')).toHaveCount(0)
   })
 
-  test('detail page without a demo video hides the video section', async ({ page }) => {
+  test('perplex-image video loads lazily and has no captions track', async ({ page }) => {
     await page.goto('projects/perplex-image')
+    await expect(page.locator('video')).toHaveAttribute('preload', 'none')
+    await expect(page.locator('video track')).toHaveCount(0)
+  })
+
+  test('detail page without a demo video hides the video section', async ({ page }) => {
+    await page.goto('projects/sudoku')
     await expect(page.locator('video')).toHaveCount(0)
     await expect(page.getByText('demo.mp4')).toHaveCount(0)
   })

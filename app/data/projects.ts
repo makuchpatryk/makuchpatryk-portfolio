@@ -62,6 +62,8 @@ export const projects: Project[] = [
     links: { demo: 'https://perplex-image.vercel.app', code: 'https://github.com/CodingCru/perplex-image' },
     detail: true,
     media: {
+      video: 'videos/perplex-image.mp4',
+      poster: 'images/perplex-image/poster.webp',
       cover: 'images/perplex-image/cover.webp',
       gallery: [
         'images/perplex-image/play.webp',

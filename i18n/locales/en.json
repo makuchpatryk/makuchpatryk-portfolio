@@ -328,14 +328,14 @@
       },
       "solution": {
         "heading": "Tile puzzles on three difficulty levels",
-        "body": "Players choose an image from the Pexels API, pick a level (9×13, 15×23 or 20×30 tiles) and drag pieces into place while a timer and a move counter run. The game can be paused and reset, and it shows progress. Pinia holds the game state; a Nitro server route proxies Pexels so the API key stays on the server, and an adapter for Supabase storage exists next to the Pexels one."
+        "body": "Players choose an image from Supabase storage, pick a level (9, 15 or 18 tile columns) and drag pieces into place while a timer and a move counter run. The game can be paused and reset, and it shows progress. Pinia holds the image list and the chosen picture; Nitro server routes read the images from Supabase through an adapter, so the service key stays on the server."
       },
       "architecture": {
         "body": "Nuxt 3 with the Vue 3 Composition API, split into modules: core (shared utilities, store, types), game (pages, components, logic) and ui (generic components). Server routes under /server/api fetch images behind an adapter interface. Vitest covers units, Playwright covers end-to-end flows and Husky pre-commit hooks run the linter."
       },
       "lessons": [
         "Keeping game logic in its own module, apart from generic UI components, keeps it testable with plain unit tests.",
-        "The image source sits behind an adapter, so Pexels and Supabase storage are interchangeable for the game."
+        "The image source sits behind an adapter, so another source could replace Supabase storage without touching the game."
       ],
       "gallery": {
         "0": "A puzzle in progress: shuffled tiles, move counter and timer",

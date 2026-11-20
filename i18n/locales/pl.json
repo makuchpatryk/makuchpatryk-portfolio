@@ -328,14 +328,14 @@
       },
       "solution": {
         "heading": "Puzzle z kafelków na trzech poziomach trudności",
-        "body": "Gracz wybiera obraz z API Pexels, ustawia poziom (9×13, 15×23 lub 20×30 kafelków) i przeciąga elementy na miejsce, gdy działa stoper i licznik ruchów. Grę można wstrzymać i zresetować, a widać też postęp. Stan gry trzyma Pinia; trasa serwerowa Nitro pośredniczy w zapytaniach do Pexels, więc klucz API zostaje na serwerze, a obok adaptera Pexels jest adapter do storage’u Supabase."
+        "body": "Gracz wybiera obraz ze storage’u Supabase, ustawia poziom (9, 15 lub 18 kolumn kafelków) i przeciąga elementy na miejsce, gdy działa stoper i licznik ruchów. Grę można wstrzymać i zresetować, a widać też postęp. Pinia trzyma listę obrazów i wybrany obrazek; trasy serwerowe Nitro czytają obrazy z Supabase przez adapter, więc klucz serwisowy zostaje na serwerze."
       },
       "architecture": {
         "body": "Nuxt 3 z Composition API Vue 3, podzielony na moduły: core (wspólne narzędzia, store, typy), game (strony, komponenty, logika) i ui (komponenty generyczne). Trasy serwerowe w /server/api pobierają obrazy przez interfejs adaptera. Vitest pokrywa testy jednostkowe, Playwright przepływy end-to-end, a hooki pre-commit Husky uruchamiają linter."
       },
       "lessons": [
         "Trzymanie logiki gry w osobnym module, oddzielnie od generycznych komponentów UI, pozwala testować ją zwykłymi testami jednostkowymi.",
-        "Źródło obrazów jest schowane za adapterem, więc Pexels i storage Supabase są dla gry wymienne."
+        "Źródło obrazów jest schowane za adapterem, więc inne źródło mogłoby zastąpić storage Supabase bez ruszania gry."
       ],
       "gallery": {
         "0": "Układanka w trakcie gry: przemieszane kafelki, licznik ruchów i czas",
