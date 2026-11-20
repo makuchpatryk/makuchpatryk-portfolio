@@ -288,7 +288,13 @@
       "lessons": [
         "Embeddingów celowo nie da się podmienić: kolumna wektorowa ma stałą szerokość, więc inny model to migracja i ponowny import. Aplikacja nie startuje, gdy skonfigurowane wymiary nie zgadzają się z kolumną, zamiast zwracać wyniki, które wyglądają wiarygodnie, ale nic nie znaczą.",
         "Pytania uzupełniające, jak „a co z jego bratem?”, działają tylko dzięki krokowi przepisywania; samo wyszukiwanie nie widzi kontekstu. Poza zakresem na razie: zapytania między dokumentami, OCR skanów i konta użytkowników."
-      ]
+      ],
+      "gallery": {
+        "0": "Odpowiedź o różnicy między fine-tuningiem a prompt engineeringiem, ze strukturą i cytatami",
+        "1": "Cytaty stron w odpowiedzi, np. p.416-418, wskazują miejsce w książce",
+        "2": "Biblioteka dokumentów z okładkami, liczbą stron i statusem przetwarzania",
+        "3": "Przegląd książki: opis, sekcje i konwersacje w jednym widoku"
+      }
     },
     "blind-clue": {
       "title": "BlindClue",

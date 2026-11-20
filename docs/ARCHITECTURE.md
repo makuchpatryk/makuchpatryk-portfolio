@@ -143,7 +143,7 @@ Pure logic (`app/utils/projects.ts`) has no Nuxt imports, so Vitest tests it dir
 - **Nav anchors**: section links are `localePath('/') + '#projects'` etc., so they also work from other pages.
 - **Home** is one page of sections (`projects`, `experience`, `stack`, `about`, `contact`) matching the design boards; there are no separate `/about` or `/stack` routes.
 - **Detail page**: header meta grid, video slot, sticky table of contents (IntersectionObserver highlights the current section), five sections, gallery, prev/next among detail projects.
-- **Media**: `VideoPlayer` renders `<video preload="none" playsinline controls>` with a `usePublicUrl` source when `media.video` is set, else a placeholder. When `media.captions` is set it adds an English `<track kind="captions">` (not `default`, label from `project.captionsLabel`); the `.vtt` is a separate file next to the video, and the site MP4 carries no embedded subtitle stream (`encode-video.sh` passes `-sn`). `PhotoFrame`, `ProjectCard` and `Gallery` use `NuxtImg` when an image path exists and placeholders otherwise.
+- **Media**: `VideoPlayer` renders `<video preload="none" playsinline controls>` with a `usePublicUrl` source when `media.video` is set; the detail page omits the whole video section otherwise. When `media.captions` is set it adds an English `<track kind="captions">` (not `default`, label from `project.captionsLabel`); the `.vtt` is a separate file next to the video, and the site MP4 carries no embedded subtitle stream (`encode-video.sh` passes `-sn`). `ProjectCard` and `Gallery` use `NuxtImg` when an image path exists and render nothing otherwise (`Gallery` renders no list without images). `PhotoFrame` keeps its placeholder text.
 
 ## 9. Hydration and performance
 
@@ -206,4 +206,4 @@ The placeholder gate warns on a branch and fails the build on a `release*` tag. 
 | Explicit per-locale sitemaps | automatic locale split is wrong under a base path |
 | pnpm `allowBuilds` in `pnpm-workspace.yaml` | pnpm 11 blocks dependency build scripts (esbuild, sharp, resvg) unless allowed |
 
-Known limitations: no `robots.txt` on a project-page subpath (only valid at a domain root); mobile Lighthouse performance is gated at 0.75, not 0.95 (see §9); demo videos exist for `screencaster`, `first-million` and `robak-remonty`, the other projects still show the placeholder slot.
+Known limitations: no `robots.txt` on a project-page subpath (only valid at a domain root); mobile Lighthouse performance is gated at 0.75, not 0.95 (see §9); demo videos exist for `screencaster`, `first-million`, `robak-remonty` and `ai-book-chat`, the other projects have no video section.

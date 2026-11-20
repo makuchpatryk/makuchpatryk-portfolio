@@ -288,7 +288,13 @@
       "lessons": [
         "Embeddings are deliberately not switchable: the vector column has a fixed width, so another model means a migration and a re-ingest. The app refuses to start when the configured dimensions and the column disagree, instead of returning plausible but meaningless results.",
         "Follow-up questions like \"and what about his brother?\" only work because of the rewrite step; retrieval alone sees no context. Still out of scope: cross-document queries, OCR for scanned PDFs and accounts."
-      ]
+      ],
+      "gallery": {
+        "0": "An answer on fine-tuning versus prompt engineering, with structure and page citations",
+        "1": "Page citations in the answer, such as p.416-418, point to the place in the book",
+        "2": "The document library with covers, page counts and processing status",
+        "3": "The book overview: description, sections and conversations in one view"
+      }
     },
     "blind-clue": {
       "title": "BlindClue",

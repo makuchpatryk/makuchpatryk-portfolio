@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00.070 --> 00:10.160
+This is AI Book Chat, a local app that answers questions about a PDF and points to the pages it used. The book here is AI Engineering by Chip Huyen, already processed.
+
+00:12.760 --> 00:15.970
+Each book gets an overview and its own conversations.
+
+00:18.490 --> 00:21.750
+I start a new chat. Questions are scoped to this one book.
+
+00:21.770 --> 00:23.580
+I ask in plain language.
+
+00:26.970 --> 00:33.930
+The question is rewritten into a search query, matched with pgvector, re-ranked by an LLM, and the answer streams in.
+
+00:42.950 --> 00:47.290
+The page references in the answer point back to the book, so every claim can be checked.
+
+00:50.800 --> 00:57.620
+The stack is Postgres with pgvector, Celery for ingestion, Ollama for embeddings, and Groq for the chat model.

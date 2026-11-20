@@ -10,7 +10,18 @@ export const projects: Project[] = [
     stack: ['Python', 'FastAPI', 'PostgreSQL + pgvector', 'Celery + Redis', 'Ollama', 'Groq', 'React 19', 'TypeScript'],
     links: { code: 'https://github.com/makuchpatryk/ai-book-chat' },
     detail: true,
-    media: { cover: 'images/ai-book-chat/cover.webp' },
+    media: {
+      video: 'videos/ai-book-chat.mp4',
+      poster: 'images/ai-book-chat/poster.webp',
+      captions: 'videos/ai-book-chat.en.vtt',
+      cover: 'images/ai-book-chat/cover.webp',
+      gallery: [
+        'images/ai-book-chat/chat.webp',
+        'images/ai-book-chat/citations.webp',
+        'images/ai-book-chat/library.webp',
+        'images/ai-book-chat/document.webp'
+      ]
+    },
     meta: { year: 2026, type: 'personal' },
     pipeline: {
       ingest: ['documents', 'parsing', 'chunking', 'embeddings', 'pgvector'],

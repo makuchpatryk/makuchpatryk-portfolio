@@ -177,14 +177,20 @@ test.describe('media', () => {
     expect(res.status()).toBe(200)
   })
 
-  test('detail page shows the video slot (placeholder until a demo video is configured)', async ({ page }) => {
+  test('ai-book-chat video has an English captions track and loads lazily', async ({ page }) => {
     await page.goto('projects/ai-book-chat')
-    await expect(page.getByText('demo.mp4')).toBeVisible()
-    const videos = page.locator('video')
-    if (await videos.count()) {
-      await expect(videos.first()).toHaveAttribute('preload', 'none')
-      await expect(videos.first()).toHaveAttribute('playsinline', '')
-    }
+    await expect(page.locator('video')).toHaveAttribute('preload', 'none')
+    const track = page.locator('video track[kind="captions"][srclang="en"]')
+    await expect(track).toHaveCount(1)
+    const src = await track.getAttribute('src')
+    const res = await page.request.get(new URL(src!, page.url()).href)
+    expect(res.status()).toBe(200)
+  })
+
+  test('detail page without a demo video hides the video section', async ({ page }) => {
+    await page.goto('projects/blind-clue')
+    await expect(page.locator('video')).toHaveCount(0)
+    await expect(page.getByText('demo.mp4')).toHaveCount(0)
   })
 })
 
