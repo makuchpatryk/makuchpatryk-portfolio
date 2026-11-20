@@ -292,23 +292,29 @@
       "title": "BlindClue",
       "summary": "Real-time multiplayer social deduction game: everyone gets the secret word except one player, who only gets a hint and has to blend in.",
       "role": "full stack: realtime backend, Vue frontend",
-      "effect": "full game loop from lobby to scoring over WebSockets",
+      "effect": "full game loop from lobby to the impostor's final guess over WebSockets",
       "duration": "May – Aug 2026",
       "problem": {
         "heading": "A party game needs everyone in the same moment",
-        "body": "The game only works if all players move through the same phases together: describe the word, vote, reveal. Each phase has to reach every player as it happens, and the scoring has to be decided in one place."
+        "body": "The game only works if all players move through the same phases together: describe the word, vote, reveal. Each phase has to reach every player as it happens, and the game state has to be kept in one place."
       },
       "solution": {
         "heading": "A server-authoritative game over Socket.io",
-        "body": "Two to four players join a lobby and play three rounds of describing the word without naming it, then vote on who the impostor is. Votes are revealed, and a caught impostor can still score by guessing the word. The server owns the game state and the scoring; clients send events such as joinGame, submitDescription and voteImpostor and react to GameStarted, VotingStarted, VotesRevealed and GameEnded."
+        "body": "Two to four players join a lobby. The first player becomes host; everyone after requests to join and waits for approval. The host starts the game. Over three rounds each player gives one clue in turn without naming the word, then the group votes on who the impostor is. A caught impostor gets one chance to guess the word. The game runs over Socket.io: the server keeps the game state and broadcasts each step, and the clients send the events that move the game on."
       },
       "architecture": {
         "body": "A pnpm monorepo: a Fastify + Socket.io + SQLite backend built in Clean Architecture layers (domain entities, use cases, application services, adapters) and a Vue 3 + Vite + Pinia + Tailwind frontend. Running games live in memory in a GameManager and are removed when they end; categories and words are managed through admin endpoints. The backend ships as a Docker image."
       },
       "lessons": [
         "Keeping running games only in memory keeps the model simple; the flip side is that a restart would end the games in progress.",
-        "Returning a Result from every operation makes failure paths explicit and easy to test, including the scoring cases for a caught and an uncaught impostor."
-      ]
+        "Returning a Result from every operation makes failure paths explicit and easy to test, including the caught and uncaught impostor branches."
+      ],
+      "gallery": {
+        "0": "Lobby: the host approves each join request and starts the game once everyone is in.",
+        "1": "Clue round: each player types one hint in turn; the impostor sees only the category.",
+        "2": "Vote: each player picks who they think the impostor is.",
+        "3": "Result: the vote count and the impostor's guess, with the word shown at the end."
+      }
     },
     "perplex-image": {
       "title": "PerplexImage",

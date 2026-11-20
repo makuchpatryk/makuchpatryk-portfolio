@@ -206,4 +206,4 @@ The placeholder gate warns on a branch and fails the build on a `release*` tag. 
 | Explicit per-locale sitemaps | automatic locale split is wrong under a base path |
 | pnpm `allowBuilds` in `pnpm-workspace.yaml` | pnpm 11 blocks dependency build scripts (esbuild, sharp, resvg) unless allowed |
 
-Known limitations: no `robots.txt` on a project-page subpath (only valid at a domain root); mobile Lighthouse performance is gated at 0.75, not 0.95 (see §9); demo videos exist for `screencaster`, `first-million`, `robak-remonty` and `ai-book-chat`, the other projects have no video section.
+Known limitations: no `robots.txt` on a project-page subpath (only valid at a domain root); mobile Lighthouse performance is gated at 0.75, not 0.95 (see §9); demo videos exist for `screencaster`, `first-million`, `robak-remonty`, `ai-book-chat` and `blind-clue` (silent, no captions track), the other projects have no video section.

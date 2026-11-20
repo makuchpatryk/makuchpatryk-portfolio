@@ -187,8 +187,14 @@ test.describe('media', () => {
     expect(res.status()).toBe(200)
   })
 
-  test('detail page without a demo video hides the video section', async ({ page }) => {
+  test('blind-clue video loads lazily and has no captions track', async ({ page }) => {
     await page.goto('projects/blind-clue')
+    await expect(page.locator('video')).toHaveAttribute('preload', 'none')
+    await expect(page.locator('video track')).toHaveCount(0)
+  })
+
+  test('detail page without a demo video hides the video section', async ({ page }) => {
+    await page.goto('projects/perplex-image')
     await expect(page.locator('video')).toHaveCount(0)
     await expect(page.getByText('demo.mp4')).toHaveCount(0)
   })

@@ -292,23 +292,29 @@
       "title": "BlindClue",
       "summary": "Wieloosobowa gra dedukcyjna w czasie rzeczywistym: wszyscy dostają tajne słowo poza jednym graczem, który ma tylko podpowiedź i musi się wtopić.",
       "role": "full stack: backend realtime, frontend w Vue",
-      "effect": "pełna pętla gry od lobby do punktacji przez WebSockets",
+      "effect": "pełna pętla gry od lobby do końcowego zgadywania impostora przez WebSockets",
       "duration": "maj – sie 2026",
       "problem": {
         "heading": "Gra imprezowa wymaga, by wszyscy byli w tym samym momencie",
-        "body": "Gra działa tylko wtedy, gdy wszyscy gracze przechodzą przez te same fazy razem: opis słowa, głosowanie, ujawnienie. Każda faza musi dotrzeć do każdego gracza na bieżąco, a punktacja musi być rozstrzygana w jednym miejscu."
+        "body": "Gra działa tylko wtedy, gdy wszyscy gracze przechodzą przez te same fazy razem: opis słowa, głosowanie, ujawnienie. Każda faza musi dotrzeć do każdego gracza na bieżąco, a stan gry musi być trzymany w jednym miejscu."
       },
       "solution": {
         "heading": "Gra sterowana przez serwer na Socket.io",
-        "body": "Od dwóch do czterech graczy dołącza do lobby i gra trzy rundy opisywania słowa bez jego wymieniania, po czym głosuje, kto jest impostorem. Głosy są ujawniane, a przyłapany impostor może jeszcze zdobyć punkty, zgadując słowo. Serwer jest właścicielem stanu gry i punktacji; klienci wysyłają zdarzenia, takie jak joinGame, submitDescription i voteImpostor, a reagują na GameStarted, VotingStarted, VotesRevealed i GameEnded."
+        "body": "Od dwóch do czterech graczy dołącza do lobby. Pierwszy gracz zostaje hostem; każdy kolejny prosi o dołączenie i czeka na zgodę. Host startuje grę. Przez trzy rundy każdy gracz po kolei podaje jedną podpowiedź bez wymieniania słowa, potem grupa głosuje, kto jest impostorem. Przyłapany impostor ma jedną szansę na zgadnięcie słowa. Gra działa przez Socket.io: serwer trzyma stan gry i rozsyła każdy krok, a klienty wysyłają zdarzenia, które posuwają grę dalej."
       },
       "architecture": {
         "body": "Monorepo pnpm: backend Fastify + Socket.io + SQLite zbudowany w warstwach Clean Architecture (encje domeny, przypadki użycia, serwisy aplikacji, adaptery) oraz frontend Vue 3 + Vite + Pinia + Tailwind. Trwające gry żyją w pamięci w GameManagerze i znikają po zakończeniu; kategorie i słowa zarządzane są endpointami administracyjnymi. Backend jest dostarczany jako obraz Dockera."
       },
       "lessons": [
         "Trzymanie trwających gier wyłącznie w pamięci upraszcza model; druga strona to fakt, że restart zakończyłby gry w toku.",
-        "Zwracanie Result z każdej operacji czyni ścieżki błędów jawnymi i łatwymi do testowania, także dla punktacji przy przyłapanym i nieprzyłapanym impostorze."
-      ]
+        "Zwracanie Result z każdej operacji czyni ścieżki błędów jawnymi i łatwymi do testowania, także dla ścieżki z przyłapanym i nieprzyłapanym impostorem."
+      ],
+      "gallery": {
+        "0": "Lobby: host zatwierdza każdą prośbę o dołączenie i startuje grę, gdy wszyscy są w środku.",
+        "1": "Runda wskazówek: każdy gracz po kolei wpisuje jedną podpowiedź; impostor widzi tylko kategorię.",
+        "2": "Głosowanie: każdy wskazuje, kto jego zdaniem jest impostorem.",
+        "3": "Wynik: liczba głosów i zgadywanie impostora, na końcu widać słowo."
+      }
     },
     "perplex-image": {
       "title": "PerplexImage",

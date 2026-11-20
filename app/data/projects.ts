@@ -39,7 +39,17 @@ export const projects: Project[] = [
     // blind-clue.xyz fails its TLS handshake (checked 2026-10-02), so no demo link until it is fixed
     links: { code: 'https://github.com/makuchpatryk/BlindClue' },
     detail: true,
-    media: { cover: 'images/blind-clue/cover.webp' },
+    media: {
+      video: 'videos/blind-clue.mp4',
+      poster: 'images/blind-clue/poster.webp',
+      cover: 'images/blind-clue/cover.webp',
+      gallery: [
+        'images/blind-clue/lobby.webp',
+        'images/blind-clue/clues.webp',
+        'images/blind-clue/voting.webp',
+        'images/blind-clue/result.webp'
+      ]
+    },
     meta: { year: 2026, type: 'personal' }
   },
   {
