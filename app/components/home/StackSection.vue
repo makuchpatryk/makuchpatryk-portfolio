@@ -12,10 +12,9 @@ const { t } = useI18n()
         <section
           v-for="group in stack"
           :key="group.id"
-          class="flex flex-col gap-4 rounded-xl border bg-surface p-6"
-          :class="group.focus ? 'border-accent' : 'border-border'"
+          class="flex flex-col gap-4 rounded-xl border border-border bg-surface p-6"
         >
-          <h3 class="font-mono text-[13px] font-normal" :class="group.focus ? 'text-accent' : 'text-muted'">
+          <h3 class="font-mono text-[13px] font-normal text-muted">
             {{ t(`stack.groups.${group.id}`) }}
           </h3>
           <ul class="flex flex-col gap-1 text-base leading-[1.9]">

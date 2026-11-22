@@ -226,7 +226,7 @@
   },
   "stack": {
     "groups": {
-      "ai": "ai / llm · główny focus",
+      "ai": "ai / llm",
       "backend": "backend",
       "cloud": "cloud / devops",
       "frontend": "frontend"

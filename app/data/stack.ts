@@ -4,7 +4,7 @@ export const stack: StackGroup[] = [
   { id: 'backend', items: ['python', 'fastapi', 'nodejs', 'nestjs', 'postgres'] },
   { id: 'cloud', items: ['aws', 'docker', 'cicd', 'git'] },
   { id: 'frontend', items: ['typescript', 'vue', 'nuxt', 'tailwind'] },
-  { id: 'ai', focus: true, items: ['llmApi', 'embeddings', 'llmEval', 'rag'] }
+  { id: 'ai', items: ['llmApi', 'embeddings', 'llmEval', 'rag'] }
 ]
 
 /** lines of the hero terminal (`cat stack.yaml`); tech names are not translated */

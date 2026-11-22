@@ -80,8 +80,6 @@ export interface Experience {
 
 export interface StackGroup {
   id: string
-  /** highlighted group (main focus) */
-  focus?: boolean
   /** keys under `stack.items.<key>` */
   items: string[]
 }
