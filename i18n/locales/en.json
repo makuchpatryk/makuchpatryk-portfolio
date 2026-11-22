@@ -137,6 +137,8 @@
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
     "fit": "Fit to width",
+    "fullscreen": "Open full screen",
+    "closeFullscreen": "Close full screen",
     "prev": "Previous page",
     "next": "Next page",
     "page": "{current} / {total}",

@@ -11,11 +11,32 @@ const linkLayer = ref<HTMLElement>()
 
 const { status, page, pageCount, zoomIn, zoomOut, fit, next, prev } = usePdfDocument(src, { container, canvas, textLayer, linkLayer })
 
+const fullscreen = ref(false)
+const toggleButton = ref<HTMLButtonElement>()
+
+async function setFullscreen(value: boolean) {
+  fullscreen.value = value
+  document.documentElement.style.overflow = value ? 'hidden' : ''
+  await nextTick()
+  toggleButton.value?.focus()
+}
+
+onBeforeUnmount(() => {
+  document.documentElement.style.overflow = ''
+})
+
 const buttonClass = 'inline-flex size-11 items-center justify-center rounded-md border border-border-strong font-mono text-lg transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-50'
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
+  <div
+    class="flex flex-col gap-4"
+    :class="fullscreen ? 'fixed inset-0 z-50 bg-bg p-3 md:p-6' : ''"
+    :role="fullscreen ? 'dialog' : undefined"
+    :aria-modal="fullscreen ? 'true' : undefined"
+    :aria-label="fullscreen ? t('cv.canvasLabel') : undefined"
+    @keydown.esc="fullscreen && setFullscreen(false)"
+  >
     <div class="flex flex-wrap items-center gap-2" role="toolbar" :aria-label="t('cv.eyebrow')">
       <button type="button" :class="buttonClass" :aria-label="t('cv.zoomOut')" :disabled="status !== 'ready'" @click="zoomOut">
         <span aria-hidden="true">−</span>
@@ -35,10 +56,20 @@ const buttonClass = 'inline-flex size-11 items-center justify-center rounded-md 
           <span aria-hidden="true">→</span>
         </button>
       </template>
+      <button
+        ref="toggleButton"
+        type="button"
+        :class="[buttonClass, 'ml-auto']"
+        :aria-label="fullscreen ? t('cv.closeFullscreen') : t('cv.fullscreen')"
+        :aria-pressed="fullscreen"
+        @click="setFullscreen(!fullscreen)"
+      >
+        <span aria-hidden="true">{{ fullscreen ? '✕' : '⛶' }}</span>
+      </button>
       <a
         :href="src"
         download
-        class="ml-auto inline-flex min-h-11 items-center rounded-md border border-accent px-4 font-mono text-sm text-accent transition-colors hover:bg-accent hover:text-accent-fg"
+        class="inline-flex min-h-11 items-center rounded-md border border-accent px-4 font-mono text-sm text-accent transition-colors hover:bg-accent hover:text-accent-fg"
       >
         {{ t('cv.download') }}
       </a>
@@ -48,8 +79,8 @@ const buttonClass = 'inline-flex size-11 items-center justify-center rounded-md 
       {{ t('cv.error') }}
     </p>
 
-    <div class="bg-surface-2 p-3 md:p-6">
-      <div ref="container" class="w-full overflow-x-auto">
+    <div class="bg-surface-2 p-3 md:p-6" :class="fullscreen ? 'min-h-0 flex-1 overflow-y-auto' : ''">
+      <div ref="container" class="mx-auto w-full overflow-x-auto" :class="fullscreen ? 'max-w-5xl' : ''">
         <div
           v-if="status === 'loading'"
           class="mx-auto aspect-[210/297] w-full max-w-3xl bg-surface motion-safe:animate-pulse noscript:hidden"
