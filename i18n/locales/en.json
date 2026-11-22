@@ -8,12 +8,17 @@
       "title": "Projects — Patryk Makuch",
       "description": "All projects: backend, full-stack and tooling systems. Filter by technology."
     },
+    "cv": {
+      "title": "CV — Patryk Makuch",
+      "description": "Read or download the CV of Patryk Makuch, Software Engineer building backend systems and API platforms."
+    },
     "notFound": {
       "title": "Page not found — Patryk Makuch",
       "description": "This page does not exist."
     },
     "ogHomeSubtitle": "Software Engineer",
-    "ogProjectsSubtitle": "Projects"
+    "ogProjectsSubtitle": "Projects",
+    "ogCvSubtitle": "CV"
   },
   "a11y": {
     "skip": "Skip to content",
@@ -30,7 +35,7 @@
     "stack": "stack",
     "about": "about_me",
     "contact": "contact",
-    "cv": "cv.pdf ↓",
+    "cv": "cv",
     "allProjects": "← all projects"
   },
   "theme": {
@@ -47,6 +52,7 @@
     "role": "Software Engineer",
     "tagline": "I deliver software end to end — from design through frontend, backend and DevOps — and ship faster without cutting corners.",
     "viewProjects": "view projects →",
+    "viewCv": "view CV →",
     "github": "github ↗",
     "linkedin": "linkedin ↗",
     "photoAlt": "Portrait of {name}",
@@ -121,6 +127,21 @@
       "cli": "CLI",
       "ui": "UI"
     }
+  },
+  "cv": {
+    "eyebrow": "cv",
+    "title": "Curriculum vitae",
+    "loading": "Loading CV…",
+    "error": "The CV could not be displayed here. Download it instead.",
+    "download": "download cv.pdf ↓",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "fit": "Fit to width",
+    "prev": "Previous page",
+    "next": "Next page",
+    "page": "{current} / {total}",
+    "canvasLabel": "CV of Patryk Makuch, rendered from cv.pdf",
+    "noscript": "Enable JavaScript to read the CV here, or download it."
   },
   "projectsPage": {
     "eyebrow": "~/projects",
@@ -247,7 +268,7 @@
     "mail": "mail",
     "github": "github ↗",
     "linkedin": "linkedin ↗",
-    "cv": "cv.pdf ↓"
+    "cv": "cv"
   },
   "footer": {
     "copyright": "© {year} {name}",

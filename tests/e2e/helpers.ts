@@ -8,6 +8,9 @@ export const locales = [
 /** paths relative to Playwright's baseURL (keeps the non-root base check working) */
 export const routes = ['', 'projects', 'projects/ai-book-chat', 'projects/blind-clue']
 
+/** English-only pages: no /pl counterpart, so they are not crossed with locales */
+export const enOnlyRoutes = ['cv']
+
 export async function setTheme(page: Page, theme: 'dark' | 'light') {
   await page.addInitScript(value => localStorage.setItem('theme', value), theme)
 }

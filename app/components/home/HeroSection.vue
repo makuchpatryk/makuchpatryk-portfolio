@@ -3,7 +3,6 @@ import { site } from '~/data/site'
 
 const { t } = useI18n()
 const localePath = useLocalePath()
-const publicUrl = usePublicUrl()
 const projectsLink = computed(() => `${localePath('/')}#projects`)
 </script>
 
@@ -40,13 +39,12 @@ const projectsLink = computed(() => `${localePath('/')}#projects`)
           >
             {{ t('hero.linkedin') }}
           </UiExternalLink>
-          <a
-            :href="publicUrl(site.cv)"
-            download
-            class="inline-flex min-h-[50px] items-center justify-center rounded-md border border-border-strong px-6 transition-colors hover:border-accent hover:text-accent sm:hidden"
+          <NuxtLink
+            to="/cv"
+            class="inline-flex min-h-[50px] items-center justify-center rounded-md border border-border-strong px-6 transition-colors hover:border-accent hover:text-accent"
           >
-            {{ t('nav.cv') }}
-          </a>
+            {{ t('hero.viewCv') }}
+          </NuxtLink>
         </div>
       </div>
       <div class="lg:col-span-5">

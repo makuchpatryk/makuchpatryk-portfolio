@@ -3,7 +3,7 @@
 > **Status: implemented.** Sections 1–12 are the original plan, corrected where the build differs (marked *Updated*). §13 lists every deviation, results and what is left. Architecture as built: [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ## 1. Summary
-Static, bilingual (EN default / PL) developer portfolio for an AI / Software Engineer. Nuxt 4 SSG, Tailwind, dark-default terminal aesthetic with light toggle, content hardcoded as typed TS data + i18n JSON. Deployed to GitHub Pages via GitHub Actions (host-agnostic build, so moving later is a config change). Goal: recruiters/clients land, see 3 featured AI projects, drill into case studies, download CV, contact by mail/GitHub/LinkedIn.
+Static, bilingual (EN default / PL) developer portfolio for an AI / Software Engineer. Nuxt 4 SSG, Tailwind, dark-default terminal aesthetic with light toggle, content hardcoded as typed TS data + i18n JSON. Deployed to GitHub Pages via GitHub Actions (host-agnostic build, so moving later is a config change). Goal: recruiters/clients land, see 3 featured AI projects, drill into case studies, read or download the CV, contact by mail/GitHub/LinkedIn.
 
 ## 2. Locked decisions
 | Area | Decision |
@@ -15,7 +15,7 @@ Static, bilingual (EN default / PL) developer portfolio for an AI / Software Eng
 | Content | Typed TS in `app/data/*` + copy in `i18n/locales/{en,pl}.json`. No markdown/CMS |
 | Theme | Dark default (design), light derived, toggle, persisted, no flash |
 | Projects | 7+; home shows 3 featured; `/projects` index w/ tag filter; `/projects/[slug]` only for projects with `detail: true` |
-| CV | single static `public/cv.pdf` (EN), same for both locales |
+| CV | single static `public/cv.pdf` (EN), same for both locales; read on the site at `/cv` (pdf.js reader) and downloadable |
 | Video | self-hosted mp4 in `public/videos/` (size-capped, see risks) |
 | Contact | mailto + GitHub + LinkedIn. No form |
 | SEO | meta, OG, per-page OG image, sitemap, robots, hreflang, JSON-LD Person. No analytics, no cookie banner |
@@ -44,7 +44,7 @@ Out: blog, CMS, contact form, analytics, cookie banner, auto language redirect, 
 Boards: Desktop 1440 (home), Mobile 390 (home), Project detail 1440.
 Tokens (dark): bg `#0B0D10`, surface `#12151A`, surface-2 `#1A1E24`, border `#232830`, border-strong `#343A44`, text `#E6E8EB`, text-2 `#B4BAC4`, muted `#8B93A1`, faint `#5C6470`, accent teal `#5EEAD4`; secondary accents `#FDBA74 #A5B4FC #A3E635` (tag/category colors). Fonts Geist / Geist Mono. Design has `{{accent}}` tweak var → single `--accent` CSS var.
 Contrast audit (computed): `#5C6470` = 3.25:1 on bg → **fails AA** for text (used ~12x in design). `#343A44` is border only (fine, non-text). Fix (*updated, as built*): token `faint` lifted to `#7F8896` dark / `#636D7B` light (≥4.5:1 on bg, surface and surface-2; enforced by `tests/unit/contrast.test.ts`). Light palette (derived): bg `#F7F8FA`, surface `#FFFFFF`, surface-2 `#EEF0F3`, border `#DDE1E7`, border-strong `#B9C0CA`, text `#14171C`, text-2 `#3D4450`, muted `#5B6472`, accent `#0F766E`, accent-fg `#FFFFFF`; category colours `#0F766E #9A3412 #4F46E5 #3F6212`. Detail: [design/tokens.md](./design/tokens.md).
-Terminal nav labels `01.projekty … 05.kontakt` → i18n keys; header has cv.pdf button, mobile collapses nav.
+Terminal nav labels `01.projekty … 05.kontakt` → i18n keys; header has a cv button linking to `/cv` (reader with download), mobile collapses nav.
 
 ## 6. Architecture
 
@@ -137,7 +137,7 @@ Phase 1 — Design system
 7. Contrast tune (fix faint token), document in `docs/design/tokens.md`; unit test computing ratios for token pairs both themes.
 8. UI primitives: TagChip, ExternalLink, SectionHeading (`[01] projekty` style), focus-visible ring, skip link.
 Phase 2 — Shell
-9. SiteHeader/Footer/MobileNav, ThemeToggle, LangSwitcher (`switchLocalePath`), cv.pdf link.
+9. SiteHeader/Footer/MobileNav, ThemeToggle, LangSwitcher (`switchLocalePath`), `/cv` link and reader.
 10. i18n config + en/pl skeleton for nav/footer; hreflang & `lang` attr.
 Phase 3 — Home
 11. Data files + types + placeholder content (7 projects, 3 featured; 2 experience; 4 stack groups).
@@ -216,7 +216,7 @@ Unit (Vitest): `filterProjects`, locale parity, detail completeness, contrast ca
 - [~] CI green (lint, types, unit, e2e, lhci) — lint/types/unit/e2e green locally at root and non-root base; workflows written but not yet run on GitHub; lhci job is non-blocking
 - [~] Both themes reviewed vs design.html boards — desktop home, detail (light) and mobile home compared visually; user review of light theme pending
 - [ ] Content checklist complete; placeholder gate passes (`docs/content-checklist.md`; 326 placeholders remain by design)
-- [ ] cv.pdf, photo, OG, favicon in place — OG template and favicon done; `cv.pdf` is a placeholder PDF, photo not provided
+- [ ] cv.pdf, photo, OG, favicon in place — OG template, favicon and real `cv.pdf` done; photo not provided
 - [ ] Pages source = GitHub Actions; `SITE_URL` var set; deploy workflow green; live URL, `/pl/`, deep link to a detail page, `404.html`, sitemap and cv.pdf all load
 
 ## 11. Estimates

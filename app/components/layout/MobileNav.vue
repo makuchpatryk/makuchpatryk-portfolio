@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { site } from '~/data/site'
-
 defineProps<{
   items: { id: string, label: string, to: string }[]
 }>()
 
 const { t } = useI18n()
-const publicUrl = usePublicUrl()
 const route = useRoute()
 const details = ref<HTMLDetailsElement>()
 
@@ -44,13 +41,12 @@ watch(() => route.fullPath, close)
         </NuxtLink>
       </nav>
       <div class="mt-4 flex items-center justify-between gap-3">
-        <a
-          :href="publicUrl(site.cv)"
-          download
+        <NuxtLink
+          to="/cv"
           class="inline-flex min-h-11 flex-1 items-center justify-center rounded-md border border-accent px-4 text-accent"
         >
           {{ t('nav.cv') }}
-        </a>
+        </NuxtLink>
         <LayoutLangSwitcher />
         <LayoutThemeToggle />
       </div>

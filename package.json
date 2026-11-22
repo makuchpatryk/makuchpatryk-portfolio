@@ -34,6 +34,7 @@
     "nuxt": "^4.5.2",
     "nuxt-og-image": "^6.9.0",
     "nuxt-schema-org": "^6.3.2",
+    "pdfjs-dist": "6.5.438",
     "satori": "^0.33.5",
     "sharp": "^0.35.4",
     "ufo": "^1.6.4",

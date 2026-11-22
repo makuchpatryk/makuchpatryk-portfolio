@@ -22,6 +22,7 @@ A fully static, bilingual (EN default, PL) portfolio. `nuxt generate` prerenders
 | Theme | `@nuxtjs/color-mode` (dark default, `.light` class on `<html>`) |
 | Fonts | `@nuxt/fonts`: Geist + Geist Mono, self-hosted at build time, `latin` + `latin-ext` (Polish diacritics) |
 | Images | `@nuxt/image` (build-time optimisation, avif/webp) |
+| PDF | `pdfjs-dist`, lazy chunk on `/cv` only |
 | SEO | `nuxt-og-image` (satori), `@nuxtjs/sitemap`, `@nuxtjs/robots`, `nuxt-schema-org` |
 | Quality | ESLint (`@nuxt/eslint`), `vue-tsc` (TypeScript 5.9), Vitest, Playwright + axe, Lighthouse CI, Husky + lint-staged |
 | Tooling | pnpm 11, Node 22 |
@@ -32,19 +33,21 @@ A fully static, bilingual (EN default, PL) portfolio. `nuxt generate` prerenders
 app/
   app.vue, error.vue         root (locale head, theme-color) and 404/error page
   layouts/default.vue        skip link, header, <main id="main">, footer
-  pages/                     index.vue, projects/index.vue, projects/[slug].vue
+  pages/                     index.vue, cv.vue, projects/index.vue, projects/[slug].vue
   components/
     layout/                  SiteHeader, SiteFooter, MobileNav, ThemeToggle, LangSwitcher
     home/                    Hero, TerminalBlock, Projects, Experience, Stack, About, Contact sections
+    cv/                      CvReader (toolbar, canvas, text and link layers)
     project/                 ProjectCard, ProjectFeatured, PipelineDiagram, TagFilter,
                              MetricGrid, VideoPlayer, Gallery, ProjectToc, ProjectNav
     ui/                      TagChip, ExternalLink, SectionHeading, PhotoFrame
     OgImage/                 PortfolioCard.satori.vue (OG image template)
   composables/               useProjects, useLocalizedProject, useProjectFilter,
-                             usePageSeo, usePublicUrl, useMessageList
+                             usePageSeo, usePublicUrl, useMessageList, usePdfDocument
   data/                      site.ts, projects.ts, experience.ts, stack.ts   (typed, non-translated content)
   types/content.ts           domain types + DETAIL_KEYS
   utils/projects.ts          pure logic (filter, sort, adjacency, localize)
+  utils/pdfZoom.ts           pure CV reader rules (fit scale, zoom and page clamps)
   assets/css/main.css        Tailwind import, tokens, base/components layers
 i18n/
   i18n.config.ts             vue-i18n options (fallbackLocale: en)
@@ -61,6 +64,7 @@ Nuxt name mapping: components are auto-imported with their folder as a prefix (`
 ## 4. Rendering and routing
 
 - **Build**: `nuxt generate` prerenders `/`, `/projects`, `/projects/<slug>` for every project with `detail: true`, each in EN and under `/pl`. The route list is derived from `app/data/projects.ts` in `nuxt.config.ts`; `crawlLinks` is on and `failOnError` makes a broken link fail the build. `404.html` and `200.html` are emitted too.
+- **`/cv`** is prerendered in EN only (one English `cv.pdf`), listed in the EN sitemap without hreflang alternates (`definePageMeta({ enOnly: true })`, filtered in `app.vue`). Entry points link to the literal `/cv`, so Polish pages land on the English CV; a direct `/pl/cv` is a prerender-emitted redirect page to `/cv`.
 - **Every route is a real file.** GitHub Pages has no rewrite rules, so there is no SPA fallback: deep links resolve to their own `index.html`.
 - **Locales**: EN lives at `/`, PL at `/pl/*`. `detectBrowserLanguage` is off, so a Polish browser still lands on EN and switches deliberately. The switcher uses `useSwitchLocalePath`, so the current path is kept.
 - **Not-found**: a slug without `detail: true` is not prerendered; the page also throws a 404 `createError` if reached client-side.
@@ -139,10 +143,11 @@ Pure logic (`app/utils/projects.ts`) has no Nuxt imports, so Vitest tests it dir
 ## 8. Layout and components
 
 - **Shell**: `layouts/default.vue` renders a skip link, `SiteHeader`, `<main id="main" tabindex="-1">` and `SiteFooter`. `error.vue` reuses the layout and sets `lang` itself (it renders outside `app.vue`).
-- **Header**: full nav from `xl`, `MobileNav` below. `MobileNav` is a `<details>/<summary>`, so it opens without JS; JS only adds close-on-navigate and Escape. On detail pages the desktop nav becomes "← all projects".
+- **Header**: full nav from `xl`, `MobileNav` below. `MobileNav` is a `<details>/<summary>`, so it opens without JS; JS only adds close-on-navigate and Escape. On detail pages the desktop nav becomes "← all projects". The `cv` button (header, mobile menu, footer, hero "view CV") links to `/cv`.
 - **Nav anchors**: section links are `localePath('/') + '#projects'` etc., so they also work from other pages.
 - **Home** is one page of sections (`projects`, `experience`, `stack`, `about`, `contact`) matching the design boards; there are no separate `/about` or `/stack` routes.
 - **Detail page**: header meta grid, video slot, sticky table of contents (IntersectionObserver highlights the current section), five sections, gallery, prev/next among detail projects.
+- **CV reader**: `/cv` renders `cv.pdf` one page at a time with pdf.js into a `<canvas>`, with a transparent text layer (selectable text) and a hand-mapped link layer (`Link` annotations → `<a target="_blank">`). `usePdfDocument` owns the lifecycle (lazy import inside `onMounted`, render cancellation, `ResizeObserver` refit, cleanup); `utils/pdfZoom.ts` owns the rules. The toolbar has zoom −/+, fit and download; prev/next and the counter appear only when the PDF has more than one page. The paper stays white in both themes. The download link is SSR-rendered, so the page works without JS and falls back to it if pdf.js fails. Native pinch zoom is left alone (WCAG 1.4.4). Only the `.textLayer` rules from pdf.js are copied (`pdf_viewer.css` is ~170 KB).
 - **Media**: `VideoPlayer` renders `<video preload="none" playsinline controls>` with a `usePublicUrl` source when `media.video` is set; the detail page omits the whole video section otherwise. When `media.captions` is set it adds an English `<track kind="captions">` (not `default`, label from `project.captionsLabel`); the `.vtt` is a separate file next to the video, and the site MP4 carries no embedded subtitle stream (`encode-video.sh` passes `-sn`). `ProjectCard` and `Gallery` use `NuxtImg` when an image path exists and render nothing otherwise (`Gallery` renders no list without images). `PhotoFrame` keeps its placeholder text.
 
 ## 9. Hydration and performance
@@ -150,6 +155,7 @@ Pure logic (`app/utils/projects.ts`) has no Nuxt imports, so Vitest tests it dir
 - Above the fold (header, hero) hydrates normally. Home sections below the hero use `<LazyHome…Section hydrate-on-visible />`: their HTML is prerendered, they hydrate on scroll, lowering total blocking time.
 - Fonts: two self-hosted variable files (Geist, Geist Mono) with `font-display: swap`.
 - Images: build-time optimisation, explicit width/height, lazy loading below the fold.
+- pdf.js (and its worker, imported with Vite `?url` so it is hashed under `_nuxt/` and respects the base) loads only on `/cv`; an e2e test asserts the home page never requests it.
 - Budget for video is enforced by `pnpm check:video-size` (≤15 MiB per file, ≤120 MiB total).
 
 Measured on a dev box: desktop 100 on all four categories; mobile accessibility/best-practices/SEO 100, performance 75–88. On a GitHub runner mobile performance is 0.81 (home) to 0.94. The floor is JS boot, not content: the same page with scripts stripped scores 100 (FCP 1.3 s, TBT 0), and Vue + Nuxt + vue-i18n boot costs ~300 ms TBT under Lighthouse's 4x CPU throttle. Tried without a lasting gain: `hydrate-never` on the hero and home sections (≈+0.03–0.05, breaks SPA navigation from those links), `i18n.bundle.runtimeOnly` (breaks: lazy-loaded locale JSON needs the runtime compiler), dropping `prefetch` links, `local()` font lookups, `text-wrap: balance`. The mobile performance gate is therefore 0.75; desktop performance and all other categories stay at 0.95.
@@ -170,9 +176,9 @@ Skip link, one `h1` per page with a logical heading order (project titles are `h
 
 | Layer | Tool | Covers |
 |---|---|---|
-| Unit | Vitest (`tests/unit`) | filter/selection/adjacency logic, `localizeProject` fallback, EN/PL key parity, detail-key completeness, data ↔ copy links, contrast ratios |
-| E2E | Playwright (`tests/e2e`) against the **built** site | route smoke × 2 locales × 2 viewports (no failed requests, no console errors), unique titles/OG, theme toggle + persistence + no flash, language switch, tag filter incl. `?tag=` restore, no-JS rendering, keyboard/skip link/focus, 404, base-URL correctness, axe WCAG 2.1 AA in dark and light |
-| Perf/a11y | Lighthouse CI (`lighthouserc.cjs`) | 6 URLs × mobile/desktop, ≥0.95 assertions |
+| Unit | Vitest (`tests/unit`) | filter/selection/adjacency logic, CV zoom/fit/page rules, `localizeProject` fallback, EN/PL key parity, detail-key completeness, data ↔ copy links, contrast ratios |
+| E2E | Playwright (`tests/e2e`) against the **built** site | `/cv` reader (render, text layer, zoom, error state, lazy pdf.js; link layer and page navigation run on a 2-page fixture because `cv.pdf` has no link annotations), route smoke × 2 locales × 2 viewports (no failed requests, no console errors), unique titles/OG, theme toggle + persistence + no flash, language switch, tag filter incl. `?tag=` restore, no-JS rendering, keyboard/skip link/focus, 404, base-URL correctness, axe WCAG 2.1 AA in dark and light |
+| Perf/a11y | Lighthouse CI (`lighthouserc.cjs`) | 6 URLs (not `/cv`: it is client-heavy) × mobile/desktop, ≥0.95 assertions |
 
 `scripts/serve.mjs` is a small static server that mimics GitHub Pages (directory index, `404.html` fallback, gzip, optional base path); Playwright's `webServer` uses it. E2E runs twice in CI: root base, and `/makuchpatryk/` with the `github_pages` preset to prove asset, video and `cv.pdf` URLs survive a subpath.
 

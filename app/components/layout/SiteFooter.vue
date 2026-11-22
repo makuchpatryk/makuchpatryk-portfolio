@@ -2,7 +2,6 @@
 import { site } from '~/data/site'
 
 const { t } = useI18n()
-const publicUrl = usePublicUrl()
 const year = new Date().getFullYear()
 </script>
 
@@ -18,7 +17,7 @@ const year = new Date().getFullYear()
           {{ t('contact.linkedin') }}
         </UiExternalLink>
         <a :href="`mailto:${site.email}`" class="inline-flex min-h-11 items-center hover:text-accent">{{ t('footer.mail') }}</a>
-        <a :href="publicUrl(site.cv)" download class="inline-flex min-h-11 items-center hover:text-accent">{{ t('contact.cv') }}</a>
+        <NuxtLink to="/cv" class="inline-flex min-h-11 items-center hover:text-accent">{{ t('contact.cv') }}</NuxtLink>
       </nav>
     </div>
   </footer>

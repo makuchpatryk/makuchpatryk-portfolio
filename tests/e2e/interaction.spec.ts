@@ -66,6 +66,14 @@ test.describe('navigation', () => {
     await expect(page.locator('#stack')).toBeInViewport()
   })
 
+  test('the cv link opens the reader', async ({ page, isMobile }) => {
+    await page.goto('')
+    if (isMobile) await openMobileMenu(page)
+    await page.getByRole('navigation', { name: /primary/i }).getByRole('link', { name: 'cv', exact: true }).click()
+    await expect(page).toHaveURL(/\/cv\/?$/)
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  })
+
   test('home links to /projects and a case study', async ({ page }) => {
     await page.goto('')
     await page.getByRole('link', { name: /all projects/i }).click()
@@ -122,6 +130,17 @@ test.describe('no-JS content', () => {
     for (const id of ['projects', 'experience', 'stack', 'about', 'contact']) {
       await expect(page.locator(`#${id}`)).toBeAttached()
     }
+    await context.close()
+  })
+})
+
+test.describe('no-JS cv', () => {
+  test('cv page keeps the heading and a working download link without JS', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false })
+    const page = await context.newPage()
+    await page.goto('http://localhost:' + (process.env.PORT || 4173) + (process.env.E2E_BASE || '/') + 'cv')
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    await expect(page.getByRole('link', { name: /download cv\.pdf/i })).toHaveAttribute('href', /cv\.pdf$/)
     await context.close()
   })
 })

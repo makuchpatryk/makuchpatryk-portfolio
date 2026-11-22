@@ -5,7 +5,6 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const getRouteBaseName = useRouteBaseName()
 const route = useRoute()
-const publicUrl = usePublicUrl()
 
 const sections = ['projects', 'experience', 'stack', 'about', 'contact'] as const
 const items = computed(() =>
@@ -42,13 +41,12 @@ const isDetail = computed(() => getRouteBaseName(route) === 'projects-slug')
             <span class="text-faint">{{ String(i + 1).padStart(2, '0') }}.</span>{{ item.label }}
           </NuxtLink>
         </template>
-        <a
-          :href="publicUrl(site.cv)"
-          download
+        <NuxtLink
+          to="/cv"
           class="inline-flex min-h-11 items-center rounded-md border border-accent px-[18px] text-accent transition-colors hover:bg-accent hover:text-accent-fg"
         >
           {{ t('nav.cv') }}
-        </a>
+        </NuxtLink>
         <div class="flex items-center gap-1">
           <LayoutLangSwitcher />
           <LayoutThemeToggle />

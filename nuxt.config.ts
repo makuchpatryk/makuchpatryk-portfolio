@@ -8,6 +8,8 @@ const baseURL = process.env.NUXT_APP_BASE_URL || '/'
 
 const detailPaths = projects.filter(p => p.detail).map(p => `/projects/${p.slug}`)
 const pagePaths = ['/', '/projects', ...detailPaths]
+// the CV is English only (one cv.pdf), so it has no /pl counterpart
+const enOnlyPaths = ['/cv']
 const localePrefix = { en: '', pl: '/pl' } as const
 type LocaleCode = keyof typeof localePrefix
 
@@ -15,7 +17,7 @@ const localized = (code: LocaleCode, path: string) => (localePrefix[code] + (pat
 
 // every URL lists all language versions (hreflang) so search engines pair EN/PL pages
 function sitemapUrls(locale: LocaleCode) {
-  return pagePaths.map(path => ({
+  const urls = pagePaths.map(path => ({
     loc: localized(locale, path),
     alternatives: [
       { hreflang: 'en', href: localized('en', path) },
@@ -23,6 +25,7 @@ function sitemapUrls(locale: LocaleCode) {
       { hreflang: 'x-default', href: localized('en', path) }
     ]
   }))
+  return locale === 'en' ? [...urls, ...enOnlyPaths.map(loc => ({ loc }))] : urls
 }
 
 export default defineNuxtConfig({
@@ -72,7 +75,7 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       failOnError: true,
-      routes: ['/', '/pl', '/projects', '/pl/projects', ...detailPaths.flatMap(p => [p, `/pl${p}`])]
+      routes: ['/', '/pl', '/projects', '/pl/projects', ...enOnlyPaths, ...detailPaths.flatMap(p => [p, `/pl${p}`])]
     }
   },
   vite: {

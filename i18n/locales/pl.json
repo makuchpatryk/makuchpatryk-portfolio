@@ -8,12 +8,17 @@
       "title": "Projekty — Patryk Makuch",
       "description": "Wszystkie projekty: systemy backendowe, full-stack i narzędzia. Filtruj według technologii."
     },
+    "cv": {
+      "title": "CV — Patryk Makuch",
+      "description": "Read or download the CV of Patryk Makuch, Software Engineer building backend systems and API platforms."
+    },
     "notFound": {
       "title": "Nie znaleziono strony — Patryk Makuch",
       "description": "Ta strona nie istnieje."
     },
     "ogHomeSubtitle": "Software Engineer",
-    "ogProjectsSubtitle": "Projekty"
+    "ogProjectsSubtitle": "Projekty",
+    "ogCvSubtitle": "CV"
   },
   "a11y": {
     "skip": "Przejdź do treści",
@@ -30,7 +35,7 @@
     "stack": "stack",
     "about": "o_mnie",
     "contact": "kontakt",
-    "cv": "cv.pdf ↓",
+    "cv": "cv",
     "allProjects": "← wszystkie projekty"
   },
   "theme": {
@@ -47,6 +52,7 @@
     "role": "Software Engineer",
     "tagline": "Dostarczam oprogramowanie od A do Z — od designu przez frontend, backend po DevOps — i dowożę szybciej, bez ścinania zakrętów.",
     "viewProjects": "zobacz projekty →",
+    "viewCv": "zobacz CV →",
     "github": "github ↗",
     "linkedin": "linkedin ↗",
     "photoAlt": "Portret: {name}",
@@ -121,6 +127,21 @@
       "cli": "CLI",
       "ui": "UI"
     }
+  },
+  "cv": {
+    "eyebrow": "cv",
+    "title": "Curriculum vitae",
+    "loading": "Loading CV…",
+    "error": "The CV could not be displayed here. Download it instead.",
+    "download": "download cv.pdf ↓",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "fit": "Fit to width",
+    "prev": "Previous page",
+    "next": "Next page",
+    "page": "{current} / {total}",
+    "canvasLabel": "CV of Patryk Makuch, rendered from cv.pdf",
+    "noscript": "Enable JavaScript to read the CV here, or download it."
   },
   "projectsPage": {
     "eyebrow": "~/projekty",
@@ -247,7 +268,7 @@
     "mail": "mail",
     "github": "github ↗",
     "linkedin": "linkedin ↗",
-    "cv": "cv.pdf ↓"
+    "cv": "cv"
   },
   "footer": {
     "copyright": "© {year} {name}",

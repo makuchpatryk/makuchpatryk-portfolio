@@ -1,26 +1,29 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
-import { locales, rel, routes } from './helpers'
+import { enOnlyRoutes, locales, rel, routes } from './helpers'
 
 const themes = ['dark', 'light'] as const
 
+const cases = [
+  ...locales.flatMap(({ code, prefix }) => routes.map(route => ({ code, prefix, route }))),
+  ...enOnlyRoutes.map(route => ({ code: 'en', prefix: '', route }))
+]
+
 for (const theme of themes) {
-  for (const { code, prefix } of locales) {
-    for (const route of routes) {
-      test(`axe WCAG 2.1 AA — ${theme} ${code} /${route}`, async ({ page }) => {
-        await page.addInitScript(value => localStorage.setItem('theme', value), theme)
-        await page.goto(rel(prefix, route))
-        await page.waitForLoadState('networkidle')
-        await expect(page.locator('html')).toHaveClass(new RegExp(theme))
+  for (const { code, prefix, route } of cases) {
+    test(`axe WCAG 2.1 AA — ${theme} ${code} /${route}`, async ({ page }) => {
+      await page.addInitScript(value => localStorage.setItem('theme', value), theme)
+      await page.goto(rel(prefix, route))
+      await page.waitForLoadState('networkidle')
+      await expect(page.locator('html')).toHaveClass(new RegExp(theme))
 
-        const results = await new AxeBuilder({ page })
-          .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-          .analyze()
+      const results = await new AxeBuilder({ page })
+        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+        .analyze()
 
-        const summary = results.violations.map(v => `${v.id} (${v.impact}): ${v.nodes.map(n => n.target.join(' ')).slice(0, 3).join(' | ')}`)
-        expect(summary).toEqual([])
-      })
-    }
+      const summary = results.violations.map(v => `${v.id} (${v.impact}): ${v.nodes.map(n => n.target.join(' ')).slice(0, 3).join(' | ')}`)
+      expect(summary).toEqual([])
+    })
   }
 }
 
