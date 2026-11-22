@@ -140,8 +140,7 @@
     "prev": "Previous page",
     "next": "Next page",
     "page": "{current} / {total}",
-    "canvasLabel": "CV of Patryk Makuch, rendered from cv.pdf",
-    "noscript": "Enable JavaScript to read the CV here, or download it."
+    "canvasLabel": "CV of Patryk Makuch, rendered from cv.pdf"
   },
   "projectsPage": {
     "eyebrow": "~/projects",

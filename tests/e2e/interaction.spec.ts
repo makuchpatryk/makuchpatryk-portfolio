@@ -69,7 +69,7 @@ test.describe('navigation', () => {
   test('the cv link opens the reader', async ({ page, isMobile }) => {
     await page.goto('')
     if (isMobile) await openMobileMenu(page)
-    await page.getByRole('navigation', { name: /primary/i }).getByRole('link', { name: 'cv', exact: true }).click()
+    await page.locator('header').getByRole('link', { name: 'cv', exact: true }).click()
     await expect(page).toHaveURL(/\/cv\/?$/)
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   })

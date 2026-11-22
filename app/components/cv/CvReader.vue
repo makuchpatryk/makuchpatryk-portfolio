@@ -57,6 +57,7 @@ const buttonClass = 'inline-flex size-11 items-center justify-center rounded-md 
         >
           <span class="sr-only">{{ t('cv.loading') }}</span>
         </div>
+        <!-- no <noscript> hint: the browser parses its content as text, which Vue then reports as a hydration mismatch -->
         <!-- the paper stays white in both themes: it is a real document, inverting it would distort colours and links -->
         <div v-show="status === 'ready'" class="relative mx-auto w-fit bg-white">
           <canvas ref="canvas" role="img" :aria-label="t('cv.canvasLabel')" class="block" />
@@ -65,8 +66,6 @@ const buttonClass = 'inline-flex size-11 items-center justify-center rounded-md 
         </div>
       </div>
     </div>
-
-    <noscript><p class="text-text-2">{{ t('cv.noscript') }}</p></noscript>
   </div>
 </template>
 
